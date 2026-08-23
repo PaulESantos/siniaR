@@ -5,14 +5,17 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>What the Package Does (One Line, Title Case) • perestamb</title>
+<title>Access to Peru's Environmental Statistics (SINIA / MINAM) • siniaR</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="What the Package Does (One Line, Title Case)">
-<meta name="description" content="What the package does (one paragraph).">
-<meta property="og:description" content="What the package does (one paragraph).">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/Jost-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Overpass_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Abhaya_Libre-0.4.10/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access to Peru's Environmental Statistics (SINIA / MINAM)">
+<meta name="description" content="Provides programmatic access to official environmental statistics and data of Peru from the National Environmental Information System (SINIA), Ministry of the Environment (MINAM), and the National Institute of Statistics and Informatics (INEI). Includes indicator catalogs, technical metadata sheets (fichas tecnicas), and structured historical series.">
+<meta property="og:description" content="Provides programmatic access to official environmental statistics and data of Peru from the National Environmental Information System (SINIA), Ministry of the Environment (MINAM), and the National Institute of Statistics and Informatics (INEI). Includes indicator catalogs, technical metadata sheets (fichas tecnicas), and structured historical series.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -20,9 +23,9 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="index.html">perestamb</a>
+    <a class="navbar-brand me-2" href="index.html">siniaR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +40,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/PaulESantos/perestamb/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/PaulESantos/siniaR/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -45,13 +48,169 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-What the package does (one paragraph).
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="siniar-">siniaR <img src="reference/figures/logo.png" align="right" height="139" alt=""><a class="anchor" aria-label="anchor" href="#siniar-"></a>
+</h1></div>
+<!-- badges: start -->
+
+<p><strong><code>siniaR</code></strong> es un paquete para R diseñado para facilitar el acceso programático, exploración y análisis de las estadísticas ambientales oficiales del Perú, provenientes del <strong>Sistema Nacional de Información Ambiental (SINIA / MINAM)</strong> y del <strong>Instituto Nacional de Estadística e Informática (INEI)</strong>.</p>
+<div class="section level2">
+<h2 id="package-instalación">📦 Instalación<a class="anchor" aria-label="anchor" href="#package-instalaci%C3%B3n"></a>
+</h2>
+<p>Puedes instalar la versión de desarrollo de <code>siniaR</code> desde GitHub:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"PaulESantos/siniaR"</span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="rocket-características-principales">🚀 Características Principales<a class="anchor" aria-label="anchor" href="#rocket-caracter%C3%ADsticas-principales"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Acceso directo al SINIA / MINAM en vivo</strong>:
+<ul>
+<li>
+<code><a href="reference/sinia_indicadores.html">sinia_indicadores()</a></code>: Catálogo de más de 180 estadísticas ambientales según el marco internacional MDEA (ONU) o el marco SINIA.</li>
+<li>
+<code><a href="reference/sinia_buscar.html">sinia_buscar()</a></code>: Búsqueda rápida de indicadores por palabras clave (ej. <code>"temperatura"</code>, <code>"pm10"</code>, <code>"glaciares"</code>, <code>"bosque"</code>).</li>
+<li>
+<code><a href="reference/sinia_ficha.html">sinia_ficha()</a></code>: Consulta interactiva de la <strong>Ficha Técnica</strong> oficial con metodologías, fuentes, fórmulas de cálculo y notas.</li>
+<li>
+<code><a href="reference/sinia_datos.html">sinia_datos()</a></code>: Descarga de series históricas en formato <em>tidy</em> (<code>wide</code> o <code>long</code> listo para <code>ggplot2</code>).</li>
+<li>
+<code><a href="reference/sinia_estadistica.html">sinia_estadistica()</a></code>: Objeto integrado con metadatos y datos tabulares.</li>
+</ul>
+</li>
+<li>
+<strong>15 Datasets Preempaquetados (INEI / SERNANP / SENAMHI)</strong>:
+<ul>
+<li>Áreas de Conservación Privada y Regional (<code>acp_sernanp</code>, <code>acr_sernanp</code>).</li>
+<li>Bosques y Cobertura Amazónica (<code>cap_pot_bosq_amaz</code>, <code>sup_dep_sup_bha</code>, <code>superficie_bha</code>).</li>
+<li>Flora y Fauna (<code>flora_fauna_2013_2020</code>, <code>flora_fauna_ende</code>).</li>
+<li>Clima y Meteorología (<code>temperatura</code>, <code>temperatura_maxima</code>, <code>precipitacion</code>, <code>humedad_rel</code>).</li>
+<li>Calidad del Aire (<code>prom_mensual_pm_menor_10mcr</code>).</li>
+<li>Hidrografía y Territorio (<code>rios_frontera</code>, <code>islas_islotes</code>, <code>xlsx_links</code>).</li>
+</ul>
+</li>
+</ol>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="bulb-ejemplos-de-uso">💡 Ejemplos de Uso<a class="anchor" aria-label="anchor" href="#bulb-ejemplos-de-uso"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PaulESantos/siniaR" class="external-link">siniaR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="id_1-explorar-y-buscar-estadísticas-en-el-sinia">1. Explorar y buscar estadísticas en el SINIA<a class="anchor" aria-label="anchor" href="#id_1-explorar-y-buscar-estad%C3%ADsticas-en-el-sinia"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Buscar estadísticas relacionadas a la calidad del aire</span></span>
+<span><span class="va">resultados</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sinia_buscar.html">sinia_buscar</a></span><span class="op">(</span><span class="st">"PM10"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">resultados</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 7</span></span>
+<span><span class="co">#&gt;      id numeral nombre                      nivel clasificador_id padre_id marco</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                       &lt;int&gt;           &lt;int&gt;    &lt;int&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1    42 1.3.1.2 Promedio anual de partícul…     4              NA       62 mdea </span></span>
+<span><span class="co">#&gt; 2    44 1.3.1.4 Material particulado con d…     4              NA       62 mdea</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="id_2-consultar-la-ficha-técnica-de-un-indicador">2. Consultar la Ficha Técnica de un Indicador<a class="anchor" aria-label="anchor" href="#id_2-consultar-la-ficha-t%C3%A9cnica-de-un-indicador"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Consultar la ficha técnica de Temperatura Promedio Anual (ID = 1)</span></span>
+<span><span class="va">ficha</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sinia_ficha.html">sinia_ficha</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">ficha</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Ficha Tecnica: Temperatura del aire promedio anual en estación de medición se</span></span>
+<span><span class="co">#&gt; • ID: 1 (Numero: 1)</span></span>
+<span><span class="co">#&gt; • Fuente: Servicio Nacional de Meteorología e Hidrología (Senamhi)</span></span>
+<span><span class="co">#&gt; • Unidad de Medida: Grado Celsius (°C)</span></span>
+<span><span class="co">#&gt; • Periodo de Serie: 2014-2024</span></span>
+<span><span class="co">#&gt; • Ambito Geografico: Nacional, Departamental, Provincial, Distrital, Estación</span></span>
+<span><span class="co">#&gt;   de medición</span></span>
+<span><span class="co">#&gt; • Clasificacion MDEA: 1.1.1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Descripcion ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; La temperatura del aire es uno de los elementos climáticos que está en relación</span></span>
+<span><span class="co">#&gt; directa con el balance de energía, es decir, su valor o magnitud depende de la</span></span>
+<span><span class="co">#&gt; fracción de Radiación Neta (Rn). Sin embargo, esta relación directa, entre</span></span>
+<span><span class="co">#&gt; temperatura y Rn es afectado por otros factores como se ve a continuación: - El</span></span>
+<span><span class="co">#&gt; movimiento de rotación de la tierra que da origen al ciclo diurno y el</span></span>
+<span><span class="co">#&gt; movimiento de traslación que origina el ciclo anual. - La amplitud de estas</span></span>
+<span><span class="co">#&gt; ondas (ciclo diurno de temperatura) son alterados por: la superficie sobre la</span></span>
+<span><span class="co">#&gt; cual incide la radiación solar, masas de aire, nubosidad, transparencia</span></span>
+<span><span class="co">#&gt; atmosférica, relieve topográfico, etc.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Formula de Calculo ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Tapa = Suma de la temperatura del aire promedio mensual (Tapm) / Número de</span></span>
+<span><span class="co">#&gt; meses con temperatura del aire promedio mensual (nm) del año (condición nm</span></span>
+<span><span class="co">#&gt; &gt;=7).  Tapm = Suma de la temperatura del aire promedio diaria (Tapd) / Número</span></span>
+<span><span class="co">#&gt; de días con temperatura del aire promedio diario (nd) del mes (condición nd</span></span>
+<span><span class="co">#&gt; &gt;=16). Donde: Tapa: temperatura del aire promedio anual Tapm: temperatura del</span></span>
+<span><span class="co">#&gt; aire promedio mensual Tapd: temperatura del aire promedio diario nd: número de</span></span>
+<span><span class="co">#&gt; días del mes nm: número de meses del año</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Metodologia ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; La temperatura del aire promedio anual es información procesada de los datos</span></span>
+<span><span class="co">#&gt; provenientes de la lectura del termómetro y de los termómetros extremos</span></span>
+<span><span class="co">#&gt; (máximos y mínimos) de las estaciones de medición ubicadas principalmente en</span></span>
+<span><span class="co">#&gt; capital de departamento.</span></span>
+<span><span class="co">#&gt; ℹ Nota: es el valor de la temperatura del aire promedio anual en la estación de medición, ubicada principalmente en capital de departamento. (…) No se cuentan con estadísticas.</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="id_3-descargar-datos-en-formato-tidy-y-visualizar">3. Descargar datos en formato <em>Tidy</em> y visualizar<a class="anchor" aria-label="anchor" href="#id_3-descargar-datos-en-formato-tidy-y-visualizar"></a>
+</h3>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Descargar datos en formato largo (long) para graficar</span></span>
+<span><span class="va">temp_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sinia_datos.html">sinia_datos</a></span><span class="op">(</span><span class="fl">1</span>, pivot <span class="op">=</span> <span class="st">"long"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Filtrar algunos departamentos y visualizar la evolución temporal</span></span>
+<span><span class="va">deptos_interes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lima"</span>, <span class="st">"Loreto"</span>, <span class="st">"Cusco"</span>, <span class="st">"Piura"</span>, <span class="st">"Puno"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">temp_long</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">departamento</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">deptos_interes</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">valor</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">anio</span>, y <span class="op">=</span> <span class="va">valor</span>, color <span class="op">=</span> <span class="va">departamento</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Evolución de la Temperatura Promedio Anual (°C)"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Fuente: SINIA / SENAMHI"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Año"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Temperatura Promedio (°C)"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"Departamento"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-plot-1.png" alt="" width="100%"></p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="books-datasets-preempaquetados">📚 Datasets Preempaquetados<a class="anchor" aria-label="anchor" href="#books-datasets-preempaquetados"></a>
+</h2>
+<p>Puedes consultar la documentación de cualquier conjunto de datos directamente con <code>?</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">?</span><span class="va">acp_sernanp</span></span>
+<span><span class="op">?</span><span class="va">temperatura</span></span>
+<span><span class="op">?</span><span class="va">prom_mensual_pm_menor_10mcr</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="page_facing_up-licencia">📄 Licencia<a class="anchor" aria-label="anchor" href="#page_facing_up-licencia"></a>
+</h2>
+<p>Este proyecto está bajo la Licencia MIT.</p>
+</div>
+</div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/PaulESantos/perestamb/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/PaulESantos/perestamb/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/PaulESantos/siniaR/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/PaulESantos/siniaR/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -75,29 +234,36 @@ What the package does (one paragraph).
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing perestamb</a></li>
+<li><a href="authors.html#citation">Citing siniaR</a></li>
 </ul>
 </div>
 
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>First Last <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://paulefrens.rbind.io/" class="external-link">Paul Efren Santos Andrade</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6635-0375" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by First Last.</p>
+  <p>Developed by <a href="https://paulefrens.rbind.io/" class="external-link">Paul Efren Santos Andrade</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
