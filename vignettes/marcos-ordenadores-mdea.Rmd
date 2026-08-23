@@ -25,72 +25,191 @@ has_api <- tryCatch({
 
 ## El Marco para el Desarrollo de las Estadísticas Ambientales (MDEA)
 
-El **Marco para el Desarrollo de las Estadísticas Ambientales (MDEA / FDES)** de las Naciones Unidas es la estructura metodológica internacional adoptada por el Ministerio del Ambiente (MINAM) y el SINIA para ordenar y clasificar las estadísticas ambientales del Perú.
+El **Marco para el Desarrollo de las Estadísticas Ambientales (MDEA / FDES)** de las Naciones Unidas es la estructura metodológica internacional adoptada por el Ministerio del Ambiente (MINAM) y el SINIA para organizar las estadísticas ambientales del Perú.
 
-El MDEA organiza las estadísticas en **6 componentes principales**:
+El MDEA organiza toda la información ambiental en **6 componentes principales**, cada uno enfocado en un aspecto del entorno natural y la interacción humana:
 
-| N° | Componente MDEA | Color Temático | Descripción |
+| N° | Componente MDEA | Color Oficial | Ámbito y Temáticas Principales |
 |:---:|:---|:---:|:---|
-| **1** | **Condiciones y Calidad Ambiental** | `#38B6FF` (Celeste) | Clima, atmósfera, recursos hídricos, suelo, biodiversidad y ecosistemas. |
-| **2** | **Recursos Ambientales y su Uso** | `#E07A26` (Ámbar) | Recursos minerales, energéticos, forestales, biológicos y acuáticos. |
-| **3** | **Residuos** | `#7B3F7B` (Púrpura) | Generación, gestión, tratamiento y disposición de residuos sólidos y aguas residuales. |
-| **4** | **Eventos Naturales y Cambio Climático** | `#2C3E50` (Pizarra) | Desastres naturales, peligros asociados y variables de cambio climático. |
-| **5** | **Hábitat Humano y Asuntos Socioambientales** | `#5E8D3B` (Verde Olivo) | Asentamientos humanos, salud ambiental, población expuesta y conflictos socioambientales. |
-| **6** | **Protección, Gestión y Participación Ambiental** | `#D4AC0D` (Mostaza) | Gasto ambiental, regulación, áreas protegidas, fiscalización y participación ciudadana. |
+| **1** | **Condiciones y Calidad Ambiental** | `#38B6FF` | Atmósfera, clima, recursos hídricos, suelo, biodiversidad y calidad del aire/agua. |
+| **2** | **Recursos Ambientales y su Uso** | `#E07A26` | Recursos forestales, minerales, energéticos, biológicos y uso de la tierra. |
+| **3** | **Residuos** | `#7B3F7B` | Generación y disposición de residuos sólidos municipales, no municipales y aguas servidas. |
+| **4** | **Eventos Naturales y Desastres** | `#2C3E50` | Desastres naturales (heladas, friajes, sismos, inundaciones) y peligros climáticos. |
+| **5** | **Hábitat Humano y Salud Ambiental** | `#5E8D3B` | Asentamientos humanos, servicios básicos, salud ambiental y población expuesta. |
+| **6** | **Protección y Gestión Ambiental** | `#D4AC0D` | Gasto ambiental, regulación, fiscalización, educación ambiental y áreas protegidas. |
 
 ---
 
-## Consultando Estadísticas por Componente
+## 1. Búsqueda Directa por Palabras Clave
+
+La forma más sencilla y amigable de encontrar estadísticas sin necesidad de códigos complejos es mediante la función `sinia_buscar()`:
 
 ```{r setup}
 library(siniaR)
 library(dplyr)
+library(ggplot2)
 ```
 
-Podemos consultar el catálogo completo bajo el marco MDEA y filtrar por componente según el código numeral:
+```{r busqueda-facil, eval = has_api}
+# Buscar estadísticas sobre bosques y deforestación
+bosques <- sinia_buscar("bosque")
+bosques |> select(id, numeral, nombre)
 
-```{r mdea-catalogo, eval = has_api}
-# Descargar el índice completo del marco MDEA
-ind_mdea <- sinia_indicadores(marco = "mdea")
+# Buscar estadísticas sobre calidad del aire
+aire <- sinia_buscar("aire")
+aire |> select(id, numeral, nombre)
 
-# Estadísticas pertenecientes al Componente 1 (Condiciones y Calidad Ambiental)
-c1_calidad <- ind_mdea |>
-  filter(grepl("^1\\.", numeral))
-
-head(c1_calidad, 8)
-```
-
-### Explorando Otros Componentes
-
-```{r otros-componentes, eval = has_api}
-# Componente 2: Recursos Ambientales
-c2_recursos <- ind_mdea |> filter(grepl("^2\\.", numeral))
-head(c2_recursos, 5)
-
-# Componente 3: Residuos
-c3_residuos <- ind_mdea |> filter(grepl("^3\\.", numeral))
-head(c3_residuos, 5)
-
-# Componente 4: Eventos Naturales y Desastres
-c4_eventos <- ind_mdea |> filter(grepl("^4\\.", numeral))
-head(c4_eventos, 5)
-
-# Componente 5: Hábitat Humano
-c5_habitat <- ind_mdea |> filter(grepl("^5\\.", numeral))
-head(c5_habitat, 5)
-
-# Componente 6: Gestión y Protección Ambiental
-c6_gestion <- ind_mdea |> filter(grepl("^6\\.", numeral))
-head(c6_gestion, 5)
+# Buscar estadísticas sobre residuos sólidos
+residuos <- sinia_buscar("residuos")
+residuos |> select(id, numeral, nombre)
 ```
 
 ---
 
-## Marco Propio SINIA
+## 2. Clasificación y Filtrado Amigable del Catálogo MDEA
 
-Además del marco MDEA, el SINIA cuenta con un marco temático sectorial nacional que también puede consultarse indicando `marco = "sinia"`:
+Podemos enriquecer el catálogo completo del MDEA agregando una columna legible con el nombre de cada componente, facilitando su exploración:
+
+```{r mdea-enriquecido, eval = has_api}
+# Descargar el índice completo del MDEA
+indicadores <- sinia_indicadores(marco = "mdea", solo_estadisticas = TRUE)
+
+# Nombres descriptivos para cada uno de los 6 componentes
+nombres_componentes <- c(
+  "1" = "1. Condiciones y Calidad Ambiental",
+  "2" = "2. Recursos Ambientales y su Uso",
+  "3" = "3. Residuos",
+  "4" = "4. Eventos Naturales y Desastres",
+  "5" = "5. Hábitat Humano y Asuntos Socioambientales",
+  "6" = "6. Protección y Gestión Ambiental"
+)
+
+# Agregar el componente de forma clara y legible
+catalogo_mdea <- indicadores |>
+  mutate(
+    codigo_componente = substr(numeral, 1, 1),
+    componente = nombres_componentes[codigo_componente]
+  )
+
+# Conteo de indicadores disponibles por componente
+catalogo_mdea |>
+  count(componente, name = "total_estadisticas")
+```
+
+---
+
+## 3. Explorando los 6 Componentes con Ejemplos Prácticos
+
+### Componente 1: Condiciones y Calidad Ambiental
+Comprende variables meteorológicas y calidad del aire. Por ejemplo, la temperatura promedio anual (ID = 1):
+
+```{r componente-1, eval = has_api}
+# Filtrar indicadores del Componente 1
+c1_indicadores <- catalogo_mdea |>
+  filter(codigo_componente == "1")
+
+head(c1_indicadores |> select(id, numeral, nombre), 5)
+
+# Descargar datos de Temperatura del Aire (ID = 1) en formato largo
+temp_peru <- sinia_datos(id = 1, pivot = "long")
+head(temp_peru)
+```
+
+### Componente 2: Recursos Ambientales y su Uso
+Incluye recursos biológicos, forestales y energéticos:
+
+```{r componente-2, eval = has_api}
+# Filtrar indicadores del Componente 2
+c2_indicadores <- catalogo_mdea |>
+  filter(codigo_componente == "2")
+
+head(c2_indicadores |> select(id, numeral, nombre), 5)
+```
+
+### Componente 3: Residuos
+Monitorea la generación, reciclaje y disposición final de residuos:
+
+```{r componente-3, eval = has_api}
+# Filtrar indicadores del Componente 3
+c3_indicadores <- catalogo_mdea |>
+  filter(codigo_componente == "3")
+
+head(c3_indicadores |> select(id, numeral, nombre), 5)
+```
+
+### Componente 4: Eventos Naturales y Desastres
+Registra ocurrencias de fenómenos naturales, heladas, friajes e impactos:
+
+```{r componente-4, eval = has_api}
+# Filtrar indicadores del Componente 4
+c4_indicadores <- catalogo_mdea |>
+  filter(codigo_componente == "4")
+
+head(c4_indicadores |> select(id, numeral, nombre), 5)
+```
+
+### Componente 5: Hábitat Humano y Asuntos Socioambientales
+Enfocado en las condiciones de vida, acceso a servicios y salud ambiental:
+
+```{r componente-5, eval = has_api}
+# Filtrar indicadores del Componente 5
+c5_indicadores <- catalogo_mdea |>
+  filter(codigo_componente == "5")
+
+head(c5_indicadores |> select(id, numeral, nombre), 5)
+```
+
+### Componente 6: Protección, Gestión y Participación Ambiental
+Abarca gobernanza ambiental, áreas naturales protegidas e instrumentos de gestión:
+
+```{r componente-6, eval = has_api}
+# Filtrar indicadores del Componente 6
+c6_indicadores <- catalogo_mdea |>
+  filter(codigo_componente == "6")
+
+head(c6_indicadores |> select(id, numeral, nombre), 5)
+```
+
+---
+
+## 4. Visualización de Datos de un Componente MDEA
+
+A continuación, visualizamos la evolución temporal de la temperatura del aire en distintos departamentos (Componente 1):
+
+```{r grafico-mdea, eval = has_api, fig.width = 7, fig.height = 4.2}
+departamentos_muestra <- c("Lima", "Loreto", "Cusco", "Piura", "Puno")
+
+temp_filtrada <- temp_peru |>
+  filter(departamento %in% departamentos_muestra, !is.na(valor))
+
+ggplot(temp_filtrada, aes(x = anio, y = valor, color = departamento)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  scale_color_manual(values = c(
+    "Lima" = "#1B75BC",
+    "Loreto" = "#78BE20",
+    "Cusco" = "#E07A26",
+    "Piura" = "#38B6FF",
+    "Puno" = "#7B3F7B"
+  )) +
+  labs(
+    title = "Temperatura Promedio Anual por Departamento",
+    subtitle = "MDEA Componente 1: Condiciones y Calidad Ambiental",
+    x = "Año",
+    y = "Temperatura (°C)",
+    color = "Departamento"
+  ) +
+  theme_minimal()
+```
+
+---
+
+## 5. Marco Temático Sectorial del SINIA
+
+Adicionalmente al marco MDEA, el SINIA permite consultar la organización sectorial propia del Ministerio del Ambiente mediante el argumento `marco = "sinia"`:
 
 ```{r marco-sinia, eval = has_api}
-ind_sinia <- sinia_indicadores(marco = "sinia")
-head(ind_sinia, 8)
+# Catálogo sectorial propio del SINIA
+sinia_tematico <- sinia_indicadores(marco = "sinia", solo_estadisticas = TRUE)
+head(sinia_tematico |> select(id, numeral, nombre), 6)
 ```
