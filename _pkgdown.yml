@@ -50,18 +50,23 @@ navbar:
   type: light
   bg: "#ffffff"
   structure:
-    left:  [home, intro, reference, articles, news]
+    left:  [home, intro, catalogo, reference, articles, news]
     right: [search, github]
   components:
     intro:
       text: "Primeros Pasos"
       href: articles/siniaR-introduccion.html
+    catalogo:
+      text: "Catálogo de Indicadores"
+      href: articles/catalogo-indicadores.html
     articles:
       text: "Viñetas"
       menu:
         - text: "Guías de Uso"
         - text: "Guía de Inicio Rápido a siniaR"
           href: articles/siniaR-introduccion.html
+        - text: "Catálogo Completo de Indicadores (180+)"
+          href: articles/catalogo-indicadores.html
         - text: "Explorando los Componentes del Marco MDEA"
           href: articles/marcos-ordenadores-mdea.html
         - text: "-------"

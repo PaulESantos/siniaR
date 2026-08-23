@@ -1,40 +1,25 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # siniaR <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/PaulESantos/siniaR/graph/badge.svg)](https://app.codecov.io/gh/PaulESantos/siniaR)
+[![Codecov test
+coverage](https://codecov.io/gh/PaulESantos/siniaR/graph/badge.svg)](https://app.codecov.io/gh/PaulESantos/siniaR)
 <!-- badges: end -->
 
 **`siniaR`** es un paquete para R diseñado para facilitar el acceso
 programático, exploración y análisis de las estadísticas ambientales
-oficiales del Perú, provenientes en vivo del **Sistema Nacional de Información
-Ambiental (SINIA / MINAM)**.
+oficiales del Perú, provenientes en vivo del **Sistema Nacional de
+Información Ambiental (SINIA / MINAM)**.
 
 ------------------------------------------------------------------------
 
-## 🎨 Paleta de Colores Institucional (SINIA / Marco MDEA)
-
-El sitio web y la identidad visual de `siniaR` están construidos a partir de los
-colores oficiales del portal del SINIA / MINAM y los 6 componentes del Marco
-para el Desarrollo de las Estadísticas Ambientales (MDEA / ONU):
-
-| Componente / Elemento | Muestra | Color HEX | Descripción Temática |
-|:---|:---:|:---:|:---|
-| **SINIA Brand Blue** | ![#1B75BC](https://via.placeholder.com/15/1B75BC/1B75BC.png) | `#1B75BC` | Color institucional primario SINIA / MINAM |
-| **SINIA Brand Green** | ![#78BE20](https://via.placeholder.com/15/78BE20/78BE20.png) | `#78BE20` | Acento secundario y naturaleza |
-| **1. Condiciones y Calidad Ambiental** | ![#38B6FF](https://via.placeholder.com/15/38B6FF/38B6FF.png) | `#38B6FF` | Atmósfera, clima, agua, suelo y ecosistemas |
-| **2. Recursos Ambientales y su Uso** | ![#E07A26](https://via.placeholder.com/15/E07A26/E07A26.png) | `#E07A26` | Minerales, energía, madera y biomasa |
-| **3. Residuos** | ![#7B3F7B](https://via.placeholder.com/15/7B3F7B/7B3F7B.png) | `#7B3F7B` | Generación y disposición de residuos |
-| **4. Eventos Naturales y Cambio Climático** | ![#2C3E50](https://via.placeholder.com/15/2C3E50/2C3E50.png) | `#2C3E50` | Desastres naturales y variables climáticas |
-| **5. Hábitat Humano y Asuntos Socioambientales** | ![#5E8D3B](https://via.placeholder.com/15/5E8D3B/5E8D3B.png) | `#5E8D3B` | Salud ambiental y asentamientos humanos |
-| **6. Protección y Gestión Ambiental** | ![#D4AC0D](https://via.placeholder.com/15/D4AC0D/D4AC0D.png) | `#D4AC0D` | Regulación, gasto y participación ambiental |
-
-------------------------------------------------------------------------
-
-## 📦 Instalación
+## Instalación
 
 Puedes instalar la versión de desarrollo de `siniaR` desde GitHub:
 
@@ -45,27 +30,39 @@ remotes::install_github("PaulESantos/siniaR")
 
 ------------------------------------------------------------------------
 
-## 🚀 Características Principales
+## Características Principales
 
-- `sinia_indicadores()`: Catálogo y árbol temático de estadísticas ambientales
-  oficiales según el marco internacional MDEA (ONU) o el marco SINIA.
-- `sinia_buscar()`: Búsqueda rápida de indicadores por palabras clave (ej.
-  `"temperatura"`, `"pm10"`, `"glaciares"`, `"bosque"`).
-- `sinia_ficha()`: Consulta estructurada de la **Ficha Técnica** oficial con
-  metodologías, fuentes, fórmulas de cálculo y notas explicativas.
-- `sinia_datos()`: Descarga directa de matrices y series históricas en formato
-  *tidy* (`wide` o `long` listo para análisis y visualización con `ggplot2`).
-- `sinia_estadistica()`: Integración en un solo objeto de los metadatos de la
-  ficha técnica y la tabla de datos procesada.
+- **`sinia_indicadores()`**: Catálogo y árbol temático de estadísticas
+  ambientales oficiales según el marco internacional MDEA (ONU) o el
+  marco SINIA.
+- **`sinia_buscar()`**: Búsqueda rápida de indicadores por palabras
+  clave (ej. `"temperatura"`, `"pm10"`, `"glaciares"`, `"bosque"`).
+- **`sinia_ficha()`**: Consulta estructurada de la **Ficha Técnica**
+  oficial con metodologías, fuentes, fórmulas de cálculo y notas
+  explicativas.
+- **`sinia_datos()`**: Descarga directa de matrices y series históricas
+  en formato *tidy* (`wide` o `long` listo para análisis y visualización
+  con `ggplot2`).
+- **`sinia_estadistica()`**: Integración en un solo objeto de los
+  metadatos de la ficha técnica y la tabla de datos procesada.
 
 ------------------------------------------------------------------------
 
-## 💡 Ejemplos de Uso
+## Ejemplos de Uso
 
 ``` r
 library(siniaR)
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
+#> ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+#> ✔ dplyr     1.2.1     ✔ readr     2.2.0
+#> ✔ forcats   1.0.1     ✔ stringr   1.6.0
+#> ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+#> ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+#> ✔ purrr     1.2.2     
+#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#> ✖ dplyr::filter() masks stats::filter()
+#> ✖ dplyr::lag()    masks stats::lag()
+#> ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
 
 ### 1. Explorar y buscar estadísticas en el SINIA
@@ -159,7 +156,34 @@ temp_long |>
   theme_minimal()
 ```
 
-<img src="man/figures/README-example-plot-1.png" alt="" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" alt="" width="100%" />
+
+\`\`\`
+
+------------------------------------------------------------------------
+
+## 📊 Acceso Rápido a Indicadores Frecuentes
+
+A continuación se presentan algunos de los indicadores más consultados
+del SINIA y la instrucción directa para obtenerlos en formato ordenado
+(*tidy*):
+
+| ID | Numeral | Indicador Ambiental | Componente MDEA | Código de Descarga R |
+|:--:|:--:|:---|:---|:---|
+| **1** | `1.1.1.1` | **Temperatura del aire promedio anual** | 1\. Condiciones y Calidad | `sinia_datos(id = 1, pivot = "long")` |
+| **2** | `1.1.1.2` | **Temperatura máxima promedio anual** | 1\. Condiciones y Calidad | `sinia_datos(id = 2, pivot = "long")` |
+| **3** | `1.1.1.3` | **Temperatura mínima promedio anual** | 1\. Condiciones y Calidad | `sinia_datos(id = 3, pivot = "long")` |
+| **4** | `1.1.1.4` | **Precipitación total anual** | 1\. Condiciones y Calidad | `sinia_datos(id = 4, pivot = "long")` |
+| **5** | `1.1.1.5` | **Humedad relativa promedio anual** | 1\. Condiciones y Calidad | `sinia_datos(id = 5, pivot = "long")` |
+| **10** | `1.1.2.1` | **Superficie de lagunas de origen glaciar** | 1\. Condiciones y Calidad | `sinia_datos(id = 10, pivot = "long")` |
+| **42** | `1.3.1.2` | **Promedio anual de PM10 en el aire** | 1\. Condiciones y Calidad | `sinia_datos(id = 42, pivot = "long")` |
+| **44** | `1.3.1.4` | **Material particulado menor a 2.5 micras (PM2.5)** | 1\. Condiciones y Calidad | `sinia_datos(id = 44, pivot = "long")` |
+| **78** | `2.3.1.1` | **Superficie de bosque húmedo amazónico** | 2\. Recursos Ambientales | `sinia_datos(id = 78, pivot = "long")` |
+| **132** | `3.1.1.1` | **Generación total de residuos sólidos municipales** | 3\. Residuos | `sinia_datos(id = 132, pivot = "long")` |
+
+> 💡 Para ver la lista completa con los más de 180 indicadores del
+> SINIA, consulta el **[Catálogo Completo de
+> Indicadores](https://paulesantos.github.io/siniaR/articles/catalogo-indicadores.html)**.
 
 ------------------------------------------------------------------------
 
@@ -167,8 +191,16 @@ temp_long |>
 
 Para guías detalladas paso a paso, consulta las viñetas del paquete:
 
-1. **[Guía de Inicio Rápido a siniaR](https://paulesantos.github.io/siniaR/articles/siniaR-introduccion.html)**: Flujo de trabajo completo para búsqueda, extracción y visualización.
-2. **[Explorando los Componentes del Marco MDEA](https://paulesantos.github.io/siniaR/articles/marcos-ordenadores-mdea.html)**: Consulta y estructuración según los 6 componentes de Naciones Unidas.
+1.  **[Guía de Inicio Rápido a
+    siniaR](https://paulesantos.github.io/siniaR/articles/siniaR-introduccion.html)**:
+    Flujo de trabajo completo para búsqueda, extracción y visualización.
+2.  **[Catálogo Completo de Indicadores
+    (180+)](https://paulesantos.github.io/siniaR/articles/catalogo-indicadores.html)**:
+    Tabla interactiva con IDs, códigos y comandos de descarga.
+3.  **[Explorando los Componentes del Marco
+    MDEA](https://paulesantos.github.io/siniaR/articles/marcos-ordenadores-mdea.html)**:
+    Consulta y estructuración según los 6 componentes de Naciones
+    Unidas.
 
 ------------------------------------------------------------------------
 
