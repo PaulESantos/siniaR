@@ -6,3 +6,6 @@
 .quarto
 docs
 raw_data
+raw_data_inei
+deprecated
+.RData

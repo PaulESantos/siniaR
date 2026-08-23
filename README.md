@@ -12,9 +12,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 **`siniaR`** es un paquete para R diseñado para facilitar el acceso
 programático, exploración y análisis de las estadísticas ambientales
-oficiales del Perú, provenientes del **Sistema Nacional de Información
-Ambiental (SINIA / MINAM)** y del **Instituto Nacional de Estadística e
-Informática (INEI)**.
+oficiales del Perú, provenientes en vivo del **Sistema Nacional de Información
+Ambiental (SINIA / MINAM)**.
 
 ## 📦 Instalación
 
@@ -29,29 +28,16 @@ remotes::install_github("PaulESantos/siniaR")
 
 ## 🚀 Características Principales
 
-1.  **Acceso directo al SINIA / MINAM en vivo**:
-    - `sinia_indicadores()`: Catálogo de más de 180 estadísticas
-      ambientales según el marco internacional MDEA (ONU) o el marco
-      SINIA.
-    - `sinia_buscar()`: Búsqueda rápida de indicadores por palabras
-      clave (ej. `"temperatura"`, `"pm10"`, `"glaciares"`, `"bosque"`).
-    - `sinia_ficha()`: Consulta interactiva de la **Ficha Técnica**
-      oficial con metodologías, fuentes, fórmulas de cálculo y notas.
-    - `sinia_datos()`: Descarga de series históricas en formato *tidy*
-      (`wide` o `long` listo para `ggplot2`).
-    - `sinia_estadistica()`: Objeto integrado con metadatos y datos
-      tabulares.
-2.  **15 Datasets Preempaquetados (INEI / SERNANP / SENAMHI)**:
-    - Áreas de Conservación Privada y Regional (`acp_sernanp`,
-      `acr_sernanp`).
-    - Bosques y Cobertura Amazónica (`cap_pot_bosq_amaz`,
-      `sup_dep_sup_bha`, `superficie_bha`).
-    - Flora y Fauna (`flora_fauna_2013_2020`, `flora_fauna_ende`).
-    - Clima y Meteorología (`temperatura`, `temperatura_maxima`,
-      `precipitacion`, `humedad_rel`).
-    - Calidad del Aire (`prom_mensual_pm_menor_10mcr`).
-    - Hidrografía y Territorio (`rios_frontera`, `islas_islotes`,
-      `xlsx_links`).
+- `sinia_indicadores()`: Catálogo y árbol temático de estadísticas ambientales
+  oficiales según el marco internacional MDEA (ONU) o el marco SINIA.
+- `sinia_buscar()`: Búsqueda rápida de indicadores por palabras clave (ej.
+  `"temperatura"`, `"pm10"`, `"glaciares"`, `"bosque"`).
+- `sinia_ficha()`: Consulta estructurada de la **Ficha Técnica** oficial con
+  metodologías, fuentes, fórmulas de cálculo y notas explicativas.
+- `sinia_datos()`: Descarga directa de matrices y series históricas en formato
+  *tidy* (`wide` o `long` listo para análisis y visualización con `ggplot2`).
+- `sinia_estadistica()`: Integración en un solo objeto de los metadatos de la
+  ficha técnica y la tabla de datos procesada.
 
 ------------------------------------------------------------------------
 
@@ -148,19 +134,6 @@ temp_long |>
 ```
 
 <img src="man/figures/README-example-plot-1.png" alt="" width="100%" />
-
-------------------------------------------------------------------------
-
-## 📚 Datasets Preempaquetados
-
-Puedes consultar la documentación de cualquier conjunto de datos
-directamente con `?`:
-
-``` r
-?acp_sernanp
-?temperatura
-?prom_mensual_pm_menor_10mcr
-```
 
 ------------------------------------------------------------------------
 

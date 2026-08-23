@@ -7,9 +7,9 @@ Authors@R:
            comment = c(ORCID = "0000-0002-6635-0375"))
 Description: Provides programmatic access to official environmental statistics
     and data of Peru from the National Environmental Information System
-    (SINIA), Ministry of the Environment (MINAM), and the National Institute of
-    Statistics and Informatics (INEI). Includes indicator catalogs, technical
-    metadata sheets (fichas tecnicas), and structured historical series.
+    (SINIA), Ministry of the Environment (MINAM). Includes indicator
+    catalogs, technical metadata sheets (fichas tecnicas), and structured
+    historical series.
 License: MIT + file LICENSE
 URL: https://github.com/PaulESantos/siniaR, https://paulesantos.github.io/siniaR/
 BugReports: https://github.com/PaulESantos/siniaR/issues
@@ -28,6 +28,5 @@ Suggests:
     tidyr
 Config/testthat/edition: 3
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 Config/roxygen2/version: 8.0.0

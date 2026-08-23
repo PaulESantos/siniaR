@@ -10,6 +10,7 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^deprecated$
 ^data-raw$
 ^raw_data$
 ^raw_data_inei$
