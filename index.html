@@ -43,12 +43,14 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="articles/siniaR-introduccion.html">Primeros Pasos</a></li>
+<li class="nav-item"><a class="nav-link" href="articles/catalogo-indicadores.html">Catálogo de Indicadores</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-vi-etas" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Viñetas</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-vi-etas">
 <li><h6 class="dropdown-header" data-toc-skip>Guías de Uso</h6></li>
     <li><a class="dropdown-item" href="articles/siniaR-introduccion.html">Guía de Inicio Rápido a siniaR</a></li>
+    <li><a class="dropdown-item" href="articles/catalogo-indicadores.html">Catálogo Completo de Indicadores (180+)</a></li>
     <li><a class="dropdown-item" href="articles/marcos-ordenadores-mdea.html">Explorando los Componentes del Marco MDEA</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Recursos Oficiales</h6></li>
@@ -77,77 +79,7 @@
 <p><strong><code>siniaR</code></strong> es un paquete para R diseñado para facilitar el acceso programático, exploración y análisis de las estadísticas ambientales oficiales del Perú, provenientes en vivo del <strong>Sistema Nacional de Información Ambiental (SINIA / MINAM)</strong>.</p>
 <hr>
 <div class="section level2">
-<h2 id="art-paleta-de-colores-institucional-sinia--marco-mdea">🎨 Paleta de Colores Institucional (SINIA / Marco MDEA)<a class="anchor" aria-label="anchor" href="#art-paleta-de-colores-institucional-sinia--marco-mdea"></a>
-</h2>
-<p>El sitio web y la identidad visual de <code>siniaR</code> están construidos a partir de los colores oficiales del portal del SINIA / MINAM y los 6 componentes del Marco para el Desarrollo de las Estadísticas Ambientales (MDEA / ONU):</p>
-<table class="table">
-<colgroup>
-<col width="22%">
-<col width="27%">
-<col width="27%">
-<col width="22%">
-</colgroup>
-<thead><tr>
-<th align="left">Componente / Elemento</th>
-<th align="center">Muestra</th>
-<th align="center">Color HEX</th>
-<th align="left">Descripción Temática</th>
-</tr></thead>
-<tbody>
-<tr>
-<td align="left"><strong>SINIA Brand Blue</strong></td>
-<td align="center"><img src="https://via.placeholder.com/15/1B75BC/1B75BC.png" alt="#1B75BC"></td>
-<td align="center"><code>#1B75BC</code></td>
-<td align="left">Color institucional primario SINIA / MINAM</td>
-</tr>
-<tr>
-<td align="left"><strong>SINIA Brand Green</strong></td>
-<td align="center"><img src="https://via.placeholder.com/15/78BE20/78BE20.png" alt="#78BE20"></td>
-<td align="center"><code>#78BE20</code></td>
-<td align="left">Acento secundario y naturaleza</td>
-</tr>
-<tr>
-<td align="left"><strong>1. Condiciones y Calidad Ambiental</strong></td>
-<td align="center"><img src="https://via.placeholder.com/15/38B6FF/38B6FF.png" alt="#38B6FF"></td>
-<td align="center"><code>#38B6FF</code></td>
-<td align="left">Atmósfera, clima, agua, suelo y ecosistemas</td>
-</tr>
-<tr>
-<td align="left"><strong>2. Recursos Ambientales y su Uso</strong></td>
-<td align="center"><img src="https://via.placeholder.com/15/E07A26/E07A26.png" alt="#E07A26"></td>
-<td align="center"><code>#E07A26</code></td>
-<td align="left">Minerales, energía, madera y biomasa</td>
-</tr>
-<tr>
-<td align="left"><strong>3. Residuos</strong></td>
-<td align="center"><img src="https://via.placeholder.com/15/7B3F7B/7B3F7B.png" alt="#7B3F7B"></td>
-<td align="center"><code>#7B3F7B</code></td>
-<td align="left">Generación y disposición de residuos</td>
-</tr>
-<tr>
-<td align="left"><strong>4. Eventos Naturales y Cambio Climático</strong></td>
-<td align="center"><img src="https://via.placeholder.com/15/2C3E50/2C3E50.png" alt="#2C3E50"></td>
-<td align="center"><code>#2C3E50</code></td>
-<td align="left">Desastres naturales y variables climáticas</td>
-</tr>
-<tr>
-<td align="left"><strong>5. Hábitat Humano y Asuntos Socioambientales</strong></td>
-<td align="center"><img src="https://via.placeholder.com/15/5E8D3B/5E8D3B.png" alt="#5E8D3B"></td>
-<td align="center"><code>#5E8D3B</code></td>
-<td align="left">Salud ambiental y asentamientos humanos</td>
-</tr>
-<tr>
-<td align="left"><strong>6. Protección y Gestión Ambiental</strong></td>
-<td align="center"><img src="https://via.placeholder.com/15/D4AC0D/D4AC0D.png" alt="#D4AC0D"></td>
-<td align="center"><code>#D4AC0D</code></td>
-<td align="left">Regulación, gasto y participación ambiental</td>
-</tr>
-</tbody>
-</table>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="package-instalación">📦 Instalación<a class="anchor" aria-label="anchor" href="#package-instalaci%C3%B3n"></a>
+<h2 id="instalación">Instalación<a class="anchor" aria-label="anchor" href="#instalaci%C3%B3n"></a>
 </h2>
 <p>Puedes instalar la versión de desarrollo de <code>siniaR</code> desde GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -156,29 +88,38 @@
 <hr>
 </div>
 <div class="section level2">
-<h2 id="rocket-características-principales">🚀 Características Principales<a class="anchor" aria-label="anchor" href="#rocket-caracter%C3%ADsticas-principales"></a>
+<h2 id="características-principales">Características Principales<a class="anchor" aria-label="anchor" href="#caracter%C3%ADsticas-principales"></a>
 </h2>
 <ul>
 <li>
-<code><a href="reference/sinia_indicadores.html">sinia_indicadores()</a></code>: Catálogo y árbol temático de estadísticas ambientales oficiales según el marco internacional MDEA (ONU) o el marco SINIA.</li>
+<strong><code><a href="reference/sinia_indicadores.html">sinia_indicadores()</a></code></strong>: Catálogo y árbol temático de estadísticas ambientales oficiales según el marco internacional MDEA (ONU) o el marco SINIA.</li>
 <li>
-<code><a href="reference/sinia_buscar.html">sinia_buscar()</a></code>: Búsqueda rápida de indicadores por palabras clave (ej. <code>"temperatura"</code>, <code>"pm10"</code>, <code>"glaciares"</code>, <code>"bosque"</code>).</li>
+<strong><code><a href="reference/sinia_buscar.html">sinia_buscar()</a></code></strong>: Búsqueda rápida de indicadores por palabras clave (ej. <code>"temperatura"</code>, <code>"pm10"</code>, <code>"glaciares"</code>, <code>"bosque"</code>).</li>
 <li>
-<code><a href="reference/sinia_ficha.html">sinia_ficha()</a></code>: Consulta estructurada de la <strong>Ficha Técnica</strong> oficial con metodologías, fuentes, fórmulas de cálculo y notas explicativas.</li>
+<strong><code><a href="reference/sinia_ficha.html">sinia_ficha()</a></code></strong>: Consulta estructurada de la <strong>Ficha Técnica</strong> oficial con metodologías, fuentes, fórmulas de cálculo y notas explicativas.</li>
 <li>
-<code><a href="reference/sinia_datos.html">sinia_datos()</a></code>: Descarga directa de matrices y series históricas en formato <em>tidy</em> (<code>wide</code> o <code>long</code> listo para análisis y visualización con <code>ggplot2</code>).</li>
+<strong><code><a href="reference/sinia_datos.html">sinia_datos()</a></code></strong>: Descarga directa de matrices y series históricas en formato <em>tidy</em> (<code>wide</code> o <code>long</code> listo para análisis y visualización con <code>ggplot2</code>).</li>
 <li>
-<code><a href="reference/sinia_estadistica.html">sinia_estadistica()</a></code>: Integración en un solo objeto de los metadatos de la ficha técnica y la tabla de datos procesada.</li>
+<strong><code><a href="reference/sinia_estadistica.html">sinia_estadistica()</a></code></strong>: Integración en un solo objeto de los metadatos de la ficha técnica y la tabla de datos procesada.</li>
 </ul>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="bulb-ejemplos-de-uso">💡 Ejemplos de Uso<a class="anchor" aria-label="anchor" href="#bulb-ejemplos-de-uso"></a>
+<h2 id="ejemplos-de-uso">Ejemplos de Uso<a class="anchor" aria-label="anchor" href="#ejemplos-de-uso"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PaulESantos/siniaR" class="external-link">siniaR</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──</span></span>
+<span><span class="co">#&gt; ✔ dplyr     1.2.1     ✔ readr     2.2.0</span></span>
+<span><span class="co">#&gt; ✔ forcats   1.0.1     ✔ stringr   1.6.0</span></span>
+<span><span class="co">#&gt; ✔ ggplot2   4.0.3     ✔ tibble    3.3.1</span></span>
+<span><span class="co">#&gt; ✔ lubridate 1.9.5     ✔ tidyr     1.3.2</span></span>
+<span><span class="co">#&gt; ✔ purrr     1.2.2     </span></span>
+<span><span class="co">#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
+<span><span class="co">#&gt; ✖ dplyr::filter() masks stats::filter()</span></span>
+<span><span class="co">#&gt; ✖ dplyr::lag()    masks stats::lag()</span></span>
+<span><span class="co">#&gt; ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="id_1-explorar-y-buscar-estadísticas-en-el-sinia">1. Explorar y buscar estadísticas en el SINIA<a class="anchor" aria-label="anchor" href="#id_1-explorar-y-buscar-estad%C3%ADsticas-en-el-sinia"></a>
 </h3>
@@ -250,28 +191,126 @@
 <span><span class="va">deptos_interes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lima"</span>, <span class="st">"Loreto"</span>, <span class="st">"Cusco"</span>, <span class="st">"Piura"</span>, <span class="st">"Puno"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">temp_long</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">departamento</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">deptos_interes</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">valor</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">anio</span>, y <span class="op">=</span> <span class="va">valor</span>, color <span class="op">=</span> <span class="va">departamento</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">departamento</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">deptos_interes</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">valor</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">anio</span>, y <span class="op">=</span> <span class="va">valor</span>, color <span class="op">=</span> <span class="va">departamento</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_color_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"Lima"</span> <span class="op">=</span> <span class="st">"#1B75BC"</span>,</span>
 <span>    <span class="st">"Loreto"</span> <span class="op">=</span> <span class="st">"#78BE20"</span>,</span>
 <span>    <span class="st">"Cusco"</span> <span class="op">=</span> <span class="st">"#E07A26"</span>,</span>
 <span>    <span class="st">"Piura"</span> <span class="op">=</span> <span class="st">"#38B6FF"</span>,</span>
 <span>    <span class="st">"Puno"</span> <span class="op">=</span> <span class="st">"#7B3F7B"</span></span>
 <span>  <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Evolución de la Temperatura Promedio Anual (°C)"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="st">"Fuente: SINIA / SENAMHI"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Año"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Temperatura Promedio (°C)"</span>,</span>
 <span>    color <span class="op">=</span> <span class="st">"Departamento"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-plot-1.png" alt="" width="100%"></p>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" alt="" width="100%"></p>
+<p>```</p>
 <hr>
 </div>
+</div>
+<div class="section level2">
+<h2 id="bar_chart-acceso-rápido-a-indicadores-frecuentes">📊 Acceso Rápido a Indicadores Frecuentes<a class="anchor" aria-label="anchor" href="#bar_chart-acceso-r%C3%A1pido-a-indicadores-frecuentes"></a>
+</h2>
+<p>A continuación se presentan algunos de los indicadores más consultados del SINIA y la instrucción directa para obtenerlos en formato ordenado (<em>tidy</em>):</p>
+<table class="table">
+<colgroup>
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+</colgroup>
+<thead><tr>
+<th align="center">ID</th>
+<th align="center">Numeral</th>
+<th align="left">Indicador Ambiental</th>
+<th align="left">Componente MDEA</th>
+<th align="left">Código de Descarga R</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="center"><strong>1</strong></td>
+<td align="center"><code>1.1.1.1</code></td>
+<td align="left"><strong>Temperatura del aire promedio anual</strong></td>
+<td align="left">1. Condiciones y Calidad</td>
+<td align="left"><code>sinia_datos(id = 1, pivot = "long")</code></td>
+</tr>
+<tr>
+<td align="center"><strong>2</strong></td>
+<td align="center"><code>1.1.1.2</code></td>
+<td align="left"><strong>Temperatura máxima promedio anual</strong></td>
+<td align="left">1. Condiciones y Calidad</td>
+<td align="left"><code>sinia_datos(id = 2, pivot = "long")</code></td>
+</tr>
+<tr>
+<td align="center"><strong>3</strong></td>
+<td align="center"><code>1.1.1.3</code></td>
+<td align="left"><strong>Temperatura mínima promedio anual</strong></td>
+<td align="left">1. Condiciones y Calidad</td>
+<td align="left"><code>sinia_datos(id = 3, pivot = "long")</code></td>
+</tr>
+<tr>
+<td align="center"><strong>4</strong></td>
+<td align="center"><code>1.1.1.4</code></td>
+<td align="left"><strong>Precipitación total anual</strong></td>
+<td align="left">1. Condiciones y Calidad</td>
+<td align="left"><code>sinia_datos(id = 4, pivot = "long")</code></td>
+</tr>
+<tr>
+<td align="center"><strong>5</strong></td>
+<td align="center"><code>1.1.1.5</code></td>
+<td align="left"><strong>Humedad relativa promedio anual</strong></td>
+<td align="left">1. Condiciones y Calidad</td>
+<td align="left"><code>sinia_datos(id = 5, pivot = "long")</code></td>
+</tr>
+<tr>
+<td align="center"><strong>10</strong></td>
+<td align="center"><code>1.1.2.1</code></td>
+<td align="left"><strong>Superficie de lagunas de origen glaciar</strong></td>
+<td align="left">1. Condiciones y Calidad</td>
+<td align="left"><code>sinia_datos(id = 10, pivot = "long")</code></td>
+</tr>
+<tr>
+<td align="center"><strong>42</strong></td>
+<td align="center"><code>1.3.1.2</code></td>
+<td align="left"><strong>Promedio anual de PM10 en el aire</strong></td>
+<td align="left">1. Condiciones y Calidad</td>
+<td align="left"><code>sinia_datos(id = 42, pivot = "long")</code></td>
+</tr>
+<tr>
+<td align="center"><strong>44</strong></td>
+<td align="center"><code>1.3.1.4</code></td>
+<td align="left"><strong>Material particulado menor a 2.5 micras (PM2.5)</strong></td>
+<td align="left">1. Condiciones y Calidad</td>
+<td align="left"><code>sinia_datos(id = 44, pivot = "long")</code></td>
+</tr>
+<tr>
+<td align="center"><strong>78</strong></td>
+<td align="center"><code>2.3.1.1</code></td>
+<td align="left"><strong>Superficie de bosque húmedo amazónico</strong></td>
+<td align="left">2. Recursos Ambientales</td>
+<td align="left"><code>sinia_datos(id = 78, pivot = "long")</code></td>
+</tr>
+<tr>
+<td align="center"><strong>132</strong></td>
+<td align="center"><code>3.1.1.1</code></td>
+<td align="left"><strong>Generación total de residuos sólidos municipales</strong></td>
+<td align="left">3. Residuos</td>
+<td align="left"><code>sinia_datos(id = 132, pivot = "long")</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 Para ver la lista completa con los más de 180 indicadores del SINIA, consulta el <strong><a href="https://paulesantos.github.io/siniaR/articles/catalogo-indicadores.html">Catálogo Completo de Indicadores</a></strong>.</p>
+</blockquote>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="books-documentación-y-viñetas">📚 Documentación y Viñetas<a class="anchor" aria-label="anchor" href="#books-documentaci%C3%B3n-y-vi%C3%B1etas"></a>
@@ -280,6 +319,8 @@
 <ol style="list-style-type: decimal">
 <li>
 <strong><a href="https://paulesantos.github.io/siniaR/articles/siniaR-introduccion.html">Guía de Inicio Rápido a siniaR</a></strong>: Flujo de trabajo completo para búsqueda, extracción y visualización.</li>
+<li>
+<strong><a href="https://paulesantos.github.io/siniaR/articles/catalogo-indicadores.html">Catálogo Completo de Indicadores (180+)</a></strong>: Tabla interactiva con IDs, códigos y comandos de descarga.</li>
 <li>
 <strong><a href="https://paulesantos.github.io/siniaR/articles/marcos-ordenadores-mdea.html">Explorando los Componentes del Marco MDEA</a></strong>: Consulta y estructuración según los 6 componentes de Naciones Unidas.</li>
 </ol>
