@@ -14,8 +14,8 @@
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access to Peru's Environmental Statistics (SINIA / MINAM)">
-<meta name="description" content="Provides programmatic access to official environmental statistics and data of Peru from the National Environmental Information System (SINIA), Ministry of the Environment (MINAM), and the National Institute of Statistics and Informatics (INEI). Includes indicator catalogs, technical metadata sheets (fichas tecnicas), and structured historical series.">
-<meta property="og:description" content="Provides programmatic access to official environmental statistics and data of Peru from the National Environmental Information System (SINIA), Ministry of the Environment (MINAM), and the National Institute of Statistics and Informatics (INEI). Includes indicator catalogs, technical metadata sheets (fichas tecnicas), and structured historical series.">
+<meta name="description" content="Provides programmatic access to official environmental statistics and data of Peru from the National Environmental Information System (SINIA), Ministry of the Environment (MINAM). Includes indicator catalogs, technical metadata sheets (fichas tecnicas), and structured historical series.">
+<meta property="og:description" content="Provides programmatic access to official environmental statistics and data of Peru from the National Environmental Information System (SINIA), Ministry of the Environment (MINAM). Includes indicator catalogs, technical metadata sheets (fichas tecnicas), and structured historical series.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -53,7 +53,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><strong><code>siniaR</code></strong> es un paquete para R diseñado para facilitar el acceso programático, exploración y análisis de las estadísticas ambientales oficiales del Perú, provenientes del <strong>Sistema Nacional de Información Ambiental (SINIA / MINAM)</strong> y del <strong>Instituto Nacional de Estadística e Informática (INEI)</strong>.</p>
+<p><strong><code>siniaR</code></strong> es un paquete para R diseñado para facilitar el acceso programático, exploración y análisis de las estadísticas ambientales oficiales del Perú, provenientes en vivo del <strong>Sistema Nacional de Información Ambiental (SINIA / MINAM)</strong>.</p>
 <div class="section level2">
 <h2 id="package-instalación">📦 Instalación<a class="anchor" aria-label="anchor" href="#package-instalaci%C3%B3n"></a>
 </h2>
@@ -66,34 +66,18 @@
 <div class="section level2">
 <h2 id="rocket-características-principales">🚀 Características Principales<a class="anchor" aria-label="anchor" href="#rocket-caracter%C3%ADsticas-principales"></a>
 </h2>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Acceso directo al SINIA / MINAM en vivo</strong>:
 <ul>
 <li>
-<code><a href="reference/sinia_indicadores.html">sinia_indicadores()</a></code>: Catálogo de más de 180 estadísticas ambientales según el marco internacional MDEA (ONU) o el marco SINIA.</li>
+<code><a href="reference/sinia_indicadores.html">sinia_indicadores()</a></code>: Catálogo y árbol temático de estadísticas ambientales oficiales según el marco internacional MDEA (ONU) o el marco SINIA.</li>
 <li>
 <code><a href="reference/sinia_buscar.html">sinia_buscar()</a></code>: Búsqueda rápida de indicadores por palabras clave (ej. <code>"temperatura"</code>, <code>"pm10"</code>, <code>"glaciares"</code>, <code>"bosque"</code>).</li>
 <li>
-<code><a href="reference/sinia_ficha.html">sinia_ficha()</a></code>: Consulta interactiva de la <strong>Ficha Técnica</strong> oficial con metodologías, fuentes, fórmulas de cálculo y notas.</li>
+<code><a href="reference/sinia_ficha.html">sinia_ficha()</a></code>: Consulta estructurada de la <strong>Ficha Técnica</strong> oficial con metodologías, fuentes, fórmulas de cálculo y notas explicativas.</li>
 <li>
-<code><a href="reference/sinia_datos.html">sinia_datos()</a></code>: Descarga de series históricas en formato <em>tidy</em> (<code>wide</code> o <code>long</code> listo para <code>ggplot2</code>).</li>
+<code><a href="reference/sinia_datos.html">sinia_datos()</a></code>: Descarga directa de matrices y series históricas en formato <em>tidy</em> (<code>wide</code> o <code>long</code> listo para análisis y visualización con <code>ggplot2</code>).</li>
 <li>
-<code><a href="reference/sinia_estadistica.html">sinia_estadistica()</a></code>: Objeto integrado con metadatos y datos tabulares.</li>
+<code><a href="reference/sinia_estadistica.html">sinia_estadistica()</a></code>: Integración en un solo objeto de los metadatos de la ficha técnica y la tabla de datos procesada.</li>
 </ul>
-</li>
-<li>
-<strong>15 Datasets Preempaquetados (INEI / SERNANP / SENAMHI)</strong>:
-<ul>
-<li>Áreas de Conservación Privada y Regional (<code>acp_sernanp</code>, <code>acr_sernanp</code>).</li>
-<li>Bosques y Cobertura Amazónica (<code>cap_pot_bosq_amaz</code>, <code>sup_dep_sup_bha</code>, <code>superficie_bha</code>).</li>
-<li>Flora y Fauna (<code>flora_fauna_2013_2020</code>, <code>flora_fauna_ende</code>).</li>
-<li>Clima y Meteorología (<code>temperatura</code>, <code>temperatura_maxima</code>, <code>precipitacion</code>, <code>humedad_rel</code>).</li>
-<li>Calidad del Aire (<code>prom_mensual_pm_menor_10mcr</code>).</li>
-<li>Hidrografía y Territorio (<code>rios_frontera</code>, <code>islas_islotes</code>, <code>xlsx_links</code>).</li>
-</ul>
-</li>
-</ol>
 <hr>
 </div>
 <div class="section level2">
@@ -189,16 +173,6 @@
 <p><img src="reference/figures/README-example-plot-1.png" alt="" width="100%"></p>
 <hr>
 </div>
-</div>
-<div class="section level2">
-<h2 id="books-datasets-preempaquetados">📚 Datasets Preempaquetados<a class="anchor" aria-label="anchor" href="#books-datasets-preempaquetados"></a>
-</h2>
-<p>Puedes consultar la documentación de cualquier conjunto de datos directamente con <code>?</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">?</span><span class="va">acp_sernanp</span></span>
-<span><span class="op">?</span><span class="va">temperatura</span></span>
-<span><span class="op">?</span><span class="va">prom_mensual_pm_menor_10mcr</span></span></code></pre></div>
-<hr>
 </div>
 <div class="section level2">
 <h2 id="page_facing_up-licencia">📄 Licencia<a class="anchor" aria-label="anchor" href="#page_facing_up-licencia"></a>
