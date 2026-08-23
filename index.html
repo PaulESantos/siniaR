@@ -5,23 +5,31 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Access to Peru's Environmental Statistics (SINIA / MINAM) • siniaR</title>
+<title>siniaR - Estadísticas Ambientales del Perú (SINIA / MINAM) • siniaR</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/Jost-0.4.10/font.css" rel="stylesheet">
-<link href="deps/Overpass_Mono-0.4.10/font.css" rel="stylesheet">
-<link href="deps/Abhaya_Libre-0.4.10/font.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/Inter-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Fira_Code-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Outfit-0.4.10/font.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access to Peru's Environmental Statistics (SINIA / MINAM)">
-<meta name="description" content="Provides programmatic access to official environmental statistics and data of Peru from the National Environmental Information System (SINIA), Ministry of the Environment (MINAM). Includes indicator catalogs, technical metadata sheets (fichas tecnicas), and structured historical series.">
-<meta property="og:description" content="Provides programmatic access to official environmental statistics and data of Peru from the National Environmental Information System (SINIA), Ministry of the Environment (MINAM). Includes indicator catalogs, technical metadata sheets (fichas tecnicas), and structured historical series.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<meta property="og:title" content="siniaR - Estadísticas Ambientales del Perú (SINIA / MINAM)">
+<meta name="description" content="Paquete para R diseñado para facilitar el acceso programático, exploración y análisis de las estadísticas e indicadores ambientales oficiales del Perú, provenientes en vivo del Sistema Nacional de Información Ambiental (SINIA) del Ministerio del Ambiente (MINAM). Incluye navegación por catálogos temáticos (MDEA / SINIA), consulta de fichas técnicas metodológicas y descarga de series históricas en formato tidy.
+">
+<meta property="og:description" content="Paquete para R diseñado para facilitar el acceso programático, exploración y análisis de las estadísticas e indicadores ambientales oficiales del Perú, provenientes en vivo del Sistema Nacional de Información Ambiental (SINIA) del Ministerio del Ambiente (MINAM). Incluye navegación por catálogos temáticos (MDEA / SINIA), consulta de fichas técnicas metodológicas y descarga de series históricas en formato tidy.
+">
+<meta property="og:image" content="https://paulesantos.github.io/siniaR/reference/figures/README-example-plot-1.png">
+<meta property="og:image:alt" content="siniaR R package - Estadísticas Ambientales del Perú">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@paulefrens">
+<meta name="twitter:site" content="@paulefrens">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-#ffffff" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="index.html">siniaR</a>
 
@@ -34,7 +42,20 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/siniaR-introduccion.html">Primeros Pasos</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-vi-etas" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Viñetas</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-vi-etas">
+<li><h6 class="dropdown-header" data-toc-skip>Guías de Uso</h6></li>
+    <li><a class="dropdown-item" href="articles/siniaR-introduccion.html">Guía de Inicio Rápido a siniaR</a></li>
+    <li><a class="dropdown-item" href="articles/marcos-ordenadores-mdea.html">Explorando los Componentes del Marco MDEA</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Recursos Oficiales</h6></li>
+    <li><a class="external-link dropdown-item" href="https://sinia.minam.gob.pe/">Portal Oficial SINIA / MINAM</a></li>
+    <li><a class="external-link dropdown-item" href="https://sinia.minam.gob.pe/portal/estadisticas-del-sector-ambiente/">Estadísticas del Sector Ambiente</a></li>
+  </ul>
+</li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -54,6 +75,77 @@
 <!-- badges: start -->
 
 <p><strong><code>siniaR</code></strong> es un paquete para R diseñado para facilitar el acceso programático, exploración y análisis de las estadísticas ambientales oficiales del Perú, provenientes en vivo del <strong>Sistema Nacional de Información Ambiental (SINIA / MINAM)</strong>.</p>
+<hr>
+<div class="section level2">
+<h2 id="art-paleta-de-colores-institucional-sinia--marco-mdea">🎨 Paleta de Colores Institucional (SINIA / Marco MDEA)<a class="anchor" aria-label="anchor" href="#art-paleta-de-colores-institucional-sinia--marco-mdea"></a>
+</h2>
+<p>El sitio web y la identidad visual de <code>siniaR</code> están construidos a partir de los colores oficiales del portal del SINIA / MINAM y los 6 componentes del Marco para el Desarrollo de las Estadísticas Ambientales (MDEA / ONU):</p>
+<table class="table">
+<colgroup>
+<col width="22%">
+<col width="27%">
+<col width="27%">
+<col width="22%">
+</colgroup>
+<thead><tr>
+<th align="left">Componente / Elemento</th>
+<th align="center">Muestra</th>
+<th align="center">Color HEX</th>
+<th align="left">Descripción Temática</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="left"><strong>SINIA Brand Blue</strong></td>
+<td align="center"><img src="https://via.placeholder.com/15/1B75BC/1B75BC.png" alt="#1B75BC"></td>
+<td align="center"><code>#1B75BC</code></td>
+<td align="left">Color institucional primario SINIA / MINAM</td>
+</tr>
+<tr>
+<td align="left"><strong>SINIA Brand Green</strong></td>
+<td align="center"><img src="https://via.placeholder.com/15/78BE20/78BE20.png" alt="#78BE20"></td>
+<td align="center"><code>#78BE20</code></td>
+<td align="left">Acento secundario y naturaleza</td>
+</tr>
+<tr>
+<td align="left"><strong>1. Condiciones y Calidad Ambiental</strong></td>
+<td align="center"><img src="https://via.placeholder.com/15/38B6FF/38B6FF.png" alt="#38B6FF"></td>
+<td align="center"><code>#38B6FF</code></td>
+<td align="left">Atmósfera, clima, agua, suelo y ecosistemas</td>
+</tr>
+<tr>
+<td align="left"><strong>2. Recursos Ambientales y su Uso</strong></td>
+<td align="center"><img src="https://via.placeholder.com/15/E07A26/E07A26.png" alt="#E07A26"></td>
+<td align="center"><code>#E07A26</code></td>
+<td align="left">Minerales, energía, madera y biomasa</td>
+</tr>
+<tr>
+<td align="left"><strong>3. Residuos</strong></td>
+<td align="center"><img src="https://via.placeholder.com/15/7B3F7B/7B3F7B.png" alt="#7B3F7B"></td>
+<td align="center"><code>#7B3F7B</code></td>
+<td align="left">Generación y disposición de residuos</td>
+</tr>
+<tr>
+<td align="left"><strong>4. Eventos Naturales y Cambio Climático</strong></td>
+<td align="center"><img src="https://via.placeholder.com/15/2C3E50/2C3E50.png" alt="#2C3E50"></td>
+<td align="center"><code>#2C3E50</code></td>
+<td align="left">Desastres naturales y variables climáticas</td>
+</tr>
+<tr>
+<td align="left"><strong>5. Hábitat Humano y Asuntos Socioambientales</strong></td>
+<td align="center"><img src="https://via.placeholder.com/15/5E8D3B/5E8D3B.png" alt="#5E8D3B"></td>
+<td align="center"><code>#5E8D3B</code></td>
+<td align="left">Salud ambiental y asentamientos humanos</td>
+</tr>
+<tr>
+<td align="left"><strong>6. Protección y Gestión Ambiental</strong></td>
+<td align="center"><img src="https://via.placeholder.com/15/D4AC0D/D4AC0D.png" alt="#D4AC0D"></td>
+<td align="center"><code>#D4AC0D</code></td>
+<td align="left">Regulación, gasto y participación ambiental</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</div>
 <div class="section level2">
 <h2 id="package-instalación">📦 Instalación<a class="anchor" aria-label="anchor" href="#package-instalaci%C3%B3n"></a>
 </h2>
@@ -160,8 +252,15 @@
 <span><span class="va">temp_long</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">departamento</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">deptos_interes</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">valor</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">anio</span>, y <span class="op">=</span> <span class="va">valor</span>, color <span class="op">=</span> <span class="va">departamento</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Lima"</span> <span class="op">=</span> <span class="st">"#1B75BC"</span>,</span>
+<span>    <span class="st">"Loreto"</span> <span class="op">=</span> <span class="st">"#78BE20"</span>,</span>
+<span>    <span class="st">"Cusco"</span> <span class="op">=</span> <span class="st">"#E07A26"</span>,</span>
+<span>    <span class="st">"Piura"</span> <span class="op">=</span> <span class="st">"#38B6FF"</span>,</span>
+<span>    <span class="st">"Puno"</span> <span class="op">=</span> <span class="st">"#7B3F7B"</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Evolución de la Temperatura Promedio Anual (°C)"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="st">"Fuente: SINIA / SENAMHI"</span>,</span>
@@ -173,6 +272,18 @@
 <p><img src="reference/figures/README-example-plot-1.png" alt="" width="100%"></p>
 <hr>
 </div>
+</div>
+<div class="section level2">
+<h2 id="books-documentación-y-viñetas">📚 Documentación y Viñetas<a class="anchor" aria-label="anchor" href="#books-documentaci%C3%B3n-y-vi%C3%B1etas"></a>
+</h2>
+<p>Para guías detalladas paso a paso, consulta las viñetas del paquete:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong><a href="https://paulesantos.github.io/siniaR/articles/siniaR-introduccion.html">Guía de Inicio Rápido a siniaR</a></strong>: Flujo de trabajo completo para búsqueda, extracción y visualización.</li>
+<li>
+<strong><a href="https://paulesantos.github.io/siniaR/articles/marcos-ordenadores-mdea.html">Explorando los Componentes del Marco MDEA</a></strong>: Consulta y estructuración según los 6 componentes de Naciones Unidas.</li>
+</ol>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="page_facing_up-licencia">📄 Licencia<a class="anchor" aria-label="anchor" href="#page_facing_up-licencia"></a>
@@ -225,6 +336,7 @@
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/PaulESantos/siniaR" class="external-link"><img src="https://codecov.io/gh/PaulESantos/siniaR/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 

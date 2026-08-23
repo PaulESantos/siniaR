@@ -1,8 +1,8 @@
-# Getting help with perestamb
+# Getting help with siniaR
 
-Thanks for using perestamb! Before filing an issue, there are a few
-places to explore and pieces to put together to make the process as
-smooth as possible.
+Thanks for using siniaR! Before filing an issue, there are a few places
+to explore and pieces to put together to make the process as smooth as
+possible.
 
 ## Make a reprex
 
@@ -24,15 +24,15 @@ ask](https://www.tidyverse.org/help/#where-to-ask).
   StackOverflow. There are more people there to answer questions.
 
 - If it’s a bug: you’re in the right place, [file an
-  issue](https://github.com/PaulESantos/perestamb/issues/new).
+  issue](https://github.com/PaulESantos/siniaR/issues/new).
 
 - If you’re not sure: let the community help you figure it out! If your
   problem *is* a bug or a feature request, you can easily return here
   and report it.
 
 Before opening a new issue, be sure to [search issues and pull
-requests](https://github.com/PaulESantos/perestamb/issues) to make sure
-the bug hasn’t been reported and/or already fixed in the development
+requests](https://github.com/PaulESantos/siniaR/issues) to make sure the
+bug hasn’t been reported and/or already fixed in the development
 version. By default, the search will be pre-populated with
 `is:issue is:open`. You can [edit the
 qualifiers](https://help.github.com/articles/searching-issues-and-pull-requests/)

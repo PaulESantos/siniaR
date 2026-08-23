@@ -1,7 +1,8 @@
-# Obtener datos y ficha tecnica completa de una estadistica del SINIA
+# Obtener datos y ficha técnica completa de una estadística del SINIA
 
-Descarga tanto los metadatos de la ficha tecnica como el conjunto de
-datos estructurado en un unico objeto `sinia_estadistica`.
+Descarga tanto los metadatos estructurados de la ficha técnica como el
+conjunto de datos tabulares en un único objeto compuesto de clase
+`sinia_estadistica`.
 
 ## Usage
 
@@ -13,7 +14,7 @@ sinia_estadistica(id, pivot = c("wide", "long"))
 
 - id:
 
-  Identificador numerico de la estadistica (ej. `1` para temperatura).
+  Identificador numérico de la estadística (ej. `1` para temperatura).
 
 - pivot:
 
@@ -21,20 +22,40 @@ sinia_estadistica(id, pivot = c("wide", "long"))
 
 ## Value
 
-Un objeto de clase `sinia_estadistica` que contiene:
+Un objeto de clase `sinia_estadistica` (lista S3) con los siguientes
+elementos:
 
-- `ficha`: Objeto `sinia_ficha` con los metadatos.
+- id:
 
-- `datos`:
+  Identificador numérico de la estadística.
+
+- nombre:
+
+  Nombre oficial del indicador.
+
+- ficha:
+
+  Objeto de clase `sinia_ficha` con todos los metadatos oficiales.
+
+- datos:
+
+  Un
   [tibble::tibble](https://tibble.tidyverse.org/reference/tibble.html)
-  con los datos tabulares.
+  con los datos tabulares en el formato solicitado.
+
+## See also
+
+[`sinia_ficha()`](https://paulesantos.github.io/siniaR/reference/sinia_ficha.md),
+[`sinia_datos()`](https://paulesantos.github.io/siniaR/reference/sinia_datos.md)
 
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-est <- sinia_estadistica(1)
+est <- sinia_estadistica(1, pivot = "long")
+# Consultar ficha
 est$ficha
+# Consultar datos
 head(est$datos)
 } # }
 ```

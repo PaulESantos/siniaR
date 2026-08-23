@@ -5,6 +5,28 @@ programático, exploración y análisis de las estadísticas ambientales
 oficiales del Perú, provenientes en vivo del **Sistema Nacional de
 Información Ambiental (SINIA / MINAM)**.
 
+------------------------------------------------------------------------
+
+## 🎨 Paleta de Colores Institucional (SINIA / Marco MDEA)
+
+El sitio web y la identidad visual de `siniaR` están construidos a
+partir de los colores oficiales del portal del SINIA / MINAM y los 6
+componentes del Marco para el Desarrollo de las Estadísticas Ambientales
+(MDEA / ONU):
+
+| Componente / Elemento | Muestra | Color HEX | Descripción Temática |
+|:---|:--:|:--:|:---|
+| **SINIA Brand Blue** | ![\#1B75BC](https://via.placeholder.com/15/1B75BC/1B75BC.png) | `#1B75BC` | Color institucional primario SINIA / MINAM |
+| **SINIA Brand Green** | ![\#78BE20](https://via.placeholder.com/15/78BE20/78BE20.png) | `#78BE20` | Acento secundario y naturaleza |
+| **1. Condiciones y Calidad Ambiental** | ![\#38B6FF](https://via.placeholder.com/15/38B6FF/38B6FF.png) | `#38B6FF` | Atmósfera, clima, agua, suelo y ecosistemas |
+| **2. Recursos Ambientales y su Uso** | ![\#E07A26](https://via.placeholder.com/15/E07A26/E07A26.png) | `#E07A26` | Minerales, energía, madera y biomasa |
+| **3. Residuos** | ![\#7B3F7B](https://via.placeholder.com/15/7B3F7B/7B3F7B.png) | `#7B3F7B` | Generación y disposición de residuos |
+| **4. Eventos Naturales y Cambio Climático** | ![\#2C3E50](https://via.placeholder.com/15/2C3E50/2C3E50.png) | `#2C3E50` | Desastres naturales y variables climáticas |
+| **5. Hábitat Humano y Asuntos Socioambientales** | ![\#5E8D3B](https://via.placeholder.com/15/5E8D3B/5E8D3B.png) | `#5E8D3B` | Salud ambiental y asentamientos humanos |
+| **6. Protección y Gestión Ambiental** | ![\#D4AC0D](https://via.placeholder.com/15/D4AC0D/D4AC0D.png) | `#D4AC0D` | Regulación, gasto y participación ambiental |
+
+------------------------------------------------------------------------
+
 ## 📦 Instalación
 
 Puedes instalar la versión de desarrollo de `siniaR` desde GitHub:
@@ -121,8 +143,15 @@ deptos_interes <- c("Lima", "Loreto", "Cusco", "Piura", "Puno")
 temp_long |>
   filter(departamento %in% deptos_interes, !is.na(valor)) |>
   ggplot(aes(x = anio, y = valor, color = departamento)) +
-  geom_line(linewidth = 1) +
-  geom_point(size = 2) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 2.5) +
+  scale_color_manual(values = c(
+    "Lima" = "#1B75BC",
+    "Loreto" = "#78BE20",
+    "Cusco" = "#E07A26",
+    "Piura" = "#38B6FF",
+    "Puno" = "#7B3F7B"
+  )) +
   labs(
     title = "Evolución de la Temperatura Promedio Anual (°C)",
     subtitle = "Fuente: SINIA / SENAMHI",
@@ -134,6 +163,20 @@ temp_long |>
 ```
 
 ![](reference/figures/README-example-plot-1.png)
+
+------------------------------------------------------------------------
+
+## 📚 Documentación y Viñetas
+
+Para guías detalladas paso a paso, consulta las viñetas del paquete:
+
+1.  **[Guía de Inicio Rápido a
+    siniaR](https://paulesantos.github.io/siniaR/articles/siniaR-introduccion.html)**:
+    Flujo de trabajo completo para búsqueda, extracción y visualización.
+2.  **[Explorando los Componentes del Marco
+    MDEA](https://paulesantos.github.io/siniaR/articles/marcos-ordenadores-mdea.html)**:
+    Consulta y estructuración según los 6 componentes de Naciones
+    Unidas.
 
 ------------------------------------------------------------------------
 
