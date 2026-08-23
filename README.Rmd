@@ -13,46 +13,107 @@ knitr::opts_chunk$set(
 )
 ```
 
-# perestamb
+# siniaR <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/perestamb)](https://CRAN.R-project.org/package=perestamb)
-[![R-CMD-check](https://github.com/PaulESantos/perestamb/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/perestamb/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/PaulESantos/perestamb/graph/badge.svg)](https://app.codecov.io/gh/PaulESantos/perestamb)
+[![R-CMD-check](https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of perestamb is to ...
+**`siniaR`** es un paquete para R diseñado para facilitar el acceso programático, exploración y análisis de las estadísticas ambientales oficiales del Perú, provenientes del **Sistema Nacional de Información Ambiental (SINIA / MINAM)** y del **Instituto Nacional de Estadística e Informática (INEI)**.
 
-## Installation
+## 📦 Instalación
 
-You can install the development version of perestamb like so:
+Puedes instalar la versión de desarrollo de `siniaR` desde GitHub:
 
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+```r
+# install.packages("remotes")
+remotes::install_github("PaulESantos/siniaR")
 ```
 
-## Example
+---
 
-This is a basic example which shows you how to solve a common problem:
+## 🚀 Características Principales
 
-```{r example}
-library(perestamb)
-## basic example code
+1. **Acceso directo al SINIA / MINAM en vivo**:
+   - `sinia_indicadores()`: Catálogo de más de 180 estadísticas ambientales según el marco internacional MDEA (ONU) o el marco SINIA.
+   - `sinia_buscar()`: Búsqueda rápida de indicadores por palabras clave (ej. `"temperatura"`, `"pm10"`, `"glaciares"`, `"bosque"`).
+   - `sinia_ficha()`: Consulta interactiva de la **Ficha Técnica** oficial con metodologías, fuentes, fórmulas de cálculo y notas.
+   - `sinia_datos()`: Descarga de series históricas en formato *tidy* (`wide` o `long` listo para `ggplot2`).
+   - `sinia_estadistica()`: Objeto integrado con metadatos y datos tabulares.
+
+2. **15 Datasets Preempaquetados (INEI / SERNANP / SENAMHI)**:
+   - Áreas de Conservación Privada y Regional (`acp_sernanp`, `acr_sernanp`).
+   - Bosques y Cobertura Amazónica (`cap_pot_bosq_amaz`, `sup_dep_sup_bha`, `superficie_bha`).
+   - Flora y Fauna (`flora_fauna_2013_2020`, `flora_fauna_ende`).
+   - Clima y Meteorología (`temperatura`, `temperatura_maxima`, `precipitacion`, `humedad_rel`).
+   - Calidad del Aire (`prom_mensual_pm_menor_10mcr`).
+   - Hidrografía y Territorio (`rios_frontera`, `islas_islotes`, `xlsx_links`).
+
+---
+
+## 💡 Ejemplos de Uso
+
+```{r example-load, message=FALSE, warning=FALSE}
+library(siniaR)
+library(dplyr)
+library(ggplot2)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+### 1. Explorar y buscar estadísticas en el SINIA
 
-```{r cars}
-summary(cars)
+```{r example-search}
+# Buscar estadísticas relacionadas a la calidad del aire
+resultados <- sinia_buscar("PM10")
+head(resultados)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+### 2. Consultar la Ficha Técnica de un Indicador
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r example-ficha}
+# Consultar la ficha técnica de Temperatura Promedio Anual (ID = 1)
+ficha <- sinia_ficha(1)
+ficha
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+### 3. Descargar datos en formato *Tidy* y visualizar
+
+```{r example-plot, fig.height=5}
+# Descargar datos en formato largo (long) para graficar
+temp_long <- sinia_datos(1, pivot = "long")
+
+# Filtrar algunos departamentos y visualizar la evolución temporal
+deptos_interes <- c("Lima", "Loreto", "Cusco", "Piura", "Puno")
+
+temp_long |>
+  filter(departamento %in% deptos_interes, !is.na(valor)) |>
+  ggplot(aes(x = anio, y = valor, color = departamento)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  labs(
+    title = "Evolución de la Temperatura Promedio Anual (°C)",
+    subtitle = "Fuente: SINIA / SENAMHI",
+    x = "Año",
+    y = "Temperatura Promedio (°C)",
+    color = "Departamento"
+  ) +
+  theme_minimal()
+```
+
+---
+
+## 📚 Datasets Preempaquetados
+
+Puedes consultar la documentación de cualquier conjunto de datos directamente con `?`:
+
+```r
+?acp_sernanp
+?temperatura
+?prom_mensual_pm_menor_10mcr
+```
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT.

@@ -54,13 +54,13 @@ datos
 
 prom_mensual_pm_menor_10mcr <- datos |>
   dplyr::slice(-c(1:4)) |>
-  dplyr::mutate(año = dplyr::if_else(
+  dplyr::mutate(anio = dplyr::if_else(
     stringr::str_detect(`Año/Mes`, "[0-9]{4}"),
     `Año/Mes`,
     NA_character_
   )) |>
-  dplyr::relocate(año) |>
-  tidyr::fill(año, .direction = "down") |>
+  dplyr::relocate(anio) |>
+  tidyr::fill(anio, .direction = "down") |>
   tidyr::drop_na() |>
   tidyr::pivot_longer(-c(1:2),
                       names_to = "lugar",
@@ -68,7 +68,7 @@ prom_mensual_pm_menor_10mcr <- datos |>
   dplyr::mutate(lugar = str_remove( lugar, "\r\n"),
                 pm25_mgm = as.numeric(pm25_mgm)) |>
   dplyr::rename(mes = `Año/Mes`) |>
-  dplyr::arrange(año, mes) |>
+  dplyr::arrange(anio, mes) |>
   dplyr::mutate_if(is.character,
                    ~iconv(., to = "ASCII//TRANSLIT"))
 

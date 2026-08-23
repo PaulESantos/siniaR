@@ -1,7 +1,9 @@
+^siniaR\.Rproj$
 ^perestamb\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
+^README\.html$
 ^cran-comments\.md$
 ^\.github$
 ^codecov\.yml$
@@ -9,3 +11,6 @@
 ^docs$
 ^pkgdown$
 ^data-raw$
+^raw_data$
+^raw_data_inei$
+^scratch$
