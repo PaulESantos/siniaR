@@ -2,23 +2,61 @@
 % Please edit documentation in R/sinia_api.R
 \name{sinia_ficha}
 \alias{sinia_ficha}
-\title{Obtener la Ficha Tecnica de una estadistica del SINIA}
+\title{Obtener la Ficha Técnica de una estadística del SINIA}
 \usage{
 sinia_ficha(id)
 }
 \arguments{
-\item{id}{Identificador numerico de la estadistica (ej. \code{1} para temperatura promedio anual).}
+\item{id}{Identificador numérico de la estadística (ej. \code{1} para temperatura promedio anual).}
 }
 \value{
-Un objeto de clase \code{sinia_ficha} con los metadatos de la estadistica.
+Un objeto de clase \code{sinia_ficha} (lista estructurada) con los siguientes campos:
+\describe{
+\item{id}{Identificador numérico único de la estadística.}
+\item{numero}{Código numeral asignado en el SINIA.}
+\item{nombre}{Nombre oficial de la estadística ambiental.}
+\item{finalidad}{Objetivo o propósito de la medición.}
+\item{descripcion}{Fundamentación conceptual y descripción técnica.}
+\item{unidad_medida}{Unidad física o métrica de medición (ej. \verb{°C}, \code{ug/m3}, \code{ha}, \verb{\\\%}).}
+\item{formula_calculo}{Ecuación o expresión matemática utilizada para el cálculo.}
+\item{metodologia_calculo}{Procedimiento metodológico de recopilación y procesamiento.}
+\item{fuente}{Institución u organismo oficial generador (ej. SENAMHI, SERNANP, INEI, OEFA).}
+\item{unidad_organica}{Dirección o unidad orgánica responsable de la información.}
+\item{url_fuente}{Enlace web al portal o repositorio de la fuente original.}
+\item{periodicidad_generacion}{Frecuencia de generación del dato (mensual, anual, etc.).}
+\item{periodicidad_entrega}{Frecuencia de actualización en el SINIA.}
+\item{periodo_serie}{Rango de años comprendido en la serie histórica (ej. \code{2014-2024}).}
+\item{ambito_geografico}{Desagregación territorial (Nacional, Departamental, Provincial, etc.).}
+\item{limitaciones}{Restricciones o consideraciones sobre los datos.}
+\item{relacion_objetivos_nacionales}{Alineación con políticas y objetivos ambientales nacionales.}
+\item{relacion_iniciativas_internacionales}{Alineación con ODS u otros compromisos globales.}
+\item{datos_contacto}{Información de contacto institucional del generador.}
+\item{correo_electronico}{Correo electrónico de contacto.}
+\item{clasificacion_mdea}{Código y nombre del componente/subcomponente MDEA.}
+\item{clasificacion_sinia}{Clasificación temática propia del SINIA.}
+\item{titulo_tabla}{Título formal de la matriz tabular de datos.}
+\item{nota_tabla}{Notas técnicas y aclaratorias sobre los valores numéricos.}
+\item{fuente_tabla}{Texto de fuente que acompaña la tabla.}
+\item{elaboracion_tabla}{Texto de elaboración institucional.}
+}
 }
 \description{
-Consulta y estructura los metadatos oficiales (definicion, fuente, formula,
-metodologia, periodicidad y responsables) de una estadistica ambiental.
+Consulta y estructura los metadatos oficiales (definición, fuente, fórmula de cálculo,
+metodología, periodicidad, unidad de medida y responsables institucionales) de una
+estadística ambiental registrada en el SINIA.
 }
 \examples{
 \dontrun{
+# Obtener la ficha tecnica de Temperatura Promedio Anual (ID = 1)
 ficha <- sinia_ficha(1)
 print(ficha)
+
+# Consultar campos especificos
+ficha$fuente
+ficha$unidad_medida
+ficha$formula_calculo
 }
+}
+\seealso{
+\code{\link[=sinia_datos]{sinia_datos()}}, \code{\link[=sinia_estadistica]{sinia_estadistica()}}, \code{\link[=sinia_indicadores]{sinia_indicadores()}}
 }

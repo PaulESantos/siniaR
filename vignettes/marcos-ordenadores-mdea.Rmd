@@ -1,0 +1,96 @@
+---
+title: "Explorando los Componentes del Marco MDEA"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Explorando los Componentes del Marco MDEA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE
+)
+
+# Verificar conectividad con la API del SINIA
+has_api <- tryCatch({
+  con <- url("https://wp.bex.pe/portal/wp-json/esam/v1/website/marcos-ordenadores/mdea/indice-estadisticas", "r")
+  close(con)
+  TRUE
+}, error = function(e) FALSE)
+```
+
+## El Marco para el Desarrollo de las Estadísticas Ambientales (MDEA)
+
+El **Marco para el Desarrollo de las Estadísticas Ambientales (MDEA / FDES)** de las Naciones Unidas es la estructura metodológica internacional adoptada por el Ministerio del Ambiente (MINAM) y el SINIA para ordenar y clasificar las estadísticas ambientales del Perú.
+
+El MDEA organiza las estadísticas en **6 componentes principales**:
+
+| N° | Componente MDEA | Color Temático | Descripción |
+|:---:|:---|:---:|:---|
+| **1** | **Condiciones y Calidad Ambiental** | `#38B6FF` (Celeste) | Clima, atmósfera, recursos hídricos, suelo, biodiversidad y ecosistemas. |
+| **2** | **Recursos Ambientales y su Uso** | `#E07A26` (Ámbar) | Recursos minerales, energéticos, forestales, biológicos y acuáticos. |
+| **3** | **Residuos** | `#7B3F7B` (Púrpura) | Generación, gestión, tratamiento y disposición de residuos sólidos y aguas residuales. |
+| **4** | **Eventos Naturales y Cambio Climático** | `#2C3E50` (Pizarra) | Desastres naturales, peligros asociados y variables de cambio climático. |
+| **5** | **Hábitat Humano y Asuntos Socioambientales** | `#5E8D3B` (Verde Olivo) | Asentamientos humanos, salud ambiental, población expuesta y conflictos socioambientales. |
+| **6** | **Protección, Gestión y Participación Ambiental** | `#D4AC0D` (Mostaza) | Gasto ambiental, regulación, áreas protegidas, fiscalización y participación ciudadana. |
+
+---
+
+## Consultando Estadísticas por Componente
+
+```{r setup}
+library(siniaR)
+library(dplyr)
+```
+
+Podemos consultar el catálogo completo bajo el marco MDEA y filtrar por componente según el código numeral:
+
+```{r mdea-catalogo, eval = has_api}
+# Descargar el índice completo del marco MDEA
+ind_mdea <- sinia_indicadores(marco = "mdea")
+
+# Estadísticas pertenecientes al Componente 1 (Condiciones y Calidad Ambiental)
+c1_calidad <- ind_mdea |>
+  filter(grepl("^1\\.", numeral))
+
+head(c1_calidad, 8)
+```
+
+### Explorando Otros Componentes
+
+```{r otros-componentes, eval = has_api}
+# Componente 2: Recursos Ambientales
+c2_recursos <- ind_mdea |> filter(grepl("^2\\.", numeral))
+head(c2_recursos, 5)
+
+# Componente 3: Residuos
+c3_residuos <- ind_mdea |> filter(grepl("^3\\.", numeral))
+head(c3_residuos, 5)
+
+# Componente 4: Eventos Naturales y Desastres
+c4_eventos <- ind_mdea |> filter(grepl("^4\\.", numeral))
+head(c4_eventos, 5)
+
+# Componente 5: Hábitat Humano
+c5_habitat <- ind_mdea |> filter(grepl("^5\\.", numeral))
+head(c5_habitat, 5)
+
+# Componente 6: Gestión y Protección Ambiental
+c6_gestion <- ind_mdea |> filter(grepl("^6\\.", numeral))
+head(c6_gestion, 5)
+```
+
+---
+
+## Marco Propio SINIA
+
+Además del marco MDEA, el SINIA cuenta con un marco temático sectorial nacional que también puede consultarse indicando `marco = "sinia"`:
+
+```{r marco-sinia, eval = has_api}
+ind_sinia <- sinia_indicadores(marco = "sinia")
+head(ind_sinia, 8)
+```

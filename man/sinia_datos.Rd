@@ -2,28 +2,38 @@
 % Please edit documentation in R/sinia_api.R
 \name{sinia_datos}
 \alias{sinia_datos}
-\title{Descargar datos tabulares de una estadistica del SINIA}
+\title{Descargar datos tabulares de una estadística del SINIA}
 \usage{
 sinia_datos(id, pivot = c("wide", "long", "raw"), clean_names = TRUE)
 }
 \arguments{
-\item{id}{Identificador numerico de la estadistica (ej. \code{1} para temperatura).}
+\item{id}{Identificador numérico de la estadística (ej. \code{1} para temperatura).}
 
 \item{pivot}{Formato de salida de la tabla:
 \itemize{
-\item \code{"wide"} (por defecto): Mantiene columnas por cada periodo/anio.
-\item \code{"long"}: Transforma las columnas anuales en formato largo (\code{anio} y \code{valor}).
-\item \code{"raw"}: Retorna la estructura cruda de caracteres sin conversion automatica de tipos.
+\item \code{"wide"} (por defecto): Mantiene columnas separadas por cada año o periodo histórico.
+\item \code{"long"}: Transforma las columnas temporales en formato largo (\emph{tidy}), generando las
+columnas \code{anio} y \code{valor} listas para \code{ggplot2} y \code{dplyr}.
+\item \code{"raw"}: Retorna la matriz de texto original sin conversión automática de tipos.
 }}
 
-\item{clean_names}{Logico. Si es \code{TRUE} (por defecto), normaliza los nombres de columnas a minusculas y sin caracteres especiales.}
+\item{clean_names}{Lógico. Si es \code{TRUE} (por defecto), normaliza los nombres de columnas a
+minúsculas y sin caracteres especiales.}
 }
 \value{
-Un \link[tibble:tibble]{tibble::tibble} con los datos de la estadistica.
+Un \link[tibble:tibble]{tibble::tibble} con los datos de la estadística. Además, contiene los siguientes
+atributos con metadatos asociados:
+\describe{
+\item{\code{attr(.,"sinia_id")}}{ID numérico de la estadística.}
+\item{\code{attr(.,"sinia_nombre")}}{Nombre oficial del indicador.}
+\item{\code{attr(.,"sinia_fuente")}}{Institución generadora oficial.}
+\item{\code{attr(.,"sinia_unidad")}}{Unidad de medida.}
+\item{\code{attr(.,"sinia_nota")}}{Nota técnica o metodológica de la tabla.}
+}
 }
 \description{
-Extrae la serie de datos de una estadistica ambiental del SINIA, procesa
-la matriz tabular y la retorna en formato \link[tibble:tibble]{tibble::tibble} limpio.
+Extrae la matriz de datos de una estadística ambiental del SINIA, procesa
+la tabla y la retorna en formato \link[tibble:tibble]{tibble::tibble} limpio y estructurado.
 }
 \examples{
 \dontrun{
@@ -31,8 +41,11 @@ la matriz tabular y la retorna en formato \link[tibble:tibble]{tibble::tibble} l
 df_wide <- sinia_datos(1)
 head(df_wide)
 
-# Formato largo (apilado para graficos)
+# Formato largo (apilado para analisis y graficos con ggplot2)
 df_long <- sinia_datos(1, pivot = "long")
 head(df_long)
 }
+}
+\seealso{
+\code{\link[=sinia_ficha]{sinia_ficha()}}, \code{\link[=sinia_estadistica]{sinia_estadistica()}}, \code{\link[=sinia_buscar]{sinia_buscar()}}
 }

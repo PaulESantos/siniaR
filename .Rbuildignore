@@ -15,3 +15,5 @@
 ^raw_data$
 ^raw_data_inei$
 ^scratch$
+^doc$
+^Meta$

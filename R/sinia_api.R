@@ -1,6 +1,7 @@
-#' @title Interfaz para Estadisticas Ambientales del SINIA / MINAM
-#' @description Funciones para listar indicadores, buscar, consultar fichas tecnicas
-#'   y descargar conjuntos de datos del Sistema Nacional de Informacion Ambiental (SINIA).
+#' @title Interfaz para Estadísticas Ambientales del SINIA / MINAM
+#' @description Funciones para listar indicadores, buscar, consultar fichas técnicas
+#'   y descargar conjuntos de datos del Sistema Nacional de Información Ambiental (SINIA).
+#' @keywords internal
 #' @name sinia_api
 NULL
 
@@ -8,25 +9,39 @@ NULL
 
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
-#' Listar indicadores y estadisticas ambientales del SINIA
+#' Listar indicadores y estadísticas ambientales del SINIA
 #'
-#' Consulta el arbol tematico y catalogo de indicadores del SINIA segun el marco
+#' Consulta el árbol temático y catálogo de indicadores del SINIA según el marco
 #' ordenador especificado (por defecto MDEA - Marco para el Desarrollo de las
-#' Estadisticas Ambientales de la ONU).
+#' Estadísticas Ambientales de la ONU, o el marco sectorial propio de SINIA).
 #'
-#' @param marco Caracter indicando el marco ordenador: `"mdea"` (por defecto) o `"sinia"`.
-#' @param solo_estadisticas Logico. Si es `TRUE` (por defecto), solo retorna los items que
-#'   corresponden a estadisticas finales con ID de descarga.
+#' @param marco Carácter indicando el marco ordenador: `"mdea"` (por defecto) o `"sinia"`.
+#' @param solo_estadisticas Lógico. Si es `TRUE` (por defecto), solo retorna los ítems que
+#'   corresponden a estadísticas finales con ID numérico de descarga. Si es `FALSE`,
+#'   incluye también las categorías y niveles superiores del árbol temático.
 #'
-#' @return Un [tibble::tibble] con el listado de indicadores, codigos numerales, nombres
-#'   y jerarquia tematica.
+#' @return Un [tibble::tibble] con las siguientes columnas:
+#' \describe{
+#'   \item{id}{Identificador numérico único de la estadística (entero).}
+#'   \item{numeral}{Código numeral de clasificación jerárquica (ej. `"1.1.1"`).}
+#'   \item{nombre}{Nombre oficial del indicador o estadística ambiental.}
+#'   \item{nivel}{Nivel jerárquico dentro del árbol temático (entero).}
+#'   \item{clasificador_id}{Identificador del clasificador temático.}
+#'   \item{padre_id}{Identificador del clasificador padre en la jerarquía.}
+#'   \item{marco}{Marco ordenador consultado (`"mdea"` o `"sinia"`).}
+#' }
 #' @export
 #'
+#' @seealso [sinia_buscar()], [sinia_ficha()], [sinia_datos()]
 #' @examples
 #' \dontrun{
-#' # Listar todos los indicadores del marco MDEA
-#' ind <- sinia_indicadores()
-#' head(ind)
+#' # Listar todos los indicadores del marco MDEA (ONU)
+#' ind_mdea <- sinia_indicadores(marco = "mdea")
+#' head(ind_mdea)
+#'
+#' # Listar bajo el marco sectorial SINIA
+#' ind_sinia <- sinia_indicadores(marco = "sinia")
+#' head(ind_sinia)
 #' }
 sinia_indicadores <- function(marco = c("mdea", "sinia"), solo_estadisticas = TRUE) {
   marco <- match.arg(marco)
@@ -67,17 +82,20 @@ sinia_indicadores <- function(marco = c("mdea", "sinia"), solo_estadisticas = TR
   do.call(rbind, out)
 }
 
-#' Buscar estadisticas ambientales por palabra clave
+#' Buscar estadísticas ambientales por palabra clave
 #'
-#' Realiza una busqueda insensible a mayusculas y tildes dentro del catalogo
-#' de indicadores del SINIA.
+#' Realiza una búsqueda insensible a mayúsculas, minúsculas y tildes dentro del catálogo
+#' oficial de indicadores del SINIA.
 #'
-#' @param query Cadena de texto con la palabra o expresion a buscar (ej. `"temperatura"`, `"pm10"`, `"glaciar"`, `"bosque"`).
-#' @param marco Caracter indicando el marco ordenador: `"mdea"` (por defecto) o `"sinia"`.
+#' @param query Cadena de texto con la palabra o expresión a buscar (ej. `"temperatura"`,
+#'   `"pm10"`, `"glaciar"`, `"bosque"`, `"residuos"`).
+#' @param marco Carácter indicando el marco ordenador: `"mdea"` (por defecto) o `"sinia"`.
 #'
-#' @return Un [tibble::tibble] con los indicadores que coinciden con la busqueda.
+#' @return Un [tibble::tibble] con los indicadores que coinciden con el término de búsqueda,
+#'   conservando la estructura de [sinia_indicadores()].
 #' @export
 #'
+#' @seealso [sinia_indicadores()], [sinia_ficha()], [sinia_datos()]
 #' @examples
 #' \dontrun{
 #' # Buscar indicadores sobre temperatura
@@ -85,6 +103,9 @@ sinia_indicadores <- function(marco = c("mdea", "sinia"), solo_estadisticas = TR
 #'
 #' # Buscar indicadores sobre calidad del aire
 #' sinia_buscar("pm10")
+#'
+#' # Buscar indicadores sobre cobertura forestal
+#' sinia_buscar("bosque")
 #' }
 sinia_buscar <- function(query, marco = c("mdea", "sinia")) {
   if (missing(query) || !is.character(query) || length(query) == 0 || nchar(query) == 0) {
@@ -112,20 +133,57 @@ sinia_buscar <- function(query, marco = c("mdea", "sinia")) {
   res
 }
 
-#' Obtener la Ficha Tecnica de una estadistica del SINIA
+#' Obtener la Ficha Técnica de una estadística del SINIA
 #'
-#' Consulta y estructura los metadatos oficiales (definicion, fuente, formula,
-#' metodologia, periodicidad y responsables) de una estadistica ambiental.
+#' Consulta y estructura los metadatos oficiales (definición, fuente, fórmula de cálculo,
+#' metodología, periodicidad, unidad de medida y responsables institucionales) de una
+#' estadística ambiental registrada en el SINIA.
 #'
-#' @param id Identificador numerico de la estadistica (ej. `1` para temperatura promedio anual).
+#' @param id Identificador numérico de la estadística (ej. `1` para temperatura promedio anual).
 #'
-#' @return Un objeto de clase `sinia_ficha` con los metadatos de la estadistica.
+#' @return Un objeto de clase `sinia_ficha` (lista estructurada) con los siguientes campos:
+#' \describe{
+#'   \item{id}{Identificador numérico único de la estadística.}
+#'   \item{numero}{Código numeral asignado en el SINIA.}
+#'   \item{nombre}{Nombre oficial de la estadística ambiental.}
+#'   \item{finalidad}{Objetivo o propósito de la medición.}
+#'   \item{descripcion}{Fundamentación conceptual y descripción técnica.}
+#'   \item{unidad_medida}{Unidad física o métrica de medición (ej. `°C`, `ug/m3`, `ha`, `\%`).}
+#'   \item{formula_calculo}{Ecuación o expresión matemática utilizada para el cálculo.}
+#'   \item{metodologia_calculo}{Procedimiento metodológico de recopilación y procesamiento.}
+#'   \item{fuente}{Institución u organismo oficial generador (ej. SENAMHI, SERNANP, INEI, OEFA).}
+#'   \item{unidad_organica}{Dirección o unidad orgánica responsable de la información.}
+#'   \item{url_fuente}{Enlace web al portal o repositorio de la fuente original.}
+#'   \item{periodicidad_generacion}{Frecuencia de generación del dato (mensual, anual, etc.).}
+#'   \item{periodicidad_entrega}{Frecuencia de actualización en el SINIA.}
+#'   \item{periodo_serie}{Rango de años comprendido en la serie histórica (ej. `2014-2024`).}
+#'   \item{ambito_geografico}{Desagregación territorial (Nacional, Departamental, Provincial, etc.).}
+#'   \item{limitaciones}{Restricciones o consideraciones sobre los datos.}
+#'   \item{relacion_objetivos_nacionales}{Alineación con políticas y objetivos ambientales nacionales.}
+#'   \item{relacion_iniciativas_internacionales}{Alineación con ODS u otros compromisos globales.}
+#'   \item{datos_contacto}{Información de contacto institucional del generador.}
+#'   \item{correo_electronico}{Correo electrónico de contacto.}
+#'   \item{clasificacion_mdea}{Código y nombre del componente/subcomponente MDEA.}
+#'   \item{clasificacion_sinia}{Clasificación temática propia del SINIA.}
+#'   \item{titulo_tabla}{Título formal de la matriz tabular de datos.}
+#'   \item{nota_tabla}{Notas técnicas y aclaratorias sobre los valores numéricos.}
+#'   \item{fuente_tabla}{Texto de fuente que acompaña la tabla.}
+#'   \item{elaboracion_tabla}{Texto de elaboración institucional.}
+#' }
+#'
 #' @export
 #'
+#' @seealso [sinia_datos()], [sinia_estadistica()], [sinia_indicadores()]
 #' @examples
 #' \dontrun{
+#' # Obtener la ficha tecnica de Temperatura Promedio Anual (ID = 1)
 #' ficha <- sinia_ficha(1)
 #' print(ficha)
+#'
+#' # Consultar campos especificos
+#' ficha$fuente
+#' ficha$unidad_medida
+#' ficha$formula_calculo
 #' }
 sinia_ficha <- function(id) {
   if (missing(id) || !is.numeric(id) && !is.character(id)) {
@@ -215,28 +273,39 @@ print.sinia_ficha <- function(x, ...) {
   invisible(x)
 }
 
-#' Descargar datos tabulares de una estadistica del SINIA
+#' Descargar datos tabulares de una estadística del SINIA
 #'
-#' Extrae la serie de datos de una estadistica ambiental del SINIA, procesa
-#' la matriz tabular y la retorna en formato [tibble::tibble] limpio.
+#' Extrae la matriz de datos de una estadística ambiental del SINIA, procesa
+#' la tabla y la retorna en formato [tibble::tibble] limpio y estructurado.
 #'
-#' @param id Identificador numerico de la estadistica (ej. `1` para temperatura).
+#' @param id Identificador numérico de la estadística (ej. `1` para temperatura).
 #' @param pivot Formato de salida de la tabla:
-#'   * `"wide"` (por defecto): Mantiene columnas por cada periodo/anio.
-#'   * `"long"`: Transforma las columnas anuales en formato largo (`anio` y `valor`).
-#'   * `"raw"`: Retorna la estructura cruda de caracteres sin conversion automatica de tipos.
-#' @param clean_names Logico. Si es `TRUE` (por defecto), normaliza los nombres de columnas a minusculas y sin caracteres especiales.
+#'   * `"wide"` (por defecto): Mantiene columnas separadas por cada año o periodo histórico.
+#'   * `"long"`: Transforma las columnas temporales en formato largo (*tidy*), generando las
+#'     columnas `anio` y `valor` listas para `ggplot2` y `dplyr`.
+#'   * `"raw"`: Retorna la matriz de texto original sin conversión automática de tipos.
+#' @param clean_names Lógico. Si es `TRUE` (por defecto), normaliza los nombres de columnas a
+#'   minúsculas y sin caracteres especiales.
 #'
-#' @return Un [tibble::tibble] con los datos de la estadistica.
+#' @return Un [tibble::tibble] con los datos de la estadística. Además, contiene los siguientes
+#'   atributos con metadatos asociados:
+#' \describe{
+#'   \item{`attr(.,"sinia_id")`}{ID numérico de la estadística.}
+#'   \item{`attr(.,"sinia_nombre")`}{Nombre oficial del indicador.}
+#'   \item{`attr(.,"sinia_fuente")`}{Institución generadora oficial.}
+#'   \item{`attr(.,"sinia_unidad")`}{Unidad de medida.}
+#'   \item{`attr(.,"sinia_nota")`}{Nota técnica o metodológica de la tabla.}
+#' }
 #' @export
 #'
+#' @seealso [sinia_ficha()], [sinia_estadistica()], [sinia_buscar()]
 #' @examples
 #' \dontrun{
 #' # Formato ancho (columnas por anio)
 #' df_wide <- sinia_datos(1)
 #' head(df_wide)
 #'
-#' # Formato largo (apilado para graficos)
+#' # Formato largo (apilado para analisis y graficos con ggplot2)
 #' df_long <- sinia_datos(1, pivot = "long")
 #' head(df_long)
 #' }
@@ -339,23 +408,30 @@ sinia_datos <- function(id, pivot = c("wide", "long", "raw"), clean_names = TRUE
   tbl
 }
 
-#' Obtener datos y ficha tecnica completa de una estadistica del SINIA
+#' Obtener datos y ficha técnica completa de una estadística del SINIA
 #'
-#' Descarga tanto los metadatos de la ficha tecnica como el conjunto de datos
-#' estructurado en un unico objeto `sinia_estadistica`.
+#' Descarga tanto los metadatos estructurados de la ficha técnica como el conjunto de datos
+#' tabulares en un único objeto compuesto de clase `sinia_estadistica`.
 #'
-#' @param id Identificador numerico de la estadistica (ej. `1` para temperatura).
+#' @param id Identificador numérico de la estadística (ej. `1` para temperatura).
 #' @param pivot Formato de salida de los datos (`"wide"` o `"long"`).
 #'
-#' @return Un objeto de clase `sinia_estadistica` que contiene:
-#'   * `ficha`: Objeto `sinia_ficha` con los metadatos.
-#'   * `datos`: [tibble::tibble] con los datos tabulares.
+#' @return Un objeto de clase `sinia_estadistica` (lista S3) con los siguientes elementos:
+#' \describe{
+#'   \item{id}{Identificador numérico de la estadística.}
+#'   \item{nombre}{Nombre oficial del indicador.}
+#'   \item{ficha}{Objeto de clase `sinia_ficha` con todos los metadatos oficiales.}
+#'   \item{datos}{Un [tibble::tibble] con los datos tabulares en el formato solicitado.}
+#' }
 #' @export
 #'
+#' @seealso [sinia_ficha()], [sinia_datos()]
 #' @examples
 #' \dontrun{
-#' est <- sinia_estadistica(1)
+#' est <- sinia_estadistica(1, pivot = "long")
+#' # Consultar ficha
 #' est$ficha
+#' # Consultar datos
 #' head(est$datos)
 #' }
 sinia_estadistica <- function(id, pivot = c("wide", "long")) {

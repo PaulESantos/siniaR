@@ -2,21 +2,23 @@
 % Please edit documentation in R/sinia_api.R
 \name{sinia_buscar}
 \alias{sinia_buscar}
-\title{Buscar estadisticas ambientales por palabra clave}
+\title{Buscar estadísticas ambientales por palabra clave}
 \usage{
 sinia_buscar(query, marco = c("mdea", "sinia"))
 }
 \arguments{
-\item{query}{Cadena de texto con la palabra o expresion a buscar (ej. \code{"temperatura"}, \code{"pm10"}, \code{"glaciar"}, \code{"bosque"}).}
+\item{query}{Cadena de texto con la palabra o expresión a buscar (ej. \code{"temperatura"},
+\code{"pm10"}, \code{"glaciar"}, \code{"bosque"}, \code{"residuos"}).}
 
-\item{marco}{Caracter indicando el marco ordenador: \code{"mdea"} (por defecto) o \code{"sinia"}.}
+\item{marco}{Carácter indicando el marco ordenador: \code{"mdea"} (por defecto) o \code{"sinia"}.}
 }
 \value{
-Un \link[tibble:tibble]{tibble::tibble} con los indicadores que coinciden con la busqueda.
+Un \link[tibble:tibble]{tibble::tibble} con los indicadores que coinciden con el término de búsqueda,
+conservando la estructura de \code{\link[=sinia_indicadores]{sinia_indicadores()}}.
 }
 \description{
-Realiza una busqueda insensible a mayusculas y tildes dentro del catalogo
-de indicadores del SINIA.
+Realiza una búsqueda insensible a mayúsculas, minúsculas y tildes dentro del catálogo
+oficial de indicadores del SINIA.
 }
 \examples{
 \dontrun{
@@ -25,5 +27,11 @@ sinia_buscar("temperatura")
 
 # Buscar indicadores sobre calidad del aire
 sinia_buscar("pm10")
+
+# Buscar indicadores sobre cobertura forestal
+sinia_buscar("bosque")
 }
+}
+\seealso{
+\code{\link[=sinia_indicadores]{sinia_indicadores()}}, \code{\link[=sinia_ficha]{sinia_ficha()}}, \code{\link[=sinia_datos]{sinia_datos()}}
 }

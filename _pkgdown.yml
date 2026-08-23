@@ -1,5 +1,15 @@
 url: https://paulesantos.github.io/siniaR/
 
+home:
+  title: siniaR - Estadísticas Ambientales del Perú (SINIA / MINAM)
+  description: >
+    Paquete para R diseñado para facilitar el acceso programático, exploración
+    y análisis de las estadísticas e indicadores ambientales oficiales del Perú,
+    provenientes en vivo del Sistema Nacional de Información Ambiental (SINIA)
+    del Ministerio del Ambiente (MINAM). Incluye navegación por catálogos temáticos
+    (MDEA / SINIA), consulta de fichas técnicas metodológicas y descarga de series
+    históricas en formato tidy.
+
 authors:
   Paul Efren Santos Andrade:
     href: https://paulefrens.rbind.io/
@@ -9,8 +19,76 @@ template:
   bslib:
     font_scale: 1.0
     base_font:
-      google: "Jost"
-    code_font:
-      google: "Overpass Mono"
+      google: "Inter"
     heading_font:
-      google: "Abhaya Libre"
+      google: "Outfit"
+    code_font:
+      google: "Fira Code"
+    bg: "#ffffff"
+    fg: "#1e293b"
+    primary: "#1B75BC"
+    secondary: "#78BE20"
+    link-color: "#1B75BC"
+    info: "#38B6FF"
+    success: "#5E8D3B"
+    warning: "#E07A26"
+    danger: "#C8102E"
+    headings-color: "#0E4B75"
+    navbar-bg: "#ffffff"
+    navbar-light-color: "#1e293b"
+    navbar-light-hover-color: "#1B75BC"
+    navbar-light-active-color: "#1B75BC"
+  opengraph:
+    image:
+      src: man/figures/README-example-plot-1.png
+      alt: "siniaR R package - Estadísticas Ambientales del Perú"
+    twitter:
+      creator: "@paulefrens"
+      card: summary_large_image
+
+navbar:
+  type: light
+  bg: "#ffffff"
+  structure:
+    left:  [home, intro, reference, articles, news]
+    right: [search, github]
+  components:
+    intro:
+      text: "Primeros Pasos"
+      href: articles/siniaR-introduccion.html
+    articles:
+      text: "Viñetas"
+      menu:
+        - text: "Guías de Uso"
+        - text: "Guía de Inicio Rápido a siniaR"
+          href: articles/siniaR-introduccion.html
+        - text: "Explorando los Componentes del Marco MDEA"
+          href: articles/marcos-ordenadores-mdea.html
+        - text: "-------"
+        - text: "Recursos Oficiales"
+        - text: "Portal Oficial SINIA / MINAM"
+          href: https://sinia.minam.gob.pe/
+        - text: "Estadísticas del Sector Ambiente"
+          href: https://sinia.minam.gob.pe/portal/estadisticas-del-sector-ambiente/
+
+reference:
+  - title: "Catálogo y Búsqueda de Indicadores"
+    desc: "Exploración de la estructura temática y búsqueda por palabras clave en el SINIA."
+    contents:
+      - sinia_indicadores
+      - sinia_buscar
+
+  - title: "Fichas Técnicas y Metadatos"
+    desc: "Consulta de definiciones, fuentes, metodologías y fórmulas oficiales."
+    contents:
+      - sinia_ficha
+
+  - title: "Descarga y Transformación de Datos"
+    desc: "Extracción de matrices estadísticas en formatos ancho, largo (*tidy*) y crudo."
+    contents:
+      - sinia_datos
+
+  - title: "Objetos Integrados"
+    desc: "Combinación de metadatos completos y matrices tabulares."
+    contents:
+      - sinia_estadistica

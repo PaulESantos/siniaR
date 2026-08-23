@@ -1,0 +1,156 @@
+---
+title: "Guía de Inicio Rápido a siniaR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Guía de Inicio Rápido a siniaR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 7,
+  fig.height = 4.5
+)
+
+# Verificar conectividad con la API del SINIA
+has_api <- tryCatch({
+  con <- url("https://wp.bex.pe/portal/wp-json/esam/v1/website/marcos-ordenadores/mdea/indice-estadisticas", "r")
+  close(con)
+  TRUE
+}, error = function(e) FALSE)
+```
+
+## Introducción
+
+El paquete **`siniaR`** proporciona una interfaz directa y programática en R para consultar, estructurar y visualizar las estadísticas ambientales oficiales del Perú desde el portal del **Sistema Nacional de Información Ambiental (SINIA)**, administrado por el **Ministerio del Ambiente (MINAM)**.
+
+A través de `siniaR`, analistas, investigadores y tomadores de decisiones pueden automatizar la extracción de series temporales, consultar fichas técnicas metodológicas y generar visualizaciones reproducibles.
+
+```{r setup}
+library(siniaR)
+library(dplyr)
+library(ggplot2)
+```
+
+---
+
+## 1. Descubrimiento y Búsqueda de Indicadores
+
+### Explorar el catálogo temático
+
+Con `sinia_indicadores()` podemos listar todas las estadísticas disponibles organizadas por su árbol temático y código numeral:
+
+```{r indicadores, eval = has_api}
+# Listar todos los indicadores bajo el marco MDEA (ONU)
+indicadores <- sinia_indicadores(marco = "mdea")
+head(indicadores, 10)
+```
+
+### Búsqueda por palabra clave
+
+La función `sinia_buscar()` permite buscar estadísticas por términos clave sin distinguir mayúsculas, minúsculas ni tildes:
+
+```{r buscar, eval = has_api}
+# Buscar estadísticas relacionadas con calidad del aire o material particulado
+aire <- sinia_buscar("pm10")
+aire
+```
+
+---
+
+## 2. Consulta de la Ficha Técnica Oficial
+
+Cada estadística en el SINIA cuenta con una **Ficha Técnica** estandarizada que detalla la entidad generadora, la fórmula de cálculo, el ámbito geográfico, la periodicidad de los datos y notas explicativas:
+
+```{r ficha, eval = has_api}
+# Consultar la ficha técnica del indicador ID = 1 (Temperatura del aire)
+ficha <- sinia_ficha(1)
+ficha
+```
+
+También podemos acceder a cualquiera de sus campos directamente como una lista:
+
+```{r ficha-campos, eval = has_api}
+ficha$fuente
+ficha$unidad_medida
+ficha$periodo_serie
+```
+
+---
+
+## 3. Descarga y Transformación de Datos
+
+La función `sinia_datos()` procesa las matrices de datos del SINIA y permite obtenerlas directamente en formato ancho (`"wide"`) o largo (*tidy*, `"long"`):
+
+### Formato Largo (*Long / Tidy*)
+
+Ideal para manipulaciones con `dplyr` y gráficos con `ggplot2`:
+
+```{r datos-long, eval = has_api}
+datos_temp <- sinia_datos(id = 1, pivot = "long")
+head(datos_temp, 12)
+```
+
+### Formato Ancho (*Wide*)
+
+Ideal para reportes tabulares o resúmenes ejecutivos:
+
+```{r datos-wide, eval = has_api}
+datos_wide <- sinia_datos(id = 1, pivot = "wide")
+head(datos_wide, 6)
+```
+
+---
+
+## 4. Visualización con ggplot2
+
+Podemos combinar fácilmente los datos obtenidos con la estética del SINIA:
+
+```{r visualizacion, eval = has_api}
+# Descargar serie temporal de temperatura en formato tidy
+df <- sinia_datos(1, pivot = "long")
+
+# Filtrar departamentos representativos de costa, sierra y selva
+deptos <- c("Lima", "Loreto", "Cusco", "Piura", "Puno")
+
+df |>
+  filter(departamento %in% deptos, !is.na(valor)) |>
+  ggplot(aes(x = anio, y = valor, color = departamento)) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 2.5) +
+  scale_color_manual(values = c(
+    "Lima" = "#1B75BC",
+    "Loreto" = "#78BE20",
+    "Cusco" = "#E07A26",
+    "Piura" = "#38B6FF",
+    "Puno" = "#7B3F7B"
+  )) +
+  labs(
+    title = "Evolución de la Temperatura Promedio Anual (°C)",
+    subtitle = "Fuente: SINIA / SENAMHI - Perú",
+    x = "Año",
+    y = "Temperatura Promedio (°C)",
+    color = "Departamento"
+  ) +
+  theme_minimal(base_family = "sans") +
+  theme(
+    plot.title = element_text(face = "bold", color = "#0E4B75"),
+    legend.position = "bottom"
+  )
+```
+
+---
+
+## 5. Objeto Integrado (`sinia_estadistica`)
+
+Si requieres tanto la ficha técnica completa como los datos tabulares en una sola estructura:
+
+```{r estadistica, eval = has_api}
+est <- sinia_estadistica(1, pivot = "long")
+est
+```

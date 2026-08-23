@@ -2,29 +2,45 @@
 % Please edit documentation in R/sinia_api.R
 \name{sinia_indicadores}
 \alias{sinia_indicadores}
-\title{Listar indicadores y estadisticas ambientales del SINIA}
+\title{Listar indicadores y estadísticas ambientales del SINIA}
 \usage{
 sinia_indicadores(marco = c("mdea", "sinia"), solo_estadisticas = TRUE)
 }
 \arguments{
-\item{marco}{Caracter indicando el marco ordenador: \code{"mdea"} (por defecto) o \code{"sinia"}.}
+\item{marco}{Carácter indicando el marco ordenador: \code{"mdea"} (por defecto) o \code{"sinia"}.}
 
-\item{solo_estadisticas}{Logico. Si es \code{TRUE} (por defecto), solo retorna los items que
-corresponden a estadisticas finales con ID de descarga.}
+\item{solo_estadisticas}{Lógico. Si es \code{TRUE} (por defecto), solo retorna los ítems que
+corresponden a estadísticas finales con ID numérico de descarga. Si es \code{FALSE},
+incluye también las categorías y niveles superiores del árbol temático.}
 }
 \value{
-Un \link[tibble:tibble]{tibble::tibble} con el listado de indicadores, codigos numerales, nombres
-y jerarquia tematica.
+Un \link[tibble:tibble]{tibble::tibble} con las siguientes columnas:
+\describe{
+\item{id}{Identificador numérico único de la estadística (entero).}
+\item{numeral}{Código numeral de clasificación jerárquica (ej. \code{"1.1.1"}).}
+\item{nombre}{Nombre oficial del indicador o estadística ambiental.}
+\item{nivel}{Nivel jerárquico dentro del árbol temático (entero).}
+\item{clasificador_id}{Identificador del clasificador temático.}
+\item{padre_id}{Identificador del clasificador padre en la jerarquía.}
+\item{marco}{Marco ordenador consultado (\code{"mdea"} o \code{"sinia"}).}
+}
 }
 \description{
-Consulta el arbol tematico y catalogo de indicadores del SINIA segun el marco
+Consulta el árbol temático y catálogo de indicadores del SINIA según el marco
 ordenador especificado (por defecto MDEA - Marco para el Desarrollo de las
-Estadisticas Ambientales de la ONU).
+Estadísticas Ambientales de la ONU, o el marco sectorial propio de SINIA).
 }
 \examples{
 \dontrun{
-# Listar todos los indicadores del marco MDEA
-ind <- sinia_indicadores()
-head(ind)
+# Listar todos los indicadores del marco MDEA (ONU)
+ind_mdea <- sinia_indicadores(marco = "mdea")
+head(ind_mdea)
+
+# Listar bajo el marco sectorial SINIA
+ind_sinia <- sinia_indicadores(marco = "sinia")
+head(ind_sinia)
 }
+}
+\seealso{
+\code{\link[=sinia_buscar]{sinia_buscar()}}, \code{\link[=sinia_ficha]{sinia_ficha()}}, \code{\link[=sinia_datos]{sinia_datos()}}
 }

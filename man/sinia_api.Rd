@@ -2,8 +2,9 @@
 % Please edit documentation in R/sinia_api.R
 \name{sinia_api}
 \alias{sinia_api}
-\title{Interfaz para Estadisticas Ambientales del SINIA / MINAM}
+\title{Interfaz para Estadísticas Ambientales del SINIA / MINAM}
 \description{
-Funciones para listar indicadores, buscar, consultar fichas tecnicas
-y descargar conjuntos de datos del Sistema Nacional de Informacion Ambiental (SINIA).
+Funciones para listar indicadores, buscar, consultar fichas técnicas
+y descargar conjuntos de datos del Sistema Nacional de Información Ambiental (SINIA).
 }
+\keyword{internal}

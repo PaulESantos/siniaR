@@ -2,30 +2,37 @@
 % Please edit documentation in R/sinia_api.R
 \name{sinia_estadistica}
 \alias{sinia_estadistica}
-\title{Obtener datos y ficha tecnica completa de una estadistica del SINIA}
+\title{Obtener datos y ficha técnica completa de una estadística del SINIA}
 \usage{
 sinia_estadistica(id, pivot = c("wide", "long"))
 }
 \arguments{
-\item{id}{Identificador numerico de la estadistica (ej. \code{1} para temperatura).}
+\item{id}{Identificador numérico de la estadística (ej. \code{1} para temperatura).}
 
 \item{pivot}{Formato de salida de los datos (\code{"wide"} o \code{"long"}).}
 }
 \value{
-Un objeto de clase \code{sinia_estadistica} que contiene:
-\itemize{
-\item \code{ficha}: Objeto \code{sinia_ficha} con los metadatos.
-\item \code{datos}: \link[tibble:tibble]{tibble::tibble} con los datos tabulares.
+Un objeto de clase \code{sinia_estadistica} (lista S3) con los siguientes elementos:
+\describe{
+\item{id}{Identificador numérico de la estadística.}
+\item{nombre}{Nombre oficial del indicador.}
+\item{ficha}{Objeto de clase \code{sinia_ficha} con todos los metadatos oficiales.}
+\item{datos}{Un \link[tibble:tibble]{tibble::tibble} con los datos tabulares en el formato solicitado.}
 }
 }
 \description{
-Descarga tanto los metadatos de la ficha tecnica como el conjunto de datos
-estructurado en un unico objeto \code{sinia_estadistica}.
+Descarga tanto los metadatos estructurados de la ficha técnica como el conjunto de datos
+tabulares en un único objeto compuesto de clase \code{sinia_estadistica}.
 }
 \examples{
 \dontrun{
-est <- sinia_estadistica(1)
+est <- sinia_estadistica(1, pivot = "long")
+# Consultar ficha
 est$ficha
+# Consultar datos
 head(est$datos)
 }
+}
+\seealso{
+\code{\link[=sinia_ficha]{sinia_ficha()}}, \code{\link[=sinia_datos]{sinia_datos()}}
 }
