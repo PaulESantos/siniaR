@@ -84,10 +84,11 @@
 <p>El <strong>Marco para el Desarrollo de las Estadísticas Ambientales
 (MDEA / FDES)</strong> de las Naciones Unidas es la estructura
 metodológica internacional adoptada por el Ministerio del Ambiente
-(MINAM) y el SINIA para ordenar y clasificar las estadísticas
-ambientales del Perú.</p>
-<p>El MDEA organiza las estadísticas en <strong>6 componentes
-principales</strong>:</p>
+(MINAM) y el SINIA para organizar las estadísticas ambientales del
+Perú.</p>
+<p>El MDEA organiza toda la información ambiental en <strong>6
+componentes principales</strong>, cada uno enfocado en un aspecto del
+entorno natural y la interacción humana:</p>
 <table class="table">
 <colgroup>
 <col width="27%">
@@ -98,179 +99,345 @@ principales</strong>:</p>
 <thead><tr class="header">
 <th align="center">N°</th>
 <th align="left">Componente MDEA</th>
-<th align="center">Color Temático</th>
-<th align="left">Descripción</th>
+<th align="center">Color Oficial</th>
+<th align="left">Ámbito y Temáticas Principales</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
 <td align="left"><strong>Condiciones y Calidad Ambiental</strong></td>
-<td align="center">
-<code>#38B6FF</code> (Celeste)</td>
-<td align="left">Clima, atmósfera, recursos hídricos, suelo,
-biodiversidad y ecosistemas.</td>
+<td align="center"><code>#38B6FF</code></td>
+<td align="left">Atmósfera, clima, recursos hídricos, suelo,
+biodiversidad y calidad del aire/agua.</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>2</strong></td>
 <td align="left"><strong>Recursos Ambientales y su Uso</strong></td>
-<td align="center">
-<code>#E07A26</code> (Ámbar)</td>
-<td align="left">Recursos minerales, energéticos, forestales, biológicos
-y acuáticos.</td>
+<td align="center"><code>#E07A26</code></td>
+<td align="left">Recursos forestales, minerales, energéticos, biológicos
+y uso de la tierra.</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>3</strong></td>
 <td align="left"><strong>Residuos</strong></td>
-<td align="center">
-<code>#7B3F7B</code> (Púrpura)</td>
-<td align="left">Generación, gestión, tratamiento y disposición de
-residuos sólidos y aguas residuales.</td>
+<td align="center"><code>#7B3F7B</code></td>
+<td align="left">Generación y disposición de residuos sólidos
+municipales, no municipales y aguas servidas.</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>4</strong></td>
-<td align="left"><strong>Eventos Naturales y Cambio
-Climático</strong></td>
-<td align="center">
-<code>#2C3E50</code> (Pizarra)</td>
-<td align="left">Desastres naturales, peligros asociados y variables de
-cambio climático.</td>
+<td align="left"><strong>Eventos Naturales y Desastres</strong></td>
+<td align="center"><code>#2C3E50</code></td>
+<td align="left">Desastres naturales (heladas, friajes, sismos,
+inundaciones) y peligros climáticos.</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>5</strong></td>
-<td align="left"><strong>Hábitat Humano y Asuntos
-Socioambientales</strong></td>
-<td align="center">
-<code>#5E8D3B</code> (Verde Olivo)</td>
-<td align="left">Asentamientos humanos, salud ambiental, población
-expuesta y conflictos socioambientales.</td>
+<td align="left"><strong>Hábitat Humano y Salud Ambiental</strong></td>
+<td align="center"><code>#5E8D3B</code></td>
+<td align="left">Asentamientos humanos, servicios básicos, salud
+ambiental y población expuesta.</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>6</strong></td>
-<td align="left"><strong>Protección, Gestión y Participación
-Ambiental</strong></td>
-<td align="center">
-<code>#D4AC0D</code> (Mostaza)</td>
-<td align="left">Gasto ambiental, regulación, áreas protegidas,
-fiscalización y participación ciudadana.</td>
+<td align="left"><strong>Protección y Gestión Ambiental</strong></td>
+<td align="center"><code>#D4AC0D</code></td>
+<td align="left">Gasto ambiental, regulación, fiscalización, educación
+ambiental y áreas protegidas.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="consultando-estadísticas-por-componente">Consultando Estadísticas por Componente<a class="anchor" aria-label="anchor" href="#consultando-estad%C3%ADsticas-por-componente"></a>
+<h2 id="búsqueda-directa-por-palabras-clave">1. Búsqueda Directa por Palabras Clave<a class="anchor" aria-label="anchor" href="#b%C3%BAsqueda-directa-por-palabras-clave"></a>
 </h2>
+<p>La forma más sencilla y amigable de encontrar estadísticas sin
+necesidad de códigos complejos es mediante la función
+<code><a href="../reference/sinia_buscar.html">sinia_buscar()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PaulESantos/siniaR" class="external-link">siniaR</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
-<p>Podemos consultar el catálogo completo bajo el marco MDEA y filtrar
-por componente según el código numeral:</p>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Descargar el índice completo del marco MDEA</span></span>
-<span><span class="va">ind_mdea</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sinia_indicadores.html">sinia_indicadores</a></span><span class="op">(</span>marco <span class="op">=</span> <span class="st">"mdea"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Buscar estadísticas sobre bosques y deforestación</span></span>
+<span><span class="va">bosques</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sinia_buscar.html">sinia_buscar</a></span><span class="op">(</span><span class="st">"bosque"</span><span class="op">)</span></span>
+<span><span class="va">bosques</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">numeral</span>, <span class="va">nombre</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
+<span><span class="co">#&gt;      id numeral nombre                                                          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    39 1.2.3.1 Superficie de bosque húmedo amazónico según departamento        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    40 1.2.3.2 Porcentaje de la superficie departamental con bosque húmedo ama…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    57 2.2.1.2 Pérdida de bosque húmedo amazónico según departamento           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    58 2.2.1.3 Variación anual de la tasa de pérdida de bosque húmedo amazónico</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    60 2.2.1.5 Pérdida de bosque húmedo amazónico por categoría territorial    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>    61 2.2.1.6 Cambio de uso de la tierra en bosque húmedo amazónico</span></span>
 <span></span>
-<span><span class="co"># Estadísticas pertenecientes al Componente 1 (Condiciones y Calidad Ambiental)</span></span>
-<span><span class="va">c1_calidad</span> <span class="op">&lt;-</span> <span class="va">ind_mdea</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^1\\."</span>, <span class="va">numeral</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Buscar estadísticas sobre calidad del aire</span></span>
+<span><span class="va">aire</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sinia_buscar.html">sinia_buscar</a></span><span class="op">(</span><span class="st">"aire"</span><span class="op">)</span></span>
+<span><span class="va">aire</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">numeral</span>, <span class="va">nombre</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 3</span></span></span>
+<span><span class="co">#&gt;      id numeral nombre                                                          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 1.1.1.1 Temperatura del aire promedio anual en estación de medición seg…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    41 1.3.1.1 Promedio anual de partículas inferiores a 2,5 micras (PM2,5) en…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    42 1.3.1.2 Promedio anual de partículas inferiores a 10 micras (PM10) en e…</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c1_calidad</span>, <span class="fl">8</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 7</span></span></span>
-<span><span class="co">#&gt;      id numeral nombre                      nivel clasificador_id padre_id marco</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 1.1.1.1 Temperatura del aire prome…     4              <span style="color: #BB0000;">NA</span>       55 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 1.1.1.2 Temperatura máxima promedi…     4              <span style="color: #BB0000;">NA</span>       55 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 1.1.1.3 Temperatura mínima promedi…     4              <span style="color: #BB0000;">NA</span>       55 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 1.1.1.4 Precipitación total anual …     4              <span style="color: #BB0000;">NA</span>       55 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5 1.1.1.5 Humedad relativa promedio …     4              <span style="color: #BB0000;">NA</span>       55 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     6 1.1.1.6 Número de horas de sol anu…     4              <span style="color: #BB0000;">NA</span>       55 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>     7 1.1.1.7 Radiación ultravioleta pro…     4              <span style="color: #BB0000;">NA</span>       55 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>     8 1.1.1.8 Ozono atmosférico mínimo, …     4              <span style="color: #BB0000;">NA</span>       55 mdea</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="explorando-otros-componentes">Explorando Otros Componentes<a class="anchor" aria-label="anchor" href="#explorando-otros-componentes"></a>
-</h3>
+<span><span class="co"># Buscar estadísticas sobre residuos sólidos</span></span>
+<span><span class="va">residuos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sinia_buscar.html">sinia_buscar</a></span><span class="op">(</span><span class="st">"residuos"</span><span class="op">)</span></span>
+<span><span class="va">residuos</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">numeral</span>, <span class="va">nombre</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 3</span></span></span>
+<span><span class="co">#&gt;       id numeral nombre                                                         </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    65 3.1.1.1 Generación per cápita de residuos sólidos domiciliarios urbano…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>    66 3.1.1.2 Generación total anual de residuos sólidos domiciliarios urban…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>    67 3.1.1.3 Generación anual de residuos sólidos no domiciliarios según de…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>    68 3.1.1.4 Generación per cápita de residuos sólidos municipales          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    69 3.1.1.5 Generación anual de residuos sólidos municipales según departa…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>    70 3.1.1.6 Composición promedio de residuos sólidos domiciliarios según d…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   141 3.1.1.7 Generación per cápita de residuos sólidos no domiciliarios     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    71 3.1.2.1 Residuos sólidos municipales dispuestos en una infraestructura…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    72 3.1.2.2 Porcentaje de residuos sólidos municipales generados que se di…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   140 3.1.2.3 Áreas degradadas por residuos sólidos municipales para reconve…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>   167 3.1.2.4 Áreas degradadas por residuos sólidos municipales para recuper…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>   169 3.1.2.5 Superficie degradada por residuos sólidos municipales          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>    73 3.2.1.1 Valorización de residuos sólidos municipales según departamento</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>    74 3.2.1.2 Porcentaje de residuos sólidos municipales valorizados con res…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>    75 3.2.1.3 Número de municipalidades que implementan efectivamente la val…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>    76 3.2.1.4 Número de municipalidades que implementan efectivamente la val…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>    77 3.2.2.1 Número de productores de aparatos eléctricos y electrónicos (A…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>    78 3.2.2.2 Cantidad anual de residuos de aparatos eléctricos y electrónic…</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="clasificación-y-filtrado-amigable-del-catálogo-mdea">2. Clasificación y Filtrado Amigable del Catálogo MDEA<a class="anchor" aria-label="anchor" href="#clasificaci%C3%B3n-y-filtrado-amigable-del-cat%C3%A1logo-mdea"></a>
+</h2>
+<p>Podemos enriquecer el catálogo completo del MDEA agregando una
+columna legible con el nombre de cada componente, facilitando su
+exploración:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Componente 2: Recursos Ambientales</span></span>
-<span><span class="va">c2_recursos</span> <span class="op">&lt;-</span> <span class="va">ind_mdea</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^2\\."</span>, <span class="va">numeral</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c2_recursos</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
-<span><span class="co">#&gt;      id numeral nombre                      nivel clasificador_id padre_id marco</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    48 2.1.1.1 Número de negocios sosteni…     4              <span style="color: #BB0000;">NA</span>       66 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    49 2.1.1.2 Número de negocios sosteni…     4              <span style="color: #BB0000;">NA</span>       66 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    50 2.1.1.3 Ahorro anual en los consum…     4              <span style="color: #BB0000;">NA</span>       66 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    51 2.1.1.4 Ahorro anual en el consumo…     4              <span style="color: #BB0000;">NA</span>       66 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    52 2.1.1.5 Ahorro anual en el consumo…     4              <span style="color: #BB0000;">NA</span>       66 mdea</span></span>
+<code class="sourceCode R"><span><span class="co"># Descargar el índice completo del MDEA</span></span>
+<span><span class="va">indicadores</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sinia_indicadores.html">sinia_indicadores</a></span><span class="op">(</span>marco <span class="op">=</span> <span class="st">"mdea"</span>, solo_estadisticas <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Componente 3: Residuos</span></span>
-<span><span class="va">c3_residuos</span> <span class="op">&lt;-</span> <span class="va">ind_mdea</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^3\\."</span>, <span class="va">numeral</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c3_residuos</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
-<span><span class="co">#&gt;      id numeral nombre                      nivel clasificador_id padre_id marco</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    65 3.1.1.1 Generación per cápita de r…     4              <span style="color: #BB0000;">NA</span>       78 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    66 3.1.1.2 Generación total anual de …     4              <span style="color: #BB0000;">NA</span>       78 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    67 3.1.1.3 Generación anual de residu…     4              <span style="color: #BB0000;">NA</span>       78 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    68 3.1.1.4 Generación per cápita de r…     4              <span style="color: #BB0000;">NA</span>       78 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    69 3.1.1.5 Generación anual de residu…     4              <span style="color: #BB0000;">NA</span>       78 mdea</span></span>
+<span><span class="co"># Nombres descriptivos para cada uno de los 6 componentes</span></span>
+<span><span class="va">nombres_componentes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"1"</span> <span class="op">=</span> <span class="st">"1. Condiciones y Calidad Ambiental"</span>,</span>
+<span>  <span class="st">"2"</span> <span class="op">=</span> <span class="st">"2. Recursos Ambientales y su Uso"</span>,</span>
+<span>  <span class="st">"3"</span> <span class="op">=</span> <span class="st">"3. Residuos"</span>,</span>
+<span>  <span class="st">"4"</span> <span class="op">=</span> <span class="st">"4. Eventos Naturales y Desastres"</span>,</span>
+<span>  <span class="st">"5"</span> <span class="op">=</span> <span class="st">"5. Hábitat Humano y Asuntos Socioambientales"</span>,</span>
+<span>  <span class="st">"6"</span> <span class="op">=</span> <span class="st">"6. Protección y Gestión Ambiental"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Componente 4: Eventos Naturales y Desastres</span></span>
-<span><span class="va">c4_eventos</span> <span class="op">&lt;-</span> <span class="va">ind_mdea</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^4\\."</span>, <span class="va">numeral</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c4_eventos</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
-<span><span class="co">#&gt;      id numeral nombre                      nivel clasificador_id padre_id marco</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    79 4.1.1.1 Número de sismos ocurridos…     4              <span style="color: #BB0000;">NA</span>       85 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    80 4.1.1.2 Rango de magnitudes de los…     4              <span style="color: #BB0000;">NA</span>       85 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    81 4.1.1.3 Número de alertas de pelig…     4              <span style="color: #BB0000;">NA</span>       85 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    82 4.1.1.4 Número de boletines vulcan…     4              <span style="color: #BB0000;">NA</span>       85 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    83 4.1.1.5 Número de monitoreo en las…     4              <span style="color: #BB0000;">NA</span>       85 mdea</span></span>
+<span><span class="co"># Agregar el componente de forma clara y legible</span></span>
+<span><span class="va">catalogo_mdea</span> <span class="op">&lt;-</span> <span class="va">indicadores</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    codigo_componente <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="va">numeral</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    componente <span class="op">=</span> <span class="va">nombres_componentes</span><span class="op">[</span><span class="va">codigo_componente</span><span class="op">]</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Componente 5: Hábitat Humano</span></span>
-<span><span class="va">c5_habitat</span> <span class="op">&lt;-</span> <span class="va">ind_mdea</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^5\\."</span>, <span class="va">numeral</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c5_habitat</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
-<span><span class="co">#&gt;      id numeral nombre                      nivel clasificador_id padre_id marco</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    91 5.1.1.1 Número de comunidades amaz…     4              <span style="color: #BB0000;">NA</span>       91 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    92 5.1.1.2 Mujeres que participaron e…     4              <span style="color: #BB0000;">NA</span>       91 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    93 5.1.2.1 Superficie de área verde p…     4              <span style="color: #BB0000;">NA</span>       92 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    94 5.1.2.2 Superficie de área verde p…     4              <span style="color: #BB0000;">NA</span>       92 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    95 5.1.2.3 Superficie de área verde p…     4              <span style="color: #BB0000;">NA</span>       92 mdea</span></span>
+<span><span class="co"># Conteo de indicadores disponibles por componente</span></span>
+<span><span class="va">catalogo_mdea</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">componente</span>, name <span class="op">=</span> <span class="st">"total_estadisticas"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   componente                                   total_estadisticas</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1. Condiciones y Calidad Ambiental                           60</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2. Recursos Ambientales y su Uso                             23</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3. Residuos                                                  18</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4. Eventos Naturales y Desastres                             20</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 5. Hábitat Humano y Asuntos Socioambientales                 17</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 6. Protección y Gestión Ambiental                            44</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="explorando-los-6-componentes-con-ejemplos-prácticos">3. Explorando los 6 Componentes con Ejemplos Prácticos<a class="anchor" aria-label="anchor" href="#explorando-los-6-componentes-con-ejemplos-pr%C3%A1cticos"></a>
+</h2>
+<div class="section level3">
+<h3 id="componente-1-condiciones-y-calidad-ambiental">Componente 1: Condiciones y Calidad Ambiental<a class="anchor" aria-label="anchor" href="#componente-1-condiciones-y-calidad-ambiental"></a>
+</h3>
+<p>Comprende variables meteorológicas y calidad del aire. Por ejemplo,
+la temperatura promedio anual (ID = 1):</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Filtrar indicadores del Componente 1</span></span>
+<span><span class="va">c1_indicadores</span> <span class="op">&lt;-</span> <span class="va">catalogo_mdea</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">codigo_componente</span> <span class="op">==</span> <span class="st">"1"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Componente 6: Gestión y Protección Ambiental</span></span>
-<span><span class="va">c6_gestion</span> <span class="op">&lt;-</span> <span class="va">ind_mdea</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^6\\."</span>, <span class="va">numeral</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c6_gestion</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
-<span><span class="co">#&gt;      id numeral nombre                      nivel clasificador_id padre_id marco</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>   100 6.1.1.1 <span style="color: #949494;">"</span>Número de inversiones con…     4              <span style="color: #BB0000;">NA</span>      101 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>   101 6.1.1.2 <span style="color: #949494;">"</span>Inversiones del Sector Am…     4              <span style="color: #BB0000;">NA</span>      101 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>   102 6.1.1.3 <span style="color: #949494;">"</span>Proyectos de inversión pú…     4              <span style="color: #BB0000;">NA</span>      101 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>   103 6.1.1.4 <span style="color: #949494;">"</span>Número de proyectos aprob…     4              <span style="color: #BB0000;">NA</span>      101 mdea </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>   104 6.1.1.5 <span style="color: #949494;">"</span>Número de proyectos aprob…     4              <span style="color: #BB0000;">NA</span>      101 mdea</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c1_indicadores</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">numeral</span>, <span class="va">nombre</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
+<span><span class="co">#&gt;      id numeral nombre                                                          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 1.1.1.1 Temperatura del aire promedio anual en estación de medición seg…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 1.1.1.2 Temperatura máxima promedio anual en estación de medición según…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 1.1.1.3 Temperatura mínima promedio anual en estación de medición según…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 1.1.1.4 Precipitación total anual en estación de medición según departa…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5 1.1.1.5 Humedad relativa promedio anual en estación de medición según d…</span></span>
+<span></span>
+<span><span class="co"># Descargar datos de Temperatura del Aire (ID = 1) en formato largo</span></span>
+<span><span class="va">temp_peru</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sinia_datos.html">sinia_datos</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span>, pivot <span class="op">=</span> <span class="st">"long"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">temp_peru</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
+<span><span class="co">#&gt;   departamento  anio valor</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Amazonas      <span style="text-decoration: underline;">2</span>014  14.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Áncash        <span style="text-decoration: underline;">2</span>014  12.5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Apurímac      <span style="text-decoration: underline;">2</span>014  14.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Arequipa      <span style="text-decoration: underline;">2</span>014  16.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Ayacucho      <span style="text-decoration: underline;">2</span>014  18.4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Cajamarca     <span style="text-decoration: underline;">2</span>014  15.0</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="componente-2-recursos-ambientales-y-su-uso">Componente 2: Recursos Ambientales y su Uso<a class="anchor" aria-label="anchor" href="#componente-2-recursos-ambientales-y-su-uso"></a>
+</h3>
+<p>Incluye recursos biológicos, forestales y energéticos:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Filtrar indicadores del Componente 2</span></span>
+<span><span class="va">c2_indicadores</span> <span class="op">&lt;-</span> <span class="va">catalogo_mdea</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">codigo_componente</span> <span class="op">==</span> <span class="st">"2"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c2_indicadores</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">numeral</span>, <span class="va">nombre</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
+<span><span class="co">#&gt;      id numeral nombre                                                          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    48 2.1.1.1 Número de negocios sostenibles identificados en el catálogo de …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    49 2.1.1.2 Número de negocios sostenibles identificados en el Catálogo de …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    50 2.1.1.3 Ahorro anual en los consumos de agua, energía y papel reportado…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    51 2.1.1.4 Ahorro anual en el consumo de agua reportado por las entidades …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    52 2.1.1.5 Ahorro anual en el consumo de energía reportado por las entidad…</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="componente-3-residuos">Componente 3: Residuos<a class="anchor" aria-label="anchor" href="#componente-3-residuos"></a>
+</h3>
+<p>Monitorea la generación, reciclaje y disposición final de
+residuos:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Filtrar indicadores del Componente 3</span></span>
+<span><span class="va">c3_indicadores</span> <span class="op">&lt;-</span> <span class="va">catalogo_mdea</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">codigo_componente</span> <span class="op">==</span> <span class="st">"3"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c3_indicadores</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">numeral</span>, <span class="va">nombre</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
+<span><span class="co">#&gt;      id numeral nombre                                                          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    65 3.1.1.1 Generación per cápita de residuos sólidos domiciliarios urbanos…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    66 3.1.1.2 Generación total anual de residuos sólidos domiciliarios urbano…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    67 3.1.1.3 Generación anual de residuos sólidos no domiciliarios según dep…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    68 3.1.1.4 Generación per cápita de residuos sólidos municipales           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    69 3.1.1.5 Generación anual de residuos sólidos municipales según departam…</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="componente-4-eventos-naturales-y-desastres">Componente 4: Eventos Naturales y Desastres<a class="anchor" aria-label="anchor" href="#componente-4-eventos-naturales-y-desastres"></a>
+</h3>
+<p>Registra ocurrencias de fenómenos naturales, heladas, friajes e
+impactos:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Filtrar indicadores del Componente 4</span></span>
+<span><span class="va">c4_indicadores</span> <span class="op">&lt;-</span> <span class="va">catalogo_mdea</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">codigo_componente</span> <span class="op">==</span> <span class="st">"4"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c4_indicadores</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">numeral</span>, <span class="va">nombre</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
+<span><span class="co">#&gt;      id numeral nombre                                                          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    79 4.1.1.1 Número de sismos ocurridos según departamento                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    80 4.1.1.2 Rango de magnitudes de los sismos                               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    81 4.1.1.3 Número de alertas de peligros volcánicos por volcán             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    82 4.1.1.4 Número de boletines vulcanológicos emitidos por volcán          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    83 4.1.1.5 Número de monitoreo en las estaciones en las quebradas Huaycolo…</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="componente-5-hábitat-humano-y-asuntos-socioambientales">Componente 5: Hábitat Humano y Asuntos Socioambientales<a class="anchor" aria-label="anchor" href="#componente-5-h%C3%A1bitat-humano-y-asuntos-socioambientales"></a>
+</h3>
+<p>Enfocado en las condiciones de vida, acceso a servicios y salud
+ambiental:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Filtrar indicadores del Componente 5</span></span>
+<span><span class="va">c5_indicadores</span> <span class="op">&lt;-</span> <span class="va">catalogo_mdea</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">codigo_componente</span> <span class="op">==</span> <span class="st">"5"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c5_indicadores</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">numeral</span>, <span class="va">nombre</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
+<span><span class="co">#&gt;      id numeral nombre                                                          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    91 5.1.1.1 Número de comunidades amazónicas en el ámbito de intervención d…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    92 5.1.1.2 Mujeres que participaron en el programa de voluntariado ambient…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    93 5.1.2.1 Superficie de área verde por habitante según departamento       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    94 5.1.2.2 Superficie de área verde por habitante en Lima Metropolitana se…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    95 5.1.2.3 Superficie de área verde por habitante en la Provincia Constitu…</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="componente-6-protección-gestión-y-participación-ambiental">Componente 6: Protección, Gestión y Participación Ambiental<a class="anchor" aria-label="anchor" href="#componente-6-protecci%C3%B3n-gesti%C3%B3n-y-participaci%C3%B3n-ambiental"></a>
+</h3>
+<p>Abarca gobernanza ambiental, áreas naturales protegidas e
+instrumentos de gestión:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Filtrar indicadores del Componente 6</span></span>
+<span><span class="va">c6_indicadores</span> <span class="op">&lt;-</span> <span class="va">catalogo_mdea</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">codigo_componente</span> <span class="op">==</span> <span class="st">"6"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">c6_indicadores</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">numeral</span>, <span class="va">nombre</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
+<span><span class="co">#&gt;      id numeral nombre                                                          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>   100 6.1.1.1 <span style="color: #949494;">"</span>Número de inversiones con presupuesto e inversiones ejecutadas…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>   101 6.1.1.2 <span style="color: #949494;">"</span>Inversiones del Sector Ambiente según presupuesto y nivel de e…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>   102 6.1.1.3 <span style="color: #949494;">"</span>Proyectos de inversión pública en el ámbito de intervención de…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>   103 6.1.1.4 <span style="color: #949494;">"</span>Número de proyectos aprobados por el Senace por instrumentos d…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>   104 6.1.1.5 <span style="color: #949494;">"</span>Número de proyectos aprobados por el Senace por sectores según…</span></span></code></pre></div>
 <hr>
 </div>
 </div>
 <div class="section level2">
-<h2 id="marco-propio-sinia">Marco Propio SINIA<a class="anchor" aria-label="anchor" href="#marco-propio-sinia"></a>
+<h2 id="visualización-de-datos-de-un-componente-mdea">4. Visualización de Datos de un Componente MDEA<a class="anchor" aria-label="anchor" href="#visualizaci%C3%B3n-de-datos-de-un-componente-mdea"></a>
 </h2>
-<p>Además del marco MDEA, el SINIA cuenta con un marco temático
-sectorial nacional que también puede consultarse indicando
-<code>marco = "sinia"</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ind_sinia</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sinia_indicadores.html">sinia_indicadores</a></span><span class="op">(</span>marco <span class="op">=</span> <span class="st">"sinia"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ind_sinia</span>, <span class="fl">8</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 7</span></span></span>
-<span><span class="co">#&gt;      id numeral nombre                      nivel clasificador_id padre_id marco</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    10 1.1.1   Superficie de lagunas de o…     3              <span style="color: #BB0000;">NA</span>        2 sinia</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    11 1.1.2   Número de lagunas de orige…     3              <span style="color: #BB0000;">NA</span>        2 sinia</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    12 1.1.3   Número de lagunas de orige…     3              <span style="color: #BB0000;">NA</span>        2 sinia</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    13 1.1.4   Superficie glaciar por cor…     3              <span style="color: #BB0000;">NA</span>        2 sinia</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    14 1.1.5   Número de glaciares por co…     3              <span style="color: #BB0000;">NA</span>        2 sinia</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>    15 1.1.6   Fluctuación del frente gla…     3              <span style="color: #BB0000;">NA</span>        2 sinia</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>    16 1.1.7   Aporte anual por fusión de…     3              <span style="color: #BB0000;">NA</span>        2 sinia</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>   136 1.1.8   Cambio en el uso eficiente…     3              <span style="color: #BB0000;">NA</span>        2 sinia</span></span></code></pre></div>
+<p>A continuación, visualizamos la evolución temporal de la temperatura
+del aire en distintos departamentos (Componente 1):</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">departamentos_muestra</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lima"</span>, <span class="st">"Loreto"</span>, <span class="st">"Cusco"</span>, <span class="st">"Piura"</span>, <span class="st">"Puno"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">temp_filtrada</span> <span class="op">&lt;-</span> <span class="va">temp_peru</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">departamento</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">departamentos_muestra</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">valor</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">temp_filtrada</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">anio</span>, y <span class="op">=</span> <span class="va">valor</span>, color <span class="op">=</span> <span class="va">departamento</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Lima"</span> <span class="op">=</span> <span class="st">"#1B75BC"</span>,</span>
+<span>    <span class="st">"Loreto"</span> <span class="op">=</span> <span class="st">"#78BE20"</span>,</span>
+<span>    <span class="st">"Cusco"</span> <span class="op">=</span> <span class="st">"#E07A26"</span>,</span>
+<span>    <span class="st">"Piura"</span> <span class="op">=</span> <span class="st">"#38B6FF"</span>,</span>
+<span>    <span class="st">"Puno"</span> <span class="op">=</span> <span class="st">"#7B3F7B"</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Temperatura Promedio Anual por Departamento"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"MDEA Componente 1: Condiciones y Calidad Ambiental"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Año"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Temperatura (°C)"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"Departamento"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="marcos-ordenadores-mdea_files/figure-html/grafico-mdea-1.png" class="r-plt" alt="" width="672"></p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="marco-temático-sectorial-del-sinia">5. Marco Temático Sectorial del SINIA<a class="anchor" aria-label="anchor" href="#marco-tem%C3%A1tico-sectorial-del-sinia"></a>
+</h2>
+<p>Adicionalmente al marco MDEA, el SINIA permite consultar la
+organización sectorial propia del Ministerio del Ambiente mediante el
+argumento <code>marco = "sinia"</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Catálogo sectorial propio del SINIA</span></span>
+<span><span class="va">sinia_tematico</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sinia_indicadores.html">sinia_indicadores</a></span><span class="op">(</span>marco <span class="op">=</span> <span class="st">"sinia"</span>, solo_estadisticas <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sinia_tematico</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">numeral</span>, <span class="va">nombre</span><span class="op">)</span>, <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
+<span><span class="co">#&gt;      id numeral nombre                                                </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    10 1.1.1   Superficie de lagunas de origen glaciar por cordillera</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    11 1.1.2   Número de lagunas de origen glaciar por cordillera    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    12 1.1.3   Número de lagunas de origen glaciar según departamento</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    13 1.1.4   Superficie glaciar por cordillera                     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    14 1.1.5   Número de glaciares por cordillera                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>    15 1.1.6   Fluctuación del frente glaciar Huillca</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
