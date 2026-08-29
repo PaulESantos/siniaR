@@ -1,0 +1,36 @@
+c(
+  bibentry(
+    bibtype = "Manual",
+    title = "siniaR: Access to Peru's Environmental Statistics ('SINIA' / 'MINAM')",
+    author = person("Paul Efren", "Santos Andrade", email = "paulefrens@gmail.com"),
+    year = "2026",
+    note = "R package version 0.1.0",
+    url = "https://paulesantos.github.io/siniaR/",
+    textVersion = paste(
+      "Santos Andrade, P. E. (2026).",
+      "siniaR: Access to Peru's Environmental Statistics ('SINIA' / 'MINAM').",
+      "R package version 0.1.0. https://paulesantos.github.io/siniaR/"
+    )
+  ),
+  bibentry(
+    bibtype = "Misc",
+    title = "Sistema Nacional de Información Ambiental (SINIA)",
+    author = person("Ministerio del Ambiente del Perú (MINAM)"),
+    year = "2026",
+    publisher = "Ministerio del Ambiente (MINAM) - Perú",
+    url = "https://sinia.minam.gob.pe/",
+    note = paste(
+      "El Sistema Nacional de Información Ambiental (SINIA) es un sistema funcional",
+      "del Sistema Nacional de Gestión Ambiental (SNGA), que comprende un conjunto",
+      "de principios, normas, procedimientos, técnicas e instrumentos a fin de",
+      "facilitar el acceso y uso de la información ambiental que las entidades",
+      "que lo conforman generan o poseen, en el ámbito de sus respectivas competencias."
+    ),
+    textVersion = paste(
+      "Ministerio del Ambiente (MINAM). (2026).",
+      "Sistema Nacional de Información Ambiental (SINIA).",
+      "Portal oficial de estadísticas e información ambiental de la República del Perú.",
+      "https://sinia.minam.gob.pe/"
+    )
+  )
+)

@@ -21,7 +21,7 @@ Realiza una búsqueda insensible a mayúsculas, minúsculas y tildes dentro del 
 oficial de indicadores del SINIA.
 }
 \examples{
-\dontrun{
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 # Buscar indicadores sobre temperatura
 sinia_buscar("temperatura")
 
@@ -30,7 +30,7 @@ sinia_buscar("pm10")
 
 # Buscar indicadores sobre cobertura forestal
 sinia_buscar("bosque")
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=sinia_indicadores]{sinia_indicadores()}}, \code{\link[=sinia_ficha]{sinia_ficha()}}, \code{\link[=sinia_datos]{sinia_datos()}}

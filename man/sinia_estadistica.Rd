@@ -25,13 +25,13 @@ Descarga tanto los metadatos estructurados de la ficha técnica como el conjunto
 tabulares en un único objeto compuesto de clase \code{sinia_estadistica}.
 }
 \examples{
-\dontrun{
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 est <- sinia_estadistica(1, pivot = "long")
 # Consultar ficha
 est$ficha
 # Consultar datos
 head(est$datos)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=sinia_ficha]{sinia_ficha()}}, \code{\link[=sinia_datos]{sinia_datos()}}

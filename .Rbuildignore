@@ -1,6 +1,7 @@
 ^siniaR\.Rproj$
 ^perestamb\.Rproj$
 ^\.Rproj\.user$
+^\.agents$
 ^LICENSE\.md$
 ^README\.Rmd$
 ^README\.html$
@@ -17,3 +18,4 @@
 ^scratch$
 ^doc$
 ^Meta$
+.agents

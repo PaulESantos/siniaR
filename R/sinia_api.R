@@ -1,6 +1,17 @@
 #' @title Interfaz para Estadísticas Ambientales del SINIA / MINAM
 #' @description Funciones para listar indicadores, buscar, consultar fichas técnicas
 #'   y descargar conjuntos de datos del Sistema Nacional de Información Ambiental (SINIA).
+#'
+#'   El Sistema Nacional de Información Ambiental (SINIA) es un sistema funcional
+#'   del Sistema Nacional de Gestión Ambiental (SNGA), que comprende un conjunto de
+#'   principios, normas, procedimientos, técnicas e instrumentos a fin de facilitar
+#'   el acceso y uso de la información ambiental que las entidades que lo conforman
+#'   generan o poseen, en el ámbito de sus respectivas competencias.
+#'
+#' @references
+#'   Ministerio del Ambiente del Perú (MINAM). Sistema Nacional de Información Ambiental (SINIA).
+#'   <https://sinia.minam.gob.pe/>
+#'
 #' @keywords internal
 #' @name sinia_api
 NULL
@@ -33,8 +44,7 @@ NULL
 #' @export
 #'
 #' @seealso [sinia_buscar()], [sinia_ficha()], [sinia_datos()]
-#' @examples
-#' \dontrun{
+#' @examplesIf curl::has_internet()
 #' # Listar todos los indicadores del marco MDEA (ONU)
 #' ind_mdea <- sinia_indicadores(marco = "mdea")
 #' head(ind_mdea)
@@ -42,7 +52,6 @@ NULL
 #' # Listar bajo el marco sectorial SINIA
 #' ind_sinia <- sinia_indicadores(marco = "sinia")
 #' head(ind_sinia)
-#' }
 sinia_indicadores <- function(marco = c("mdea", "sinia"), solo_estadisticas = TRUE) {
   marco <- match.arg(marco)
   url <- sprintf("%s/marcos-ordenadores/%s/indice-estadisticas", .sinia_base_url, marco)
@@ -52,34 +61,57 @@ sinia_indicadores <- function(marco = c("mdea", "sinia"), solo_estadisticas = TR
     error = function(e) {
       cli::cli_abort(c(
         "No se pudo conectar con el servidor de estadisticas del SINIA.",
-        "i" = "Verifica tu conexion a internet o la disponibilidad del servicio.",
-        "x" = conditionMessage(e)
+        "x" = conditionMessage(e),
+        "i" = "Verifica tu conexion a internet o la disponibilidad del servicio."
       ))
     }
   )
 
   items <- res$data$items
   if (is.null(items) || length(items) == 0) {
-    return(tibble::tibble())
+    return(tibble::tibble(
+      id = integer(),
+      numeral = character(),
+      nombre = character(),
+      nivel = integer(),
+      clasificador_id = integer(),
+      padre_id = integer(),
+      marco = character()
+    ))
   }
 
   if (solo_estadisticas) {
     items <- Filter(function(x) !is.null(x$estadisticaId), items)
   }
 
-  out <- lapply(items, function(x) {
-    tibble::tibble(
-      id = if (is.null(x$estadisticaId)) NA_integer_ else as.integer(x$estadisticaId),
-      numeral = if (is.null(x$numeral)) NA_character_ else as.character(x$numeral),
-      nombre = if (is.null(x$nombre)) NA_character_ else as.character(x$nombre),
-      nivel = if (is.null(x$nivel)) NA_integer_ else as.integer(x$nivel),
-      clasificador_id = if (is.null(x$clasificadorId)) NA_integer_ else as.integer(x$clasificadorId),
-      padre_id = if (is.null(x$clasificadorPadreId)) NA_integer_ else as.integer(x$clasificadorPadreId),
-      marco = marco
-    )
-  })
+  if (length(items) == 0) {
+    return(tibble::tibble(
+      id = integer(),
+      numeral = character(),
+      nombre = character(),
+      nivel = integer(),
+      clasificador_id = integer(),
+      padre_id = integer(),
+      marco = character()
+    ))
+  }
 
-  do.call(rbind, out)
+  ids <- vapply(items, function(x) if (is.null(x$estadisticaId)) NA_integer_ else as.integer(x$estadisticaId), integer(1))
+  num <- vapply(items, function(x) if (is.null(x$numeral)) NA_character_ else as.character(x$numeral), character(1))
+  nom <- vapply(items, function(x) if (is.null(x$nombre)) NA_character_ else as.character(x$nombre), character(1))
+  niv <- vapply(items, function(x) if (is.null(x$nivel)) NA_integer_ else as.integer(x$nivel), integer(1))
+  cid <- vapply(items, function(x) if (is.null(x$clasificadorId)) NA_integer_ else as.integer(x$clasificadorId), integer(1))
+  pid <- vapply(items, function(x) if (is.null(x$clasificadorPadreId)) NA_integer_ else as.integer(x$clasificadorPadreId), integer(1))
+
+  tibble::tibble(
+    id = ids,
+    numeral = num,
+    nombre = nom,
+    nivel = niv,
+    clasificador_id = cid,
+    padre_id = pid,
+    marco = marco
+  )
 }
 
 #' Buscar estadísticas ambientales por palabra clave
@@ -96,8 +128,7 @@ sinia_indicadores <- function(marco = c("mdea", "sinia"), solo_estadisticas = TR
 #' @export
 #'
 #' @seealso [sinia_indicadores()], [sinia_ficha()], [sinia_datos()]
-#' @examples
-#' \dontrun{
+#' @examplesIf curl::has_internet()
 #' # Buscar indicadores sobre temperatura
 #' sinia_buscar("temperatura")
 #'
@@ -106,14 +137,21 @@ sinia_indicadores <- function(marco = c("mdea", "sinia"), solo_estadisticas = TR
 #'
 #' # Buscar indicadores sobre cobertura forestal
 #' sinia_buscar("bosque")
-#' }
 sinia_buscar <- function(query, marco = c("mdea", "sinia")) {
-  if (missing(query) || !is.character(query) || length(query) == 0 || nchar(query) == 0) {
-    cli::cli_abort("Debes especificar un termino de busqueda en {.arg query}.")
+  if (missing(query) || !is.character(query) || length(query) != 1 || is.na(query) || nchar(trimws(query)) == 0) {
+    cli::cli_abort(c(
+      "{.arg query} debe ser una cadena de texto no vacia.",
+      "x" = "Se recibio un valor invalido o vacio.",
+      "i" = "Ejemplo: {.code sinia_buscar(\"temperatura\")}"
+    ))
   }
 
   marco <- match.arg(marco)
   df <- sinia_indicadores(marco = marco, solo_estadisticas = TRUE)
+
+  if (nrow(df) == 0) {
+    return(df)
+  }
 
   # Normalizar caracteres para busqueda insensible a acentos
   normalizar <- function(x) {
@@ -123,11 +161,15 @@ sinia_buscar <- function(query, marco = c("mdea", "sinia")) {
   q_norm <- normalizar(query)
   nombres_norm <- normalizar(df$nombre)
 
-  coincidencias <- grepl(q_norm, nombres_norm, fixed = FALSE)
+  # fixed = TRUE evita fallos si query incluye parentesis o caracteres especiales de regex
+  coincidencias <- grepl(q_norm, nombres_norm, fixed = TRUE)
   res <- df[coincidencias, ]
 
   if (nrow(res) == 0) {
-    cli::cli_inform(c("!" = "No se encontraron estadisticas que coincidan con '{query}'."))
+    cli::cli_inform(c(
+      "!" = "No se encontraron estadisticas que coincidan con {.val {query}} en el marco {.val {marco}}.",
+      "i" = "Prueba con terminos mas generales como {.val temperatura}, {.val agua}, {.val aire} o {.val bosque}."
+    ))
   }
 
   res
@@ -174,8 +216,7 @@ sinia_buscar <- function(query, marco = c("mdea", "sinia")) {
 #' @export
 #'
 #' @seealso [sinia_datos()], [sinia_estadistica()], [sinia_indicadores()]
-#' @examples
-#' \dontrun{
+#' @examplesIf curl::has_internet()
 #' # Obtener la ficha tecnica de Temperatura Promedio Anual (ID = 1)
 #' ficha <- sinia_ficha(1)
 #' print(ficha)
@@ -184,26 +225,33 @@ sinia_buscar <- function(query, marco = c("mdea", "sinia")) {
 #' ficha$fuente
 #' ficha$unidad_medida
 #' ficha$formula_calculo
-#' }
 sinia_ficha <- function(id) {
-  if (missing(id) || !is.numeric(id) && !is.character(id)) {
-    cli::cli_abort("Debes especificar un {.arg id} valido (numerico o entero).")
+  if (missing(id) || length(id) != 1 || is.na(id) || (!is.numeric(id) && !is.character(id))) {
+    cli::cli_abort(c(
+      "{.arg id} debe ser un unico identificador numerico o texto.",
+      "x" = "Se recibio un valor invalido.",
+      "i" = "Ejemplo valido: {.code sinia_ficha(id = 1)}"
+    ))
   }
 
-  url <- sprintf("%s/estadisticas/%s", .sinia_base_url, id)
+  url <- sprintf("%s/estadisticas/%s", .sinia_base_url, as.character(id))
   res <- tryCatch(
     jsonlite::fromJSON(url, simplifyVector = FALSE),
     error = function(e) {
       cli::cli_abort(c(
         sprintf("No se pudo obtener la informacion de la estadistica ID: %s.", id),
-        "x" = conditionMessage(e)
+        "x" = conditionMessage(e),
+        "i" = "Verifica tu conexion a internet o que el ID exista en {.fn sinia_indicadores}."
       ))
     }
   )
 
   d <- res$data
   if (is.null(d)) {
-    cli::cli_abort("No se encontraron datos para la estadistica con ID {id}.")
+    cli::cli_abort(c(
+      "No se encontraron datos para la estadistica con ID {.val {id}}.",
+      "i" = "Consulta los IDs disponibles con {.code sinia_indicadores()}."
+    ))
   }
 
   ficha <- list(
@@ -239,6 +287,12 @@ sinia_ficha <- function(id) {
   ficha
 }
 
+#' Imprimir ficha técnica de SINIA
+#'
+#' @param x Objeto de clase `sinia_ficha`.
+#' @param ... Argumentos adicionales pasados a otros métodos.
+#'
+#' @return Retorna el objeto `x` de forma invisible.
 #' @export
 print.sinia_ficha <- function(x, ...) {
   cli::cli_h1("Ficha Tecnica: {x$nombre}")
@@ -299,8 +353,7 @@ print.sinia_ficha <- function(x, ...) {
 #' @export
 #'
 #' @seealso [sinia_ficha()], [sinia_estadistica()], [sinia_buscar()]
-#' @examples
-#' \dontrun{
+#' @examplesIf curl::has_internet()
 #' # Formato ancho (columnas por anio)
 #' df_wide <- sinia_datos(1)
 #' head(df_wide)
@@ -308,21 +361,25 @@ print.sinia_ficha <- function(x, ...) {
 #' # Formato largo (apilado para analisis y graficos con ggplot2)
 #' df_long <- sinia_datos(1, pivot = "long")
 #' head(df_long)
-#' }
 sinia_datos <- function(id, pivot = c("wide", "long", "raw"), clean_names = TRUE) {
   pivot <- match.arg(pivot)
 
-  if (missing(id) || !is.numeric(id) && !is.character(id)) {
-    cli::cli_abort("Debes especificar un {.arg id} valido (numerico o entero).")
+  if (missing(id) || length(id) != 1 || is.na(id) || (!is.numeric(id) && !is.character(id))) {
+    cli::cli_abort(c(
+      "{.arg id} debe ser un unico identificador numerico o texto.",
+      "x" = "Se recibio un valor invalido.",
+      "i" = "Ejemplo valido: {.code sinia_datos(id = 1)}"
+    ))
   }
 
-  url <- sprintf("%s/estadisticas/%s", .sinia_base_url, id)
+  url <- sprintf("%s/estadisticas/%s", .sinia_base_url, as.character(id))
   res <- tryCatch(
     jsonlite::fromJSON(url, simplifyVector = FALSE),
     error = function(e) {
       cli::cli_abort(c(
         sprintf("No se pudo obtener la informacion de la estadistica ID: %s.", id),
-        "x" = conditionMessage(e)
+        "x" = conditionMessage(e),
+        "i" = "Verifica tu conexion a internet o que el ID exista en {.fn sinia_indicadores}."
       ))
     }
   )
@@ -330,7 +387,7 @@ sinia_datos <- function(id, pivot = c("wide", "long", "raw"), clean_names = TRUE
   d <- res$data
   raw_rows <- d$datos
 
-  if (is.null(raw_rows) || length(raw_rows) == 0) {
+  if (is.null(raw_rows) || length(raw_rows) <= 1) {
     cli::cli_warn("La estadistica con ID {id} no contiene filas de datos.")
     return(tibble::tibble())
   }
@@ -338,58 +395,76 @@ sinia_datos <- function(id, pivot = c("wide", "long", "raw"), clean_names = TRUE
   # Extraer encabezados de la fila 1
   header <- vapply(raw_rows[[1]], function(x) {
     val <- x$v
-    if (is.null(val) || is.na(val)) "columna" else as.character(val)
+    if (is.null(val) || is.na(val) || nchar(trimws(as.character(val))) == 0) "columna" else as.character(val)
   }, FUN.VALUE = character(1))
 
-  # Extraer filas de datos
-  data_list <- lapply(raw_rows[-1], function(row) {
-    lapply(row, function(cell) {
-      val <- cell$v
-      if (is.null(val) || identical(val, "\u2026") || identical(val, "...") || identical(val, "-")) {
-        NA
+  # Asegurar nombres unicos en la cabecera
+  header <- make.unique(header, sep = "_")
+
+  # Extraer matriz de datos de forma eficiente
+  n_cols <- length(header)
+  data_rows <- raw_rows[-1]
+
+  col_data <- vector("list", n_cols)
+  for (j in seq_len(n_cols)) {
+    col_data[[j]] <- vapply(data_rows, function(r) {
+      if (j > length(r)) return(NA_character_)
+      val <- r[[j]]$v
+      if (is.null(val) || identical(val, "\u2026") || identical(val, "...") || identical(val, "-") || identical(val, "s/d") || identical(val, "ND")) {
+        NA_character_
       } else {
-        val
+        as.character(val)
       }
-    })
-  })
+    }, character(1))
+  }
+  names(col_data) <- header
 
-  df_rows <- lapply(data_list, function(r) {
-    as.data.frame(r, stringsAsFactors = FALSE, col.names = header)
-  })
-
-  df <- do.call(rbind, df_rows)
-  tbl <- tibble::as_tibble(df)
+  tbl <- tibble::as_tibble(col_data)
 
   if (pivot == "raw") {
     return(tbl)
   }
 
-  # Convertir columnas numericas si es posible
+  # Convertir columnas numericas con soporte para coma decimal
   year_pattern <- "^[xX]?([0-9]{4})$"
   is_year_col <- grepl(year_pattern, colnames(tbl))
 
   for (col in colnames(tbl)) {
     vals <- tbl[[col]]
-    num_vals <- suppressWarnings(as.numeric(vals))
-    # Si la mayoria de no-NA se convierten bien a numeros, convertir
-    if (!all(is.na(vals)) && sum(!is.na(num_vals)) >= (0.8 * sum(!is.na(vals)))) {
-      tbl[[col]] <- num_vals
+    non_na <- vals[!is.na(vals)]
+    if (length(non_na) > 0) {
+      # Limpiar posibles comas decimales y espacios
+      clean_vals <- gsub(" ", "", vals)
+      clean_vals <- gsub(",", ".", clean_vals)
+      num_vals <- suppressWarnings(as.numeric(clean_vals))
+      
+      non_na_num <- num_vals[!is.na(vals)]
+      if (sum(!is.na(non_na_num)) >= (0.8 * length(non_na))) {
+        tbl[[col]] <- num_vals
+      }
     }
   }
 
-  if (pivot == "long" && any(is_year_col)) {
-    year_cols <- colnames(tbl)[is_year_col]
-    id_cols <- setdiff(colnames(tbl), year_cols)
+  if (pivot == "long") {
+    if (any(is_year_col)) {
+      year_cols <- colnames(tbl)[is_year_col]
+      id_cols <- setdiff(colnames(tbl), year_cols)
 
-    long_list <- lapply(year_cols, function(y) {
-      clean_year <- as.integer(sub(year_pattern, "\\1", y))
-      sub_df <- tbl[, id_cols, drop = FALSE]
-      sub_df$anio <- clean_year
-      sub_df$valor <- as.numeric(tbl[[y]])
-      sub_df
-    })
+      long_list <- lapply(year_cols, function(y) {
+        clean_year <- as.integer(sub(year_pattern, "\\1", y))
+        sub_df <- tbl[, id_cols, drop = FALSE]
+        sub_df$anio <- clean_year
+        sub_df$valor <- as.numeric(tbl[[y]])
+        sub_df
+      })
 
-    tbl <- tibble::as_tibble(do.call(rbind, long_list))
+      tbl <- tibble::as_tibble(do.call(rbind, long_list))
+    } else {
+      cli::cli_inform(c(
+        "i" = "La tabla no contiene columnas de anio reconocibles para pivotar a {.val long}.",
+        "i" = "Se mantiene la estructura original de columnas."
+      ))
+    }
   }
 
   if (clean_names) {
@@ -426,14 +501,12 @@ sinia_datos <- function(id, pivot = c("wide", "long", "raw"), clean_names = TRUE
 #' @export
 #'
 #' @seealso [sinia_ficha()], [sinia_datos()]
-#' @examples
-#' \dontrun{
+#' @examplesIf curl::has_internet()
 #' est <- sinia_estadistica(1, pivot = "long")
 #' # Consultar ficha
 #' est$ficha
 #' # Consultar datos
 #' head(est$datos)
-#' }
 sinia_estadistica <- function(id, pivot = c("wide", "long")) {
   pivot <- match.arg(pivot)
   ficha <- sinia_ficha(id)
@@ -450,6 +523,12 @@ sinia_estadistica <- function(id, pivot = c("wide", "long")) {
   obj
 }
 
+#' Imprimir objeto de estadística SINIA
+#'
+#' @param x Objeto de clase `sinia_estadistica`.
+#' @param ... Argumentos adicionales pasados a otros métodos.
+#'
+#' @return Retorna el objeto `x` de forma invisible.
 #' @export
 print.sinia_estadistica <- function(x, ...) {
   cli::cli_h1("Estadistica SINIA: {x$nombre}")

@@ -46,7 +46,7 @@ metodología, periodicidad, unidad de medida y responsables institucionales) de 
 estadística ambiental registrada en el SINIA.
 }
 \examples{
-\dontrun{
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 # Obtener la ficha tecnica de Temperatura Promedio Anual (ID = 1)
 ficha <- sinia_ficha(1)
 print(ficha)
@@ -55,7 +55,7 @@ print(ficha)
 ficha$fuente
 ficha$unidad_medida
 ficha$formula_calculo
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=sinia_datos]{sinia_datos()}}, \code{\link[=sinia_estadistica]{sinia_estadistica()}}, \code{\link[=sinia_indicadores]{sinia_indicadores()}}

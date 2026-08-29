@@ -36,7 +36,7 @@ Extrae la matriz de datos de una estadística ambiental del SINIA, procesa
 la tabla y la retorna en formato \link[tibble:tibble]{tibble::tibble} limpio y estructurado.
 }
 \examples{
-\dontrun{
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 # Formato ancho (columnas por anio)
 df_wide <- sinia_datos(1)
 head(df_wide)
@@ -44,7 +44,7 @@ head(df_wide)
 # Formato largo (apilado para analisis y graficos con ggplot2)
 df_long <- sinia_datos(1, pivot = "long")
 head(df_long)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=sinia_ficha]{sinia_ficha()}}, \code{\link[=sinia_estadistica]{sinia_estadistica()}}, \code{\link[=sinia_buscar]{sinia_buscar()}}

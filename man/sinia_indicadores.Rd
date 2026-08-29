@@ -31,7 +31,7 @@ ordenador especificado (por defecto MDEA - Marco para el Desarrollo de las
 Estadísticas Ambientales de la ONU, o el marco sectorial propio de SINIA).
 }
 \examples{
-\dontrun{
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 # Listar todos los indicadores del marco MDEA (ONU)
 ind_mdea <- sinia_indicadores(marco = "mdea")
 head(ind_mdea)
@@ -39,7 +39,7 @@ head(ind_mdea)
 # Listar bajo el marco sectorial SINIA
 ind_sinia <- sinia_indicadores(marco = "sinia")
 head(ind_sinia)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=sinia_buscar]{sinia_buscar()}}, \code{\link[=sinia_ficha]{sinia_ficha()}}, \code{\link[=sinia_datos]{sinia_datos()}}
