@@ -8,10 +8,9 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 1 note
 
 * This is a new release (initial submission).
-* Note on example elapsed time for `sinia_buscar`: the example queries the public live REST API of Peru's SINIA; elapsed time (> 5s) depends on remote network latency.
 
 ## Method References
 

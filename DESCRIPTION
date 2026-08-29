@@ -9,8 +9,9 @@ Authors@R:
 Description: Provides programmatic access to official environmental statistics
     and data of Peru from the National Environmental Information System
     ('SINIA'), Ministry of the Environment ('MINAM'). Includes indicator
-    catalogs, technical metadata sheets (fichas tecnicas), and structured
+    catalogs, technical metadata sheets ('fichas técnicas'), and structured
     historical series for 'R'.
+Language: es
 License: MIT + file LICENSE
 URL: https://github.com/PaulESantos/siniaR, https://paulesantos.github.io/siniaR/
 BugReports: https://github.com/PaulESantos/siniaR/issues

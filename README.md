@@ -210,9 +210,7 @@ Para guías detalladas paso a paso, consulta las viñetas del paquete:
     Consulta y estructuración según los 6 componentes de Naciones
     Unidas.
 
-------------------------------------------------------------------------
-
-## 🏛️ Créditos y Fuente Oficial de los Datos
+## Créditos y Fuente Oficial de los Datos
 
 Los datos y estadísticas consultados mediante este paquete provienen del
 **Sistema Nacional de Información Ambiental (SINIA)** del **Ministerio
@@ -253,7 +251,7 @@ URL: https://sinia.minam.gob.pe/
 O en formato BibTeX:
 
 ``` bibtex
-@Manual{siniaR-pkg,
+@Manual{siniaR-package,
   title = {siniaR: Access to Peru's Environmental Statistics ('SINIA' / 'MINAM')},
   author = {Paul Efren Santos Andrade},
   year = {2026},
