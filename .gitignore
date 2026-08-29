@@ -12,3 +12,6 @@ deprecated
 /doc/
 /Meta/
 .agents
+*.tar.gz
+*.Rcheck/
+AGENTS.md

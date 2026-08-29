@@ -1,13 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# siniaR <img src="man/figures/logo.png" align="right" height="139" alt="siniaR logo" />
+# siniaR
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/siniaR)](https://CRAN.R-project.org/package=siniaR)
 [![R-CMD-check](https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/siniaR?color=green)](https://cran.r-project.org/package=siniaR)
+[![](https://cranlogs.r-pkg.org/badges/last-week/siniaR?color=green)](https://cran.r-project.org/package=siniaR)
 [![Codecov test
 coverage](https://codecov.io/gh/PaulESantos/siniaR/graph/badge.svg)](https://app.codecov.io/gh/PaulESantos/siniaR)
 <!-- badges: end -->
@@ -27,11 +31,11 @@ Puedes instalar la versión oficial de `siniaR` desde CRAN con:
 install.packages("siniaR")
 ```
 
-O la versión de desarrollo desde GitHub con:
+O la versión de desarrollo en GitHub con:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("PaulESantos/siniaR")
+# install.packages("pak")
+pak::pak("PaulESantos/siniaR")
 ```
 
 ------------------------------------------------------------------------
@@ -164,8 +168,6 @@ temp_long |>
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" alt="" width="100%" />
 
-\`\`\`
-
 ------------------------------------------------------------------------
 
 ## 📊 Acceso Rápido a Indicadores Frecuentes
@@ -267,9 +269,3 @@ O en formato BibTeX:
   note = {Sistema funcional del Sistema Nacional de Gesti{\'o}n Ambiental (SNGA)},
 }
 ```
-
-------------------------------------------------------------------------
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT.

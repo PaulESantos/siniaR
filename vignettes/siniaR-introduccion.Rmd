@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 
 # Verificar conectividad con la API del SINIA
-has_api <- tryCatch({
+has_api <- curl::has_internet() && tryCatch({
   con <- url("https://wp.bex.pe/portal/wp-json/esam/v1/website/marcos-ordenadores/mdea/indice-estadisticas", "r")
   close(con)
   TRUE

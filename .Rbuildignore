@@ -18,4 +18,6 @@
 ^scratch$
 ^doc$
 ^Meta$
-.agents
+^AGENTS\.md$
+\.tar\.gz$
+\.Rcheck$
