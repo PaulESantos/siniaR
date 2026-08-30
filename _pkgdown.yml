@@ -9,6 +9,13 @@ home:
     del Ministerio del Ambiente (MINAM). Incluye navegación por catálogos temáticos
     (MDEA / SINIA), consulta de fichas técnicas metodológicas y descarga de series
     históricas en formato tidy.
+  sidebar:
+    structure: [links, license, community, citation, authors, dev]
+    components:
+      authors:
+        title: "Desarrolladores"
+        text: >
+          <a href="https://paulefrens.rbind.io/" class="external-link">Paul Efren Santos Andrade</a> <br><small class="roles">Autor</small> <a href="https://orcid.org/0000-0002-6635-0375" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>
 
 authors:
   Paul Efren Santos Andrade:

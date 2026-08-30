@@ -17,3 +17,4 @@ Retorna el objeto \code{x} de forma invisible.
 \description{
 Imprimir ficha técnica de SINIA
 }
+\keyword{internal}

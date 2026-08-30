@@ -293,6 +293,7 @@ sinia_ficha <- function(id) {
 #' @param ... Argumentos adicionales pasados a otros métodos.
 #'
 #' @return Retorna el objeto `x` de forma invisible.
+#' @keywords internal
 #' @export
 print.sinia_ficha <- function(x, ...) {
   cli::cli_h1("Ficha Tecnica: {x$nombre}")
@@ -529,6 +530,7 @@ sinia_estadistica <- function(id, pivot = c("wide", "long")) {
 #' @param ... Argumentos adicionales pasados a otros métodos.
 #'
 #' @return Retorna el objeto `x` de forma invisible.
+#' @keywords internal
 #' @export
 print.sinia_estadistica <- function(x, ...) {
   cli::cli_h1("Estadistica SINIA: {x$nombre}")

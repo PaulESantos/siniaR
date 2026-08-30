@@ -10,8 +10,10 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/siniaR)](https://CRAN.R-project.org/package=siniaR)
 [![R-CMD-check](https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/siniaR/actions/workflows/R-CMD-check.yaml)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/siniaR?color=green)](https://cran.r-project.org/package=siniaR)
-[![](https://cranlogs.r-pkg.org/badges/last-week/siniaR?color=green)](https://cran.r-project.org/package=siniaR)
+[![CRAN Downloads
+Total](https://cranlogs.r-pkg.org/badges/grand-total/siniaR?color=green)](https://cran.r-project.org/package=siniaR)
+[![CRAN Downloads Last
+Week](https://cranlogs.r-pkg.org/badges/last-week/siniaR?color=green)](https://cran.r-project.org/package=siniaR)
 [![Codecov test
 coverage](https://codecov.io/gh/PaulESantos/siniaR/graph/badge.svg)](https://app.codecov.io/gh/PaulESantos/siniaR)
 <!-- badges: end -->

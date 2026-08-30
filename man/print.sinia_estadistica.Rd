@@ -17,3 +17,4 @@ Retorna el objeto \code{x} de forma invisible.
 \description{
 Imprimir objeto de estadística SINIA
 }
+\keyword{internal}
