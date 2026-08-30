@@ -1,4 +1,4 @@
-# siniaR ![](reference/figures/logo.png)
+# siniaR
 
 **`siniaR`** es un paquete para R diseñado para facilitar el acceso
 programático, exploración y análisis de las estadísticas ambientales
@@ -9,12 +9,19 @@ Información Ambiental (SINIA / MINAM)**.
 
 ## Instalación
 
-Puedes instalar la versión de desarrollo de `siniaR` desde GitHub:
+Puedes instalar la versión oficial de `siniaR` desde CRAN con:
 
 ``` r
 
-# install.packages("remotes")
-remotes::install_github("PaulESantos/siniaR")
+install.packages("siniaR")
+```
+
+O la versión de desarrollo en GitHub con:
+
+``` r
+
+# install.packages("pak")
+pak::pak("PaulESantos/siniaR")
 ```
 
 ------------------------------------------------------------------------
@@ -153,8 +160,6 @@ temp_long |>
 
 ![](reference/figures/README-unnamed-chunk-5-1.png)
 
-\`\`\`
-
 ------------------------------------------------------------------------
 
 ## 📊 Acceso Rápido a Indicadores Frecuentes
@@ -197,11 +202,63 @@ Para guías detalladas paso a paso, consulta las viñetas del paquete:
     Consulta y estructuración según los 6 componentes de Naciones
     Unidas.
 
+## Créditos y Fuente Oficial de los Datos
+
+Los datos y estadísticas consultados mediante este paquete provienen del
+**Sistema Nacional de Información Ambiental (SINIA)** del **Ministerio
+del Ambiente (MINAM)** de la República del Perú.
+
+> **¿Qué es el SINIA?**  
+> El Sistema Nacional de Información Ambiental (SINIA), es un sistema
+> funcional del Sistema Nacional de Gestión Ambiental (SNGA), que
+> comprende un conjunto de principios, normas, procedimientos, técnicas
+> e instrumentos a fin de facilitar el acceso y uso de la información
+> ambiental que las entidades que lo conforman generan o poseen, en el
+> ámbito de sus respectivas competencias.  
+> — *Portal Oficial del SINIA / MINAM: <https://sinia.minam.gob.pe/>*
+
 ------------------------------------------------------------------------
 
-## 📄 Licencia
+## 📖 Cómo Citar
 
-Este proyecto está bajo la Licencia MIT.
+Si utilizas `siniaR` en publicaciones científicas, informes técnicos,
+tesis o reportes de políticas públicas, por favor cita tanto el paquete
+como la fuente oficial de los datos:
+
+### Citación del paquete `siniaR`
+
+``` text
+Santos Andrade, P. E. (2026). siniaR: Access to Peru's Environmental Statistics ('SINIA' / 'MINAM').
+R package version 0.1.0. URL: https://paulesantos.github.io/siniaR/
+```
+
+### Citación de la fuente de datos (SINIA / MINAM)
+
+``` text
+Ministerio del Ambiente (MINAM). (2026). Sistema Nacional de Información Ambiental (SINIA).
+Portal oficial de estadísticas e información ambiental de la República del Perú.
+URL: https://sinia.minam.gob.pe/
+```
+
+O en formato BibTeX:
+
+``` bibtex
+@Manual{siniaR-package,
+  title = {siniaR: Access to Peru's Environmental Statistics ('SINIA' / 'MINAM')},
+  author = {Paul Efren Santos Andrade},
+  year = {2026},
+  note = {R package version 0.1.0},
+  url = {https://paulesantos.github.io/siniaR/},
+}
+
+@Misc{sinia-minam,
+  title = {Sistema Nacional de Informaci{\'o}n Ambiental (SINIA)},
+  author = {{Ministerio del Ambiente del Per{\'u} (MINAM)}},
+  year = {2026},
+  url = {https://sinia.minam.gob.pe/},
+  note = {Sistema funcional del Sistema Nacional de Gesti{\'o}n Ambiental (SNGA)},
+}
+```
 
 # Package index
 
