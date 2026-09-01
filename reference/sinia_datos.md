@@ -39,8 +39,9 @@ sinia_datos(id, pivot = c("wide", "long", "raw"), clean_names = TRUE)
 ## Value
 
 Un [tibble::tibble](https://tibble.tidyverse.org/reference/tibble.html)
-con los datos de la estadística. Además, contiene los siguientes
-atributos con metadatos asociados:
+con los datos de la estadística, o un tibble vacío si no hay conexión o
+no existen registros. Además, contiene los siguientes atributos con
+metadatos asociados:
 
 - `attr(.,"sinia_id")`:
 
@@ -85,6 +86,7 @@ head(df_wide)
 #> 6 Cajamarca      15.0   15.4   15.6   15.0   14.9   15.0   15.5   14.9   14.8
 #> # ℹ 2 more variables: `2023` <dbl>, `2024` <dbl>
 
+# \donttest{
 # Formato largo (apilado para analisis y graficos con ggplot2)
 df_long <- sinia_datos(1, pivot = "long")
 head(df_long)
@@ -97,4 +99,5 @@ head(df_long)
 #> 4 Arequipa      2014  16.1
 #> 5 Ayacucho      2014  18.4
 #> 6 Cajamarca     2014  15.0
+# }
 ```

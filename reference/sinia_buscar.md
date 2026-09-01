@@ -46,6 +46,7 @@ sinia_buscar("temperatura")
 #> 2     2 1.1.1.2 Temperatura máxima promedi…     4              NA       55 mdea 
 #> 3     3 1.1.1.3 Temperatura mínima promedi…     4              NA       55 mdea 
 
+# \donttest{
 # Buscar indicadores sobre calidad del aire
 sinia_buscar("pm10")
 #> # A tibble: 2 × 7
@@ -65,4 +66,5 @@ sinia_buscar("bosque")
 #> 4    58 2.2.1.3 Variación anual de la tasa…     4              NA       69 mdea 
 #> 5    60 2.2.1.5 Pérdida de bosque húmedo a…     4              NA       69 mdea 
 #> 6    61 2.2.1.6 Cambio de uso de la tierra…     4              NA       69 mdea 
+# }
 ```

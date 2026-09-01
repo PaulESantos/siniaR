@@ -20,8 +20,9 @@ sinia_ficha(id)
 
 ## Value
 
-Un objeto de clase `sinia_ficha` (lista estructurada) con los siguientes
-campos:
+Un objeto de clase `sinia_ficha` (lista estructurada), o `NULL` de forma
+invisible si no se pudo obtener la información o no hay conexión, con
+los siguientes campos:
 
 - id:
 
@@ -181,10 +182,10 @@ print(ficha)
 #> ℹ Nota: es el valor de la temperatura del aire promedio anual en la estación de medición, ubicada principalmente en capital de departamento. (…) No se cuentan con estadísticas.
 
 # Consultar campos especificos
-ficha$fuente
-#> [1] "Servicio Nacional de Meteorología e Hidrología (Senamhi)"
-ficha$unidad_medida
-#> [1] "Grado Celsius (°C)"
-ficha$formula_calculo
+if (!is.null(ficha)) {
+  ficha$fuente
+  ficha$unidad_medida
+  ficha$formula_calculo
+}
 #> [1] "Tapa = Suma de la temperatura del aire promedio mensual (Tapm) / Número de meses con temperatura del aire promedio mensual (nm) del año (condición nm >=7). \nTapm = Suma de la temperatura del aire promedio diaria (Tapd) / Número de días con temperatura del aire promedio diario (nd) del mes (condición nd >=16).\nDonde: \nTapa: temperatura del aire promedio anual\nTapm: temperatura del aire promedio mensual \nTapd: temperatura del aire promedio diario\nnd: número de días del mes \nnm: número de meses del año"
 ```

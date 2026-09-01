@@ -71,7 +71,8 @@ estadística ambiental registrada en el SINIA.</p>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Un objeto de clase <code>sinia_ficha</code> (lista estructurada) con los siguientes campos:</p><dl><dt>id</dt>
+    <p>Un objeto de clase <code>sinia_ficha</code> (lista estructurada), o <code>NULL</code> de forma invisible si
+no se pudo obtener la información o no hay conexión, con los siguientes campos:</p><dl><dt>id</dt>
 <dd><p>Identificador numérico único de la estadística.</p></dd>
 
 <dt>numero</dt>
@@ -202,11 +203,11 @@ estadística ambiental registrada en el SINIA.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Nota: es el valor de la temperatura del aire promedio anual en la estación de medición, ubicada principalmente en capital de departamento. (…) No se cuentan con estadísticas.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Consultar campos especificos</span></span></span>
-<span class="r-in"><span><span class="va">ficha</span><span class="op">$</span><span class="va">fuente</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Servicio Nacional de Meteorología e Hidrología (Senamhi)"</span>
-<span class="r-in"><span><span class="va">ficha</span><span class="op">$</span><span class="va">unidad_medida</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Grado Celsius (°C)"</span>
-<span class="r-in"><span><span class="va">ficha</span><span class="op">$</span><span class="va">formula_calculo</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">ficha</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">ficha</span><span class="op">$</span><span class="va">fuente</span></span></span>
+<span class="r-in"><span>  <span class="va">ficha</span><span class="op">$</span><span class="va">unidad_medida</span></span></span>
+<span class="r-in"><span>  <span class="va">ficha</span><span class="op">$</span><span class="va">formula_calculo</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Tapa = Suma de la temperatura del aire promedio mensual (Tapm) / Número de meses con temperatura del aire promedio mensual (nm) del año (condición nm &gt;=7). \nTapm = Suma de la temperatura del aire promedio diaria (Tapd) / Número de días con temperatura del aire promedio diario (nd) del mes (condición nd &gt;=16).\nDonde: \nTapa: temperatura del aire promedio anual\nTapm: temperatura del aire promedio mensual \nTapd: temperatura del aire promedio diario\nnd: número de días del mes \nnm: número de meses del año"</span>
 </code></pre></div>
     </div>

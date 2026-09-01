@@ -80,6 +80,7 @@ head(ind_mdea)
 #> 5     5 1.1.1.5 Humedad relativa promedio …     4              NA       55 mdea 
 #> 6     6 1.1.1.6 Número de horas de sol anu…     4              NA       55 mdea 
 
+# \donttest{
 # Listar bajo el marco sectorial SINIA
 ind_sinia <- sinia_indicadores(marco = "sinia")
 head(ind_sinia)
@@ -92,4 +93,5 @@ head(ind_sinia)
 #> 4    13 1.1.4   Superficie glaciar por cor…     3              NA        2 sinia
 #> 5    14 1.1.5   Número de glaciares por co…     3              NA        2 sinia
 #> 6    15 1.1.6   Fluctuación del frente gla…     3              NA        2 sinia
+# }
 ```

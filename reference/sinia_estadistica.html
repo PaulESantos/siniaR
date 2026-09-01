@@ -72,7 +72,8 @@ tabulares en un único objeto compuesto de clase <code>sinia_estadistica</code>.
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Un objeto de clase <code>sinia_estadistica</code> (lista S3) con los siguientes elementos:</p><dl><dt>id</dt>
+    <p>Un objeto de clase <code>sinia_estadistica</code> (lista S3), o <code>NULL</code> de forma invisible si
+no se pudo conectar o no existen datos, con los siguientes elementos:</p><dl><dt>id</dt>
 <dd><p>Identificador numérico de la estadística.</p></dd>
 
 <dt>nombre</dt>
@@ -94,49 +95,12 @@ tabulares en un único objeto compuesto de clase <code>sinia_estadistica</code>.
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">est</span> <span class="op">&lt;-</span> <span class="fu">sinia_estadistica</span><span class="op">(</span><span class="fl">1</span>, pivot <span class="op">=</span> <span class="st">"long"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Consultar ficha</span></span></span>
-<span class="r-in"><span><span class="va">est</span><span class="op">$</span><span class="va">ficha</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Ficha Tecnica: Temperatura del aire promedio anual en estación de medición se</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="font-weight: bold;">ID:</span> 1 (Numero: 1)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="font-weight: bold;">Fuente:</span> Servicio Nacional de Meteorología e Hidrología (Senamhi)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="font-weight: bold;">Unidad de Medida:</span> Grado Celsius (°C)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="font-weight: bold;">Periodo de Serie:</span> 2014-2024</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="font-weight: bold;">Ambito Geografico:</span> Nacional, Departamental, Provincial, Distrital, Estación</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   de medición</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="font-weight: bold;">Clasificacion MDEA:</span> 1.1.1</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Descripcion</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> La temperatura del aire es uno de los elementos climáticos que está en relación</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> directa con el balance de energía, es decir, su valor o magnitud depende de la</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> fracción de Radiación Neta (Rn). Sin embargo, esta relación directa, entre</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> temperatura y Rn es afectado por otros factores como se ve a continuación: - El</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> movimiento de rotación de la tierra que da origen al ciclo diurno y el</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> movimiento de traslación que origina el ciclo anual. - La amplitud de estas</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ondas (ciclo diurno de temperatura) son alterados por: la superficie sobre la</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> cual incide la radiación solar, masas de aire, nubosidad, transparencia</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> atmosférica, relieve topográfico, etc.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Formula de Calculo</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Tapa = Suma de la temperatura del aire promedio mensual (Tapm) / Número de</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> meses con temperatura del aire promedio mensual (nm) del año (condición nm</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> &gt;=7).  Tapm = Suma de la temperatura del aire promedio diaria (Tapd) / Número</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> de días con temperatura del aire promedio diario (nd) del mes (condición nd</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> &gt;=16). Donde: Tapa: temperatura del aire promedio anual Tapm: temperatura del</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> aire promedio mensual Tapd: temperatura del aire promedio diario nd: número de</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> días del mes nm: número de meses del año</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Metodologia</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> La temperatura del aire promedio anual es información procesada de los datos</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> provenientes de la lectura del termómetro y de los termómetros extremos</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> (máximos y mínimos) de las estaciones de medición ubicadas principalmente en</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> capital de departamento.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Nota: es el valor de la temperatura del aire promedio anual en la estación de medición, ubicada principalmente en capital de departamento. (…) No se cuentan con estadísticas.</span>
-<span class="r-in"><span><span class="co"># Consultar datos</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">est</span><span class="op">$</span><span class="va">datos</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">est</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># Consultar ficha</span></span></span>
+<span class="r-in"><span>  <span class="va">est</span><span class="op">$</span><span class="va">ficha</span></span></span>
+<span class="r-in"><span>  <span class="co"># Consultar datos</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">est</span><span class="op">$</span><span class="va">datos</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   departamento  anio valor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>

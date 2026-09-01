@@ -22,7 +22,8 @@ sinia_estadistica(id, pivot = c("wide", "long"))
 
 ## Value
 
-Un objeto de clase `sinia_estadistica` (lista S3) con los siguientes
+Un objeto de clase `sinia_estadistica` (lista S3), o `NULL` de forma
+invisible si no se pudo conectar o no existen datos, con los siguientes
 elementos:
 
 - id:
@@ -52,49 +53,12 @@ elementos:
 
 ``` r
 est <- sinia_estadistica(1, pivot = "long")
-# Consultar ficha
-est$ficha
-#> 
-#> ── Ficha Tecnica: Temperatura del aire promedio anual en estación de medición se
-#> • ID: 1 (Numero: 1)
-#> • Fuente: Servicio Nacional de Meteorología e Hidrología (Senamhi)
-#> • Unidad de Medida: Grado Celsius (°C)
-#> • Periodo de Serie: 2014-2024
-#> • Ambito Geografico: Nacional, Departamental, Provincial, Distrital, Estación
-#>   de medición
-#> • Clasificacion MDEA: 1.1.1
-#> 
-#> ── Descripcion ──
-#> 
-#> La temperatura del aire es uno de los elementos climáticos que está en relación
-#> directa con el balance de energía, es decir, su valor o magnitud depende de la
-#> fracción de Radiación Neta (Rn). Sin embargo, esta relación directa, entre
-#> temperatura y Rn es afectado por otros factores como se ve a continuación: - El
-#> movimiento de rotación de la tierra que da origen al ciclo diurno y el
-#> movimiento de traslación que origina el ciclo anual. - La amplitud de estas
-#> ondas (ciclo diurno de temperatura) son alterados por: la superficie sobre la
-#> cual incide la radiación solar, masas de aire, nubosidad, transparencia
-#> atmosférica, relieve topográfico, etc.
-#> 
-#> ── Formula de Calculo ──
-#> 
-#> Tapa = Suma de la temperatura del aire promedio mensual (Tapm) / Número de
-#> meses con temperatura del aire promedio mensual (nm) del año (condición nm
-#> >=7).  Tapm = Suma de la temperatura del aire promedio diaria (Tapd) / Número
-#> de días con temperatura del aire promedio diario (nd) del mes (condición nd
-#> >=16). Donde: Tapa: temperatura del aire promedio anual Tapm: temperatura del
-#> aire promedio mensual Tapd: temperatura del aire promedio diario nd: número de
-#> días del mes nm: número de meses del año
-#> 
-#> ── Metodologia ──
-#> 
-#> La temperatura del aire promedio anual es información procesada de los datos
-#> provenientes de la lectura del termómetro y de los termómetros extremos
-#> (máximos y mínimos) de las estaciones de medición ubicadas principalmente en
-#> capital de departamento.
-#> ℹ Nota: es el valor de la temperatura del aire promedio anual en la estación de medición, ubicada principalmente en capital de departamento. (…) No se cuentan con estadísticas.
-# Consultar datos
-head(est$datos)
+if (!is.null(est)) {
+  # Consultar ficha
+  est$ficha
+  # Consultar datos
+  head(est$datos)
+}
 #> # A tibble: 6 × 3
 #>   departamento  anio valor
 #>   <chr>        <int> <dbl>
