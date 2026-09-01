@@ -12,7 +12,8 @@ sinia_estadistica(id, pivot = c("wide", "long"))
 \item{pivot}{Formato de salida de los datos (\code{"wide"} o \code{"long"}).}
 }
 \value{
-Un objeto de clase \code{sinia_estadistica} (lista S3) con los siguientes elementos:
+Un objeto de clase \code{sinia_estadistica} (lista S3), o \code{NULL} de forma invisible si
+no se pudo conectar o no existen datos, con los siguientes elementos:
 \describe{
 \item{id}{Identificador numérico de la estadística.}
 \item{nombre}{Nombre oficial del indicador.}
@@ -27,10 +28,12 @@ tabulares en un único objeto compuesto de clase \code{sinia_estadistica}.
 \examples{
 \dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 est <- sinia_estadistica(1, pivot = "long")
-# Consultar ficha
-est$ficha
-# Consultar datos
-head(est$datos)
+if (!is.null(est)) {
+  # Consultar ficha
+  est$ficha
+  # Consultar datos
+  head(est$datos)
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{

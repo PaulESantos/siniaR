@@ -15,7 +15,10 @@ test_that("sinia_ficha and sinia_datos validate id inputs", {
   expect_error(sinia_datos(NA))
 })
 
-test_that("S3 print methods work without errors", {
+test_that("S3 print methods handle NULL and mocks without errors", {
+  expect_no_error(print.sinia_ficha(NULL))
+  expect_no_error(print.sinia_estadistica(NULL))
+
   mock_ficha <- list(
     id = 999,
     numero = "1.1.1.1",
@@ -43,7 +46,28 @@ test_that("S3 print methods work without errors", {
   expect_no_error(print(mock_est))
 })
 
+test_that("Graceful failure works when connection fails or times out", {
+  # Simular timeout extremo para forzar salida airosa
+  op <- options(siniaR.timeout = 0.001)
+  on.exit(options(op), add = TRUE)
+
+  ind <- sinia_indicadores(marco = "mdea")
+  expect_s3_class(ind, "tbl_df")
+  expect_equal(nrow(ind), 0)
+
+  fic <- sinia_ficha(1)
+  expect_null(fic)
+
+  dat <- sinia_datos(1)
+  expect_s3_class(dat, "tbl_df")
+  expect_equal(nrow(dat), 0)
+
+  est <- sinia_estadistica(1)
+  expect_null(est)
+})
+
 test_that("SINIA API live calls work if connected", {
+  skip_on_cran()
   skip_if_not(curl::has_internet(), "No internet connection")
 
   has_api <- tryCatch({

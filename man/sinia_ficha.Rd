@@ -10,7 +10,8 @@ sinia_ficha(id)
 \item{id}{Identificador numérico de la estadística (ej. \code{1} para temperatura promedio anual).}
 }
 \value{
-Un objeto de clase \code{sinia_ficha} (lista estructurada) con los siguientes campos:
+Un objeto de clase \code{sinia_ficha} (lista estructurada), o \code{NULL} de forma invisible si
+no se pudo obtener la información o no hay conexión, con los siguientes campos:
 \describe{
 \item{id}{Identificador numérico único de la estadística.}
 \item{numero}{Código numeral asignado en el SINIA.}
@@ -52,9 +53,11 @@ ficha <- sinia_ficha(1)
 print(ficha)
 
 # Consultar campos especificos
-ficha$fuente
-ficha$unidad_medida
-ficha$formula_calculo
+if (!is.null(ficha)) {
+  ficha$fuente
+  ficha$unidad_medida
+  ficha$formula_calculo
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{

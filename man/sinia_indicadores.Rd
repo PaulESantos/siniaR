@@ -36,9 +36,11 @@ Estadísticas Ambientales de la ONU, o el marco sectorial propio de SINIA).
 ind_mdea <- sinia_indicadores(marco = "mdea")
 head(ind_mdea)
 
+\donttest{
 # Listar bajo el marco sectorial SINIA
 ind_sinia <- sinia_indicadores(marco = "sinia")
 head(ind_sinia)
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{

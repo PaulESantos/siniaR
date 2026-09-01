@@ -21,8 +21,8 @@ columnas \code{anio} y \code{valor} listas para \code{ggplot2} y \code{dplyr}.
 minúsculas y sin caracteres especiales.}
 }
 \value{
-Un \link[tibble:tibble]{tibble::tibble} con los datos de la estadística. Además, contiene los siguientes
-atributos con metadatos asociados:
+Un \link[tibble:tibble]{tibble::tibble} con los datos de la estadística, o un tibble vacío si no hay
+conexión o no existen registros. Además, contiene los siguientes atributos con metadatos asociados:
 \describe{
 \item{\code{attr(.,"sinia_id")}}{ID numérico de la estadística.}
 \item{\code{attr(.,"sinia_nombre")}}{Nombre oficial del indicador.}
@@ -41,9 +41,11 @@ la tabla y la retorna en formato \link[tibble:tibble]{tibble::tibble} limpio y e
 df_wide <- sinia_datos(1)
 head(df_wide)
 
+\donttest{
 # Formato largo (apilado para analisis y graficos con ggplot2)
 df_long <- sinia_datos(1, pivot = "long")
 head(df_long)
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{

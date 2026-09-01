@@ -8,9 +8,9 @@ Authors@R:
            comment = c(ORCID = "0000-0002-6635-0375"))
 Description: Provides programmatic access to official environmental statistics
     and data of Peru from the National Environmental Information System
-    ('SINIA'), Ministry of the Environment ('MINAM'). Includes indicator
-    catalogs, technical metadata sheets ('fichas técnicas'), and structured
-    historical series for 'R'.
+    ('SINIA', <https://sinia.minam.gob.pe/>), Ministry of the Environment
+    ('MINAM'). Includes indicator catalogs, technical metadata sheets
+    ('fichas técnicas'), and structured historical series for 'R'.
 Language: es
 License: MIT + file LICENSE
 URL: https://github.com/PaulESantos/siniaR, https://paulesantos.github.io/siniaR/
@@ -19,10 +19,10 @@ Depends:
     R (>= 3.6.0)
 Imports: 
     cli (>= 3.0.0),
+    curl (>= 4.3.0),
     jsonlite (>= 1.7.0),
     tibble (>= 3.0.0)
 Suggests: 
-    curl,
     DT,
     dplyr,
     ggplot2,

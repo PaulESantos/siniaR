@@ -20,6 +20,74 @@ NULL
 
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
+#' Realizar peticion HTTP segura a la API de SINIA con timeout y salida airosa
+#'
+#' @param url Cadena de texto con la URL completa del endpoint.
+#' @param timeout Tiempo limite de espera en segundos (por defecto 5 segundos,
+#'   configurable con la opcion global `siniaR.timeout`).
+#'
+#' @return Lista con el contenido decodificado del JSON, o `NULL` de forma airosa
+#'   si ocurre un error de conexion, timeout o respuesta no valida.
+#' @keywords internal
+#' @noRd
+.sinia_fetch_json <- function(url, timeout = getOption("siniaR.timeout", 5L)) {
+  if (!curl::has_internet()) {
+    cli::cli_alert_warning("No hay conexion a internet disponible.")
+    return(NULL)
+  }
+
+  timeout_sec <- as.numeric(timeout %||% 5)
+  if (is.na(timeout_sec) || timeout_sec <= 0) {
+    timeout_sec <- 5
+  }
+
+  handle <- curl::new_handle()
+  curl::handle_setopt(
+    handle,
+    timeout_ms = as.integer(max(1, round(timeout_sec * 1000)))
+  )
+  curl::handle_setheaders(
+    handle,
+    "User-Agent" = "siniaR R package (https://github.com/PaulESantos/siniaR)"
+  )
+
+  resp <- tryCatch(
+    curl::curl_fetch_memory(url, handle = handle),
+    error = function(e) {
+      cli::cli_alert_warning(c(
+        "No se pudo conectar con el servidor de estadisticas del SINIA (tiempo de espera agotado o servicio no disponible).",
+        "i" = conditionMessage(e)
+      ))
+      NULL
+    }
+  )
+
+  if (is.null(resp)) {
+    return(NULL)
+  }
+
+  if (resp$status_code >= 400) {
+    cli::cli_alert_warning(c(
+      sprintf("El servidor del SINIA respondio con el codigo HTTP %d.", resp$status_code),
+      "i" = "Verifica la disponibilidad del servicio o la validez del recurso solicitado."
+    ))
+    return(NULL)
+  }
+
+  res_json <- tryCatch(
+    jsonlite::fromJSON(rawToChar(resp$content), simplifyVector = FALSE),
+    error = function(e) {
+      cli::cli_alert_warning(c(
+        "No se pudo decodificar la respuesta JSON del SINIA.",
+        "i" = conditionMessage(e)
+      ))
+      NULL
+    }
+  )
+
+  res_json
+}
+
 #' Listar indicadores y estadísticas ambientales del SINIA
 #'
 #' Consulta el árbol temático y catálogo de indicadores del SINIA según el marco
@@ -49,35 +117,34 @@ NULL
 #' ind_mdea <- sinia_indicadores(marco = "mdea")
 #' head(ind_mdea)
 #'
+#' \donttest{
 #' # Listar bajo el marco sectorial SINIA
 #' ind_sinia <- sinia_indicadores(marco = "sinia")
 #' head(ind_sinia)
+#' }
 sinia_indicadores <- function(marco = c("mdea", "sinia"), solo_estadisticas = TRUE) {
   marco <- match.arg(marco)
   url <- sprintf("%s/marcos-ordenadores/%s/indice-estadisticas", .sinia_base_url, marco)
 
-  res <- tryCatch(
-    jsonlite::fromJSON(url, simplifyVector = FALSE),
-    error = function(e) {
-      cli::cli_abort(c(
-        "No se pudo conectar con el servidor de estadisticas del SINIA.",
-        "x" = conditionMessage(e),
-        "i" = "Verifica tu conexion a internet o la disponibilidad del servicio."
-      ))
-    }
+  res <- .sinia_fetch_json(url)
+
+  empty_tbl <- tibble::tibble(
+    id = integer(),
+    numeral = character(),
+    nombre = character(),
+    nivel = integer(),
+    clasificador_id = integer(),
+    padre_id = integer(),
+    marco = character()
   )
 
+  if (is.null(res) || is.null(res$data) || is.null(res$data$items)) {
+    return(empty_tbl)
+  }
+
   items <- res$data$items
-  if (is.null(items) || length(items) == 0) {
-    return(tibble::tibble(
-      id = integer(),
-      numeral = character(),
-      nombre = character(),
-      nivel = integer(),
-      clasificador_id = integer(),
-      padre_id = integer(),
-      marco = character()
-    ))
+  if (length(items) == 0) {
+    return(empty_tbl)
   }
 
   if (solo_estadisticas) {
@@ -85,15 +152,7 @@ sinia_indicadores <- function(marco = c("mdea", "sinia"), solo_estadisticas = TR
   }
 
   if (length(items) == 0) {
-    return(tibble::tibble(
-      id = integer(),
-      numeral = character(),
-      nombre = character(),
-      nivel = integer(),
-      clasificador_id = integer(),
-      padre_id = integer(),
-      marco = character()
-    ))
+    return(empty_tbl)
   }
 
   ids <- vapply(items, function(x) if (is.null(x$estadisticaId)) NA_integer_ else as.integer(x$estadisticaId), integer(1))
@@ -132,11 +191,13 @@ sinia_indicadores <- function(marco = c("mdea", "sinia"), solo_estadisticas = TR
 #' # Buscar indicadores sobre temperatura
 #' sinia_buscar("temperatura")
 #'
+#' \donttest{
 #' # Buscar indicadores sobre calidad del aire
 #' sinia_buscar("pm10")
 #'
 #' # Buscar indicadores sobre cobertura forestal
 #' sinia_buscar("bosque")
+#' }
 sinia_buscar <- function(query, marco = c("mdea", "sinia")) {
   if (missing(query) || !is.character(query) || length(query) != 1 || is.na(query) || nchar(trimws(query)) == 0) {
     cli::cli_abort(c(
@@ -183,7 +244,8 @@ sinia_buscar <- function(query, marco = c("mdea", "sinia")) {
 #'
 #' @param id Identificador numérico de la estadística (ej. `1` para temperatura promedio anual).
 #'
-#' @return Un objeto de clase `sinia_ficha` (lista estructurada) con los siguientes campos:
+#' @return Un objeto de clase `sinia_ficha` (lista estructurada), o `NULL` de forma invisible si
+#'   no se pudo obtener la información o no hay conexión, con los siguientes campos:
 #' \describe{
 #'   \item{id}{Identificador numérico único de la estadística.}
 #'   \item{numero}{Código numeral asignado en el SINIA.}
@@ -222,9 +284,11 @@ sinia_buscar <- function(query, marco = c("mdea", "sinia")) {
 #' print(ficha)
 #'
 #' # Consultar campos especificos
-#' ficha$fuente
-#' ficha$unidad_medida
-#' ficha$formula_calculo
+#' if (!is.null(ficha)) {
+#'   ficha$fuente
+#'   ficha$unidad_medida
+#'   ficha$formula_calculo
+#' }
 sinia_ficha <- function(id) {
   if (missing(id) || length(id) != 1 || is.na(id) || (!is.numeric(id) && !is.character(id))) {
     cli::cli_abort(c(
@@ -235,23 +299,19 @@ sinia_ficha <- function(id) {
   }
 
   url <- sprintf("%s/estadisticas/%s", .sinia_base_url, as.character(id))
-  res <- tryCatch(
-    jsonlite::fromJSON(url, simplifyVector = FALSE),
-    error = function(e) {
-      cli::cli_abort(c(
-        sprintf("No se pudo obtener la informacion de la estadistica ID: %s.", id),
-        "x" = conditionMessage(e),
-        "i" = "Verifica tu conexion a internet o que el ID exista en {.fn sinia_indicadores}."
-      ))
-    }
-  )
+  res <- .sinia_fetch_json(url)
+
+  if (is.null(res)) {
+    return(invisible(NULL))
+  }
 
   d <- res$data
   if (is.null(d)) {
-    cli::cli_abort(c(
+    cli::cli_alert_warning(c(
       "No se encontraron datos para la estadistica con ID {.val {id}}.",
       "i" = "Consulta los IDs disponibles con {.code sinia_indicadores()}."
     ))
+    return(invisible(NULL))
   }
 
   ficha <- list(
@@ -296,6 +356,10 @@ sinia_ficha <- function(id) {
 #' @keywords internal
 #' @export
 print.sinia_ficha <- function(x, ...) {
+  if (is.null(x)) {
+    return(invisible(NULL))
+  }
+
   cli::cli_h1("Ficha Tecnica: {x$nombre}")
   cli::cli_bullets(c(
     "*" = "{.strong ID:} {x$id} (Numero: {x$numero})",
@@ -342,8 +406,8 @@ print.sinia_ficha <- function(x, ...) {
 #' @param clean_names Lógico. Si es `TRUE` (por defecto), normaliza los nombres de columnas a
 #'   minúsculas y sin caracteres especiales.
 #'
-#' @return Un [tibble::tibble] con los datos de la estadística. Además, contiene los siguientes
-#'   atributos con metadatos asociados:
+#' @return Un [tibble::tibble] con los datos de la estadística, o un tibble vacío si no hay
+#'   conexión o no existen registros. Además, contiene los siguientes atributos con metadatos asociados:
 #' \describe{
 #'   \item{`attr(.,"sinia_id")`}{ID numérico de la estadística.}
 #'   \item{`attr(.,"sinia_nombre")`}{Nombre oficial del indicador.}
@@ -359,9 +423,11 @@ print.sinia_ficha <- function(x, ...) {
 #' df_wide <- sinia_datos(1)
 #' head(df_wide)
 #'
+#' \donttest{
 #' # Formato largo (apilado para analisis y graficos con ggplot2)
 #' df_long <- sinia_datos(1, pivot = "long")
 #' head(df_long)
+#' }
 sinia_datos <- function(id, pivot = c("wide", "long", "raw"), clean_names = TRUE) {
   pivot <- match.arg(pivot)
 
@@ -374,22 +440,17 @@ sinia_datos <- function(id, pivot = c("wide", "long", "raw"), clean_names = TRUE
   }
 
   url <- sprintf("%s/estadisticas/%s", .sinia_base_url, as.character(id))
-  res <- tryCatch(
-    jsonlite::fromJSON(url, simplifyVector = FALSE),
-    error = function(e) {
-      cli::cli_abort(c(
-        sprintf("No se pudo obtener la informacion de la estadistica ID: %s.", id),
-        "x" = conditionMessage(e),
-        "i" = "Verifica tu conexion a internet o que el ID exista en {.fn sinia_indicadores}."
-      ))
-    }
-  )
+  res <- .sinia_fetch_json(url)
+
+  if (is.null(res) || is.null(res$data)) {
+    return(tibble::tibble())
+  }
 
   d <- res$data
   raw_rows <- d$datos
 
   if (is.null(raw_rows) || length(raw_rows) <= 1) {
-    cli::cli_warn("La estadistica con ID {id} no contiene filas de datos.")
+    cli::cli_alert_warning("La estadistica con ID {id} no contiene filas de datos.")
     return(tibble::tibble())
   }
 
@@ -492,7 +553,8 @@ sinia_datos <- function(id, pivot = c("wide", "long", "raw"), clean_names = TRUE
 #' @param id Identificador numérico de la estadística (ej. `1` para temperatura).
 #' @param pivot Formato de salida de los datos (`"wide"` o `"long"`).
 #'
-#' @return Un objeto de clase `sinia_estadistica` (lista S3) con los siguientes elementos:
+#' @return Un objeto de clase `sinia_estadistica` (lista S3), o `NULL` de forma invisible si
+#'   no se pudo conectar o no existen datos, con los siguientes elementos:
 #' \describe{
 #'   \item{id}{Identificador numérico de la estadística.}
 #'   \item{nombre}{Nombre oficial del indicador.}
@@ -504,13 +566,20 @@ sinia_datos <- function(id, pivot = c("wide", "long", "raw"), clean_names = TRUE
 #' @seealso [sinia_ficha()], [sinia_datos()]
 #' @examplesIf curl::has_internet()
 #' est <- sinia_estadistica(1, pivot = "long")
-#' # Consultar ficha
-#' est$ficha
-#' # Consultar datos
-#' head(est$datos)
+#' if (!is.null(est)) {
+#'   # Consultar ficha
+#'   est$ficha
+#'   # Consultar datos
+#'   head(est$datos)
+#' }
 sinia_estadistica <- function(id, pivot = c("wide", "long")) {
   pivot <- match.arg(pivot)
   ficha <- sinia_ficha(id)
+
+  if (is.null(ficha)) {
+    return(invisible(NULL))
+  }
+
   datos <- sinia_datos(id, pivot = pivot)
 
   obj <- list(
@@ -533,15 +602,22 @@ sinia_estadistica <- function(id, pivot = c("wide", "long")) {
 #' @keywords internal
 #' @export
 print.sinia_estadistica <- function(x, ...) {
+  if (is.null(x)) {
+    return(invisible(NULL))
+  }
+
   cli::cli_h1("Estadistica SINIA: {x$nombre}")
   cli::cli_bullets(c(
     "*" = "{.strong ID:} {x$id}",
     "*" = "{.strong Fuente:} {x$ficha$fuente %||% 'No especificada'}",
     "*" = "{.strong Unidad de Medida:} {x$ficha$unidad_medida %||% 'No especificada'}",
-    "*" = "{.strong Registros de datos:} {nrow(x$datos)} filas x {ncol(x$datos)} columnas"
+    "*" = "{.strong Registros de datos:} {nrow(x$datos %||% tibble::tibble())} filas x {ncol(x$datos %||% tibble::tibble())} columnas"
   ))
-  cli::cli_text("")
-  cli::cli_h2("Vista previa de los datos")
-  print(utils::head(x$datos, 6))
+
+  if (!is.null(x$datos) && nrow(x$datos) > 0) {
+    cli::cli_text("")
+    cli::cli_h2("Vista previa de los datos")
+    print(utils::head(x$datos, 6))
+  }
   invisible(x)
 }

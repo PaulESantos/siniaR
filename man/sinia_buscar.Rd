@@ -25,11 +25,13 @@ oficial de indicadores del SINIA.
 # Buscar indicadores sobre temperatura
 sinia_buscar("temperatura")
 
+\donttest{
 # Buscar indicadores sobre calidad del aire
 sinia_buscar("pm10")
 
 # Buscar indicadores sobre cobertura forestal
 sinia_buscar("bosque")
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{
